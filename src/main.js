@@ -1,5 +1,21 @@
-// Este es el punto de entrada de tu aplicacion
+import { Welcome } from './components/Welcome.js';
+import { Login } from './components/Login.js';
+import { Register } from './components/Register';
+import './firebase';
 
-import { myFunction } from './lib/index.js';
+const root = document.getElementById('root');
+const routes = {
+  '/': Welcome,
+  '/login': Login,
+  '/Register': Register,
+};
 
-myFunction();
+const onNavigate = (pathname) => {
+  window.history.pushState({}, pathname, window.location.origin + pathname);
+  root.removeChild(root.firstChild);
+  root.appendChild(routes[pathname](onNavigate));
+};
+
+const components = routes[window.location.pathname];
+
+root.appendChild(components(onNavigate));
