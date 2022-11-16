@@ -41,6 +41,7 @@ export const Register = (onNavigate) => {
     $inputTandC,
     $SignUpbutton,
     $buttonBack,
+    $form.classList.add('form'),
   );
   console.log(`Este es un formulario${$form}`);
   $div.append($form);
