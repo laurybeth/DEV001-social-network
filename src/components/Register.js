@@ -1,34 +1,32 @@
-import { onNavigate } from "../main.js";
+export const Register = (onNavigate) => {
+  const $div = document.createElement('div');
+  const $form = document.createElement('form');
+  const $title = document.createElement('h2');
+  const $subTitle = document.createElement('h4');
+  const $inputEmail = document.createElement('input');
+  $inputEmail.type = 'email';
+  const $inputFullName = document.createElement('input');
+  const $inputUser = document.createElement('input');
+  const $inputPassword = document.createElement('input');
+  $inputPassword.type = 'password';
 
-export const Register = () => {
-  const $div = document.createElement("div");
-  const $form = document.createElement("form");
-  const $title = document.createElement("h2");
-  const $subTitle = document.createElement("h4");
-  const $inputEmail = document.createElement("input");
-  $inputEmail.type = "email";
-  const $inputFullName = document.createElement("input");
-  const $inputUser = document.createElement("input");
-  const $inputPassword = document.createElement("input");
-  $inputPassword.type = "password";
+  const $label = document.createElement('label');
+  const $inputDay = document.createElement('input');
+  $inputDay.type = 'date';
+  const $inputTandC = document.createElement('input');
+  $inputTandC.type = 'checkbox';
+  const $SignUpbutton = document.createElement('button');
+  $SignUpbutton.type = 'submit';
 
-  const $label = document.createElement("label");
-  const $inputDay = document.createElement("input");
-  $inputDay.type = "date";
-  const $inputTandC = document.createElement("input");
-  $inputTandC.type = "checkbox";
-  const $SignUpbutton = document.createElement("button");
-  $SignUpbutton.type = "submit";
+  const $buttonBack = document.createElement('button');
 
-  const $buttonBack = document.createElement("button");
-
-  $title.textContent = "Pet Book";
-  $subTitle.textContent = "Sign Up";
-  $label.innerHTML = "Date of Birth";
+  $title.textContent = 'Pet Book';
+  $subTitle.textContent = 'Sign Up';
+  $label.innerHTML = 'Date of Birth';
   // button retorna al welcom
-  $buttonBack.textContent = "Return";
-  $buttonBack.addEventListener("click", () => {
-    onNavigate("/");
+  $buttonBack.textContent = 'Return';
+  $buttonBack.addEventListener('click', () => {
+    onNavigate('/');
   });
 
   $form.append(
@@ -42,9 +40,10 @@ export const Register = () => {
     $inputDay,
     $inputTandC,
     $SignUpbutton,
-    $buttonBack
+    $buttonBack,
+    $form.classList.add('form'),
   );
-  console.log("Este es un formulario" + $form);
+  console.log(`Este es un formulario${$form}`);
   $div.append($form);
 
   return $div;

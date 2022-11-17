@@ -1,23 +1,25 @@
-import { onNavigate } from "../main.js";
+export const Welcome = (onNavigate) => {
+  const $section = document.createElement('section');
+  $section.className = 'container';
+  $section.innerHTML = ' <img class="container__img" src="./img/portada_01.png" alt="front page petbook"> <img  class="container__logo"src="./img/logo_horizontal.png" alt="logo"> <p class="container__slogan">The best social application to show the daily life of your pets.</p>';
+  const $divbuttons = document.createElement('div');
+  $divbuttons.className = 'container__button';
+  const $buttonLogin = document.createElement('button');
+  $buttonLogin.className = 'container__button__login ';
+  const $buttonSignUp = document.createElement('button');
+  $buttonSignUp.className = 'container__button__signup ';
 
-export const Welcome = () => {
-  const $div = document.createElement("div");
-  const $title = document.createElement("h2");
-  const $buttonLogin = document.createElement("button");
-  const $buttonRegister = document.createElement("button");
-
-  $title.textContent = "Welcome to PetBook";
-  $buttonLogin.textContent = "Login";
-  $buttonRegister.textContent = "Sign In";
-  $buttonLogin.addEventListener("click", () => {
-    onNavigate("/login");
+  $buttonSignUp.textContent = 'Sign Up';
+  $buttonLogin.textContent = 'Log in';
+  $buttonLogin.addEventListener('click', () => {
+    onNavigate('/login');
   });
 
-  $buttonRegister.addEventListener("click", () => {
-    onNavigate("/Register");
-    console.log("Register");
+  $buttonSignUp.addEventListener('click', () => {
+    onNavigate('/Register');
   });
 
-  $div.append($title, $buttonRegister, $buttonLogin);
-  return $div;
+  $divbuttons.append($buttonSignUp, $buttonLogin);
+  $section.append($divbuttons);
+  return $section;
 };
