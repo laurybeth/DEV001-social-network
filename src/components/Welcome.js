@@ -1,9 +1,11 @@
 export const Welcome = (onNavigate) => {
   const $section = document.createElement('section');
   $section.className = 'container';
-  $section.innerHTML = ' <img class="container__img" src="./img/portada_01.png" alt="front page petbook"> <img  class="container__logo"src="./img/logo_horizontal.png" alt="logo"> <p class="container__slogan">The best social application to show the daily life of your pets.</p>';
-  const $divbuttons = document.createElement('div');
-  $divbuttons.className = 'container__button';
+  $section.innerHTML = `<img class="container__img" src="./img/portada_01.png" alt="front page petbook"> 
+  <img  class="container__logo"src="./img/logo_horizontal.png" alt="logo">
+  <p class="container__slogan">The best social application to show the daily life of your pets.</p>`;
+  const $divButtons = document.createElement('div');
+  $divButtons.className = 'container__button';
   const $buttonLogin = document.createElement('button');
   $buttonLogin.className = 'container__button__login ';
   const $buttonSignUp = document.createElement('button');
@@ -11,6 +13,7 @@ export const Welcome = (onNavigate) => {
 
   $buttonSignUp.textContent = 'Sign Up';
   $buttonLogin.textContent = 'Log in';
+
   $buttonLogin.addEventListener('click', () => {
     onNavigate('/login');
   });
@@ -19,7 +22,7 @@ export const Welcome = (onNavigate) => {
     onNavigate('/Register');
   });
 
-  $divbuttons.append($buttonSignUp, $buttonLogin);
-  $section.append($divbuttons);
+  $divButtons.append($buttonSignUp, $buttonLogin);
+  $section.append($divButtons);
   return $section;
 };

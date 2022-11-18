@@ -1,50 +1,39 @@
 export const Register = (onNavigate) => {
-  const $div = document.createElement('div');
-  const $form = document.createElement('form');
-  const $title = document.createElement('h2');
-  const $subTitle = document.createElement('h4');
-  const $inputEmail = document.createElement('input');
-  $inputEmail.type = 'email';
-  const $inputFullName = document.createElement('input');
-  const $inputUser = document.createElement('input');
-  const $inputPassword = document.createElement('input');
-  $inputPassword.type = 'password';
+  const $section = document.createElement('section');
+  $section.className = 'container';
 
-  const $label = document.createElement('label');
-  const $inputDay = document.createElement('input');
-  $inputDay.type = 'date';
-  const $inputTandC = document.createElement('input');
-  $inputTandC.type = 'checkbox';
-  const $SignUpbutton = document.createElement('button');
-  $SignUpbutton.type = 'submit';
+  $section.innerHTML = `<img class="container__logo"src="./img/logo_horizontal.png" alt="logo">
+  <h2>Sign Up</h2>
+  <form class="container form">
+  <input type="email" placeholder="Email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" title="the format does not match what was requested" required>
+  <input type="text" placeholder="Full name" pattern="/ ^ [a-zA-Z] + [a-zA-Z] + $ /" title="Only letters" required>
+  <input type="password" placeholder="Password" pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,15}/" title="letters and numbers, minimum 8 characters" required>
+  <label>Date of Birth</label>
+  <input type="date" required>
+  <div class="container__terms&conditions">
+  <input type="checkbox" required>
+  <label>I agree with terms and conditions</label>
+  </div>
+  </form>`;
+
+  const $divButtons = document.createElement('div');
+  $divButtons.className = 'container__button';
+
+  const $signUpButton = document.createElement('button');
+  $signUpButton.type = 'submit';
+  $signUpButton.textContent = 'Sign Up';
 
   const $buttonBack = document.createElement('button');
-
-  $title.textContent = 'Pet Book';
-  $subTitle.textContent = 'Sign Up';
-  $label.innerHTML = 'Date of Birth';
-  // button retorna al welcom
   $buttonBack.textContent = 'Return';
+
+  $divButtons.append($signUpButton, $buttonBack);
+
+  $section.append($divButtons);
+
+  // button retorna al welcome
   $buttonBack.addEventListener('click', () => {
     onNavigate('/');
   });
 
-  $form.append(
-    $title,
-    $subTitle,
-    $inputEmail,
-    $inputFullName,
-    $inputUser,
-    $inputPassword,
-    $label,
-    $inputDay,
-    $inputTandC,
-    $SignUpbutton,
-    $buttonBack,
-    $form.classList.add('form'),
-  );
-  console.log(`Este es un formulario${$form}`);
-  $div.append($form);
-
-  return $div;
+  return $section;
 };
