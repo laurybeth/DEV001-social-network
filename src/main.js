@@ -18,4 +18,9 @@ const onNavigate = (pathname) => {
 
 const components = routes[window.location.pathname];
 
+window.onpopstate = () => {
+  root.removeChild(root.firstChild);
+  root.append(components(onNavigate));
+};
+
 root.appendChild(components(onNavigate));

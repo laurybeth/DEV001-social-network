@@ -1,29 +1,28 @@
 export const Welcome = (onNavigate) => {
-  const $div = document.createElement('div');
-  $div.className = 'container';
- /* const $divFrontPageImg= document.createElement('img');
-  $divFrontPageImg.src="./img/portada_01.png";
-  $divFrontPageImg.className= 'FrontPage';
-  const $divLogoImg= document.createElement('img');
-  $divLogoImg.src="./img/logo_horizontal.png";
-  $divLogoImg.className= 'LogoImg';*/
-
-  const $title = document.createElement('h2');
+  const $section = document.createElement('section');
+  $section.className = 'container';
+  $section.innerHTML = `<img class="container__img" src="./img/portada_01.png" alt="front page petbook"> 
+  <img  class="container__logo"src="./img/logo_horizontal.png" alt="logo">
+  <p class="container__slogan">The best social application to show the daily life of your pets.</p>`;
+  const $divButtons = document.createElement('div');
+  $divButtons.className = 'container__button';
   const $buttonLogin = document.createElement('button');
-  const $buttonRegister = document.createElement('button');
+  $buttonLogin.className = 'container__button__login ';
+  const $buttonSignUp = document.createElement('button');
+  $buttonSignUp.className = 'container__button__signup ';
 
-  $title.textContent = 'The best social application to show the daily life of your pets.';
-  $buttonRegister.textContent = 'Sign Up';
+  $buttonSignUp.textContent = 'Sign Up';
   $buttonLogin.textContent = 'Log in';
+
   $buttonLogin.addEventListener('click', () => {
     onNavigate('/login');
   });
 
-  $buttonRegister.addEventListener('click', () => {
+  $buttonSignUp.addEventListener('click', () => {
     onNavigate('/Register');
-    console.log('Register');
   });
 
-  $div.append(/*$divFrontPageImg,$divLogoImg,*/$title, $buttonRegister, $buttonLogin);
-  return $div;
+  $divButtons.append($buttonSignUp, $buttonLogin);
+  $section.append($divButtons);
+  return $section;
 };
