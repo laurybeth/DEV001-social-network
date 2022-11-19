@@ -58,7 +58,7 @@ font-size: 2.5vh;
 }
 
 
-/*estilo para register*/
+/*------------------------------estilo para register------------------------------*/
 .container__logo-register{
   max-width: 70%;
   height: auto;
@@ -147,3 +147,4 @@ font-size: 2.5vh;
   gap:1rem;
   width: 100%;
 }
+/***************prueba de login****************/
