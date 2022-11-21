@@ -1,5 +1,6 @@
 export const Login = (onNavigate) => {
-  const $div = document.createElement('div');
+  
+  const $div= document.createElement('div');
   const $title = document.createElement('h2');
   const $button = document.createElement('button');
   const $buttonBack = document.createElement('button');
@@ -15,4 +16,5 @@ export const Login = (onNavigate) => {
 
   $div.append($title, $inputName, $button, $buttonBack);
   return $div;
+
 };
