@@ -52,12 +52,15 @@ export const Register = (onNavigate) => {
   $buttonBack.addEventListener('click', () => {
     onNavigate('/');
   });
-
+  const dataVacio = [];
   $formR.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    console.log('hola form: ', e);
+    const userEmail = e.srcElement[0].value;
+    const userPassword = e.srcElement[2].value;
+    dataVacio.push(userEmail);
+    dataVacio.push(userPassword);
+   
   });
 
-  return $section;
+  return (dataVacio, $section);
 };
