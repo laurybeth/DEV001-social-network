@@ -9,11 +9,24 @@ export const Register = (onNavigate) => {
   $formR.id = 'registerForm';
   $formR.className = 'container form';
   // $formR.action="./lib/index.js"
-  $formR.innerHTML = `<input class="input__form" type="email" placeholder="Email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" title="the format does not match what was requested" required>
-      <input class="input__form" type="text"  name="name" placeholder="Full name" pattern="\\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+"
-      title="Only letters" required>
-      <input class="input__form" type="password" placeholder="Password" pattern= "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$" title="
-      The password must have between 8 and 16 characters, at least one digit, at least one lowercase letter, at least one uppercase letter, and at least one non-alphanumeric character." required>
+  $formR.innerHTML = `
+     <div class="containerInput">  
+      <input class="containerInput__box" type="email" name="User_email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" title="the format does not match what was requested" required>  
+      <span class=containerInput__line></span>  
+      <label for="email"class="containerInput__label">Email</label>
+    </div>
+    <div class="containerInput">
+      <input class="containerInput__box" type="text"  name="User_name" pattern="\\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+" title="Only letters" required>
+      <span class=containerInput__line></span>
+      <label for="name" class="containerInput__label">Full name</label>
+     
+    </div>
+    <div class="containerInput">
+      <input class="containerInput__box" type="password" name="User_password" pattern= "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$" title="The password must have between 8 and 16 characters, at least one digit, at least one lowercase letter, at least one uppercase letter, and at least one non-alphanumeric character." required>
+      <span class=containerInput__line></span>
+      <label for="password" class="containerInput__label">Password</label>
+      <span class=containerInput__line></span>
+    </div>
     <div id="date" class="container__date">
       <label class="label__date">Date of Birth</label>
       <input class="input__date" type="date" required>
@@ -40,13 +53,11 @@ export const Register = (onNavigate) => {
     onNavigate('/');
   });
 
-  
   $formR.addEventListener('submit', (e) => {
     e.preventDefault();
 
-      console.log("hola form: ",e);
-
-    });
+    console.log('hola form: ', e);
+  });
 
   return $section;
 };
