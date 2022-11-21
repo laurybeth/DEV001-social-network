@@ -1,6 +1,6 @@
 import { Welcome } from './components/Welcome.js';
 import { Login } from './components/Login.js';
-import { Register } from './components/Register';
+import { Register } from './components/Register.js';
 import './firebase';
 
 const root = document.getElementById('root');
