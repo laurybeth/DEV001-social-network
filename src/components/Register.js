@@ -3,7 +3,7 @@ export const Register = (onNavigate) => {
   $section.className = 'container register';
 
   $section.innerHTML = `
-    <img class="container__logo-register"src="./img/logo_horizontal.png" alt="logo">
+    <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
     <h4 class="container__title">Sign Up</h4>`;
   const $formR = document.createElement('form');
   $formR.id = 'registerForm';
@@ -30,28 +30,22 @@ export const Register = (onNavigate) => {
     <div id="date" class="container__date">
       <label class="label__date">Date of Birth</label>
       <input class="input__date" type="date" required>
+      <span class=containerDate__line></span>
     </div>
       <div class="container__terms-conditions">
         <input class="input__conditions" type="checkbox" required>
         <label class="label__conditions" >I agree with terms and conditions</label>
       </div>
-    <input class="container__button__signup" type="submit" value="Sign Up">`;
+    <input class="container__button__signup" type="submit" value="Sign Up">
+    <div class="containerGoogle">
+    <img class="containerGoogle__logo" src='./assets/img/2000px-Google_G_Logo.svg_.png'>
+    <a href = "#" class="containerGoogle__link">SING UP WITH GOOGLE</a>
+    </div>
+    <label class="container__alreadyAccount">Already have an account? <strong>Sign in</strong><label/>`;
 
-  const $divButtons = document.createElement('div');
-  $divButtons.className = 'container__button-register';
-
-  const $buttonBack = document.createElement('button');
-  $buttonBack.textContent = 'Return';
-  $buttonBack.className = 'container__button__back';
-
-  $divButtons.append($buttonBack);
-
-  $section.append($formR, $divButtons);
+  $section.append($formR);
 
   // button retorna al welcome
-  $buttonBack.addEventListener('click', () => {
-    onNavigate('/');
-  });
   const dataVacio = [];
   $formR.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -59,8 +53,6 @@ export const Register = (onNavigate) => {
     const userPassword = e.srcElement[2].value;
     dataVacio.push(userEmail);
     dataVacio.push(userPassword);
-   
   });
-
   return (dataVacio, $section);
 };
