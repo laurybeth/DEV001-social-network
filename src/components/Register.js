@@ -1,9 +1,12 @@
+/*import { endBefore } from 'firebase/firestore/lite';*/
+import { registerFunction/*,registerGoogleFunction*/ } from '../lib_firebase/auth';
+
 export const Register = (onNavigate) => {
   const $section = document.createElement('section');
   $section.className = 'container register';
 
   $section.innerHTML = `
-    <img class="container__logo-register"src="./img/logo_horizontal.png" alt="logo">
+    <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
     <h4 class="container__title">Sign Up</h4>`;
   const $formR = document.createElement('form');
   $formR.id = 'registerForm';
@@ -19,7 +22,6 @@ export const Register = (onNavigate) => {
       <input class="containerInput__box" type="text"  name="User_name" pattern="\\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+" title="Only letters" required>
       <span class=containerInput__line></span>
       <label for="name" class="containerInput__label">Full name</label>
-     
     </div>
     <div class="containerInput">
       <input class="containerInput__box" type="password" name="User_password" pattern= "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$" title="The password must have between 8 and 16 characters, at least one digit, at least one lowercase letter, at least one uppercase letter, and at least one non-alphanumeric character." required>
@@ -30,6 +32,7 @@ export const Register = (onNavigate) => {
     <div id="date" class="container__date">
       <label class="label__date">Date of Birth</label>
       <input class="input__date" type="date" required>
+      <span class=containerDate__line></span>
     </div>
       <div class="container__terms-conditions">
         <input class="input__conditions" type="checkbox" required>
@@ -37,30 +40,33 @@ export const Register = (onNavigate) => {
       </div>
     <input class="container__button__signup" type="submit" value="Sign Up">`;
 
-  const $divButtons = document.createElement('div');
-  $divButtons.className = 'container__button-register';
+  const $cGoogle = document.createElement('div');
+  $cGoogle.className = 'containerGoogle';
+  const $imgGoogle = document.createElement('img');
+  $imgGoogle.className = 'containerGoogle__logo';
+  $imgGoogle.src = './assets/img/2000px-Google_G_Logo.svg_.png';
+  const $linkGoogle = document.createElement('a');
+  $linkGoogle.href = '#';
+  $linkGoogle.id = 'googleLink';
+  $linkGoogle.className = 'containerGoogle__link';
+  $linkGoogle.textContent = 'SING UP WITH GOOGLE';
 
-  const $buttonBack = document.createElement('button');
-  $buttonBack.textContent = 'Return';
-  $buttonBack.className = 'container__button__back';
+  $cGoogle.append($imgGoogle, $linkGoogle);
 
-  $divButtons.append($buttonBack);
-
-  $section.append($formR, $divButtons);
+  $section.append($formR, $cGoogle);
+  $section.innerHTML += `
+  <p class="container__alreadyAccount">Already have an account? <strong>Sign in</strong><p/>`;
 
   // button retorna al welcome
-  $buttonBack.addEventListener('click', () => {
-    onNavigate('/');
-  });
-  const dataVacio = [];
   $formR.addEventListener('submit', (e) => {
     e.preventDefault();
     const userEmail = e.srcElement[0].value;
     const userPassword = e.srcElement[2].value;
-    dataVacio.push(userEmail);
-    dataVacio.push(userPassword);
-   
+
+    registerFunction(userEmail, userPassword);
   });
 
-  return (dataVacio, $section);
+  //$linkGoogle.addEventListener('click')
+
+  return ($section);
 };
