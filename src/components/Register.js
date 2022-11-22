@@ -1,3 +1,6 @@
+/*import { endBefore } from 'firebase/firestore/lite';*/
+import { registerFunction/*,registerGoogleFunction*/ } from '../lib_firebase/auth';
+
 export const Register = (onNavigate) => {
   const $section = document.createElement('section');
   $section.className = 'container register';
@@ -19,7 +22,6 @@ export const Register = (onNavigate) => {
       <input class="containerInput__box" type="text"  name="User_name" pattern="\\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+" title="Only letters" required>
       <span class=containerInput__line></span>
       <label for="name" class="containerInput__label">Full name</label>
-     
     </div>
     <div class="containerInput">
       <input class="containerInput__box" type="password" name="User_password" pattern= "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$" title="The password must have between 8 and 16 characters, at least one digit, at least one lowercase letter, at least one uppercase letter, and at least one non-alphanumeric character." required>
@@ -36,23 +38,35 @@ export const Register = (onNavigate) => {
         <input class="input__conditions" type="checkbox" required>
         <label class="label__conditions" >I agree with terms and conditions</label>
       </div>
-    <input class="container__button__signup" type="submit" value="Sign Up">
-    <div class="containerGoogle">
-    <img class="containerGoogle__logo" src='./assets/img/2000px-Google_G_Logo.svg_.png'>
-    <a href = "#" class="containerGoogle__link">SING UP WITH GOOGLE</a>
-    </div>
-    <label class="container__alreadyAccount">Already have an account? <strong>Sign in</strong><label/>`;
+    <input class="container__button__signup" type="submit" value="Sign Up">`;
 
-  $section.append($formR);
+  const $cGoogle = document.createElement('div');
+  $cGoogle.className = 'containerGoogle';
+  const $imgGoogle = document.createElement('img');
+  $imgGoogle.className = 'containerGoogle__logo';
+  $imgGoogle.src = './assets/img/2000px-Google_G_Logo.svg_.png';
+  const $linkGoogle = document.createElement('a');
+  $linkGoogle.href = '#';
+  $linkGoogle.id = 'googleLink';
+  $linkGoogle.className = 'containerGoogle__link';
+  $linkGoogle.textContent = 'SING UP WITH GOOGLE';
+
+  $cGoogle.append($imgGoogle, $linkGoogle);
+
+  $section.append($formR, $cGoogle);
+  $section.innerHTML += `
+  <p class="container__alreadyAccount">Already have an account? <strong>Sign in</strong><p/>`;
 
   // button retorna al welcome
-  const dataVacio = [];
   $formR.addEventListener('submit', (e) => {
     e.preventDefault();
     const userEmail = e.srcElement[0].value;
     const userPassword = e.srcElement[2].value;
-    dataVacio.push(userEmail);
-    dataVacio.push(userPassword);
+
+    registerFunction(userEmail, userPassword);
   });
-  return (dataVacio, $section);
+
+  //$linkGoogle.addEventListener('click')
+
+  return ($section);
 };

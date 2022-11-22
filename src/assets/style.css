@@ -83,7 +83,7 @@ font-size: 2.5vh;
   display: flex;
 }
 
-/*------------------------------estilo para inputs------------------------------*/
+/*------------------------------estilo para ,inputs------------------------------*/
 
 .containerInput{
   position:relative;
@@ -132,10 +132,9 @@ pointer-events: none;
 
 }
 
+
 .containerInput__box:focus ~ .containerInput__line::before{
-
   width:100%;
-
 }
 
 .containerInput__line::before {
@@ -203,6 +202,9 @@ pointer-events: none;
   border:none;
 }
 
+.input__date:focus{
+  border: none;
+}
 .containerDate__line{
   background: none;
  color: #000;
@@ -222,6 +224,7 @@ pointer-events: none;
   justify-content: center;
   flex-direction: row;
   gap: 1rem;
+  padding-top: 5%;
 }
 .containerGoogle__link{
   outline:none;
@@ -241,5 +244,6 @@ pointer-events: none;
  text-align: center;
   font-size: 0.8rem;
   color: #4b4b4b60;
+  padding-top: 10%;
 }
 /***************prueba de login****************/
