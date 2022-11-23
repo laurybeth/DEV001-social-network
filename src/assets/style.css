@@ -41,10 +41,10 @@
   width: 100%;
 }
 
-.container__button__signup,.container__button__login,.container__button__back{
+.container__button__signup,.container__button__login{
 width:60%;
 height: 41px;
-background-color:#e69093;
+background-color:#E69093;
 border:none;
 border-radius:0.2rem;
 box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
@@ -53,8 +53,8 @@ color:#fff;
 font-size: 2.5vh;
 }
 
-.container__button__login,.container__button__back{
- background-color:#4ab58d; 
+.container__button__login{
+ background-color:#44AFAC; 
 }
 
 
@@ -83,7 +83,7 @@ font-size: 2.5vh;
   display: flex;
 }
 
-/*------------------------------estilo para inputs------------------------------*/
+/*------------------------------estilo para ,inputs------------------------------*/
 
 .containerInput{
   position:relative;
@@ -111,7 +111,7 @@ font-size: 2.5vh;
 position: absolute;
 top:-0.8rem;
 font-size: 1rem;
-color: #4ab58d;
+color: #44AFAC;
 }
 
 
@@ -132,10 +132,9 @@ pointer-events: none;
 
 }
 
+
 .containerInput__box:focus ~ .containerInput__line::before{
-
   width:100%;
-
 }
 
 .containerInput__line::before {
@@ -145,9 +144,9 @@ pointer-events: none;
   bottom:0;
   left:0;
   position:absolute;
-  background: #4ab58d;
+  background:#44AFAC;
   transition:0.3s ease all;
-  
+
 }
 
 /*------------------------------estilo para inputs------------------------------*/
@@ -156,10 +155,10 @@ pointer-events: none;
   margin-top:1rem;
   display:flex;
   color: #000000;
-  gap:1rem;
+  gap:0.9rem;
   width: 100%;
-  justify-content: center;
-  align-items: center ;
+  /*justify-content: center;
+  align-items: center ;*/
 }
 .input__conditions{
   position: relative;
@@ -169,6 +168,7 @@ pointer-events: none;
   position: relative;
   bottom: 50%;
   font-weight:300;
+  font-size: 0.9rem;
 }
 .container form > *{
   width:70%;
@@ -180,15 +180,17 @@ pointer-events: none;
   flex-direction: column;
   justify-content: center;
   gap: 0.5rem;
-  width:70%;
+  width:66.5%;
   height:60px;
   padding: 0px;
-  color: #000000;
+  color: #44AFAC;
+  
 }
 .label__date{
   font-family: 'Lato', sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
+  color: #44AFAC;
 }
 .input__date{
   font-family: 'Lato', sans-serif; 
@@ -196,16 +198,52 @@ pointer-events: none;
   height:33px;
   text-align: start;
   color: #4b4b4b60;
-  padding: 8px;
   border-radius: 0.4rem;
-  border:2px solid #4b4b4b60;
+  border:none;
 }
-.container__button-register{
-  margin-top: 11%;
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  gap:1rem;
+
+.input__date:focus{
+  border: none;
+}
+.containerDate__line{
+  background: none;
+ color: #000;
+ font-size: 1rem;
+ display:block;
+ width:100%;
+ border:none;
+
+ border-bottom: 1px solid #4b4b4b60;
+ resize: none;
+}
+
+.containerGoogle{
+  display: flex;
   width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 1rem;
+  padding-top: 5%;
+}
+.containerGoogle__link{
+  outline:none;
+  margin:none ;
+ text-decoration: none;
+ font-size: 0.7rem;
+ color:#4A90E2;
+
+}
+
+.containerGoogle__logo{
+  width:1.5rem;
+  height:1.5rem;
+  
+}
+.container__alreadyAccount{
+ text-align: center;
+  font-size: 0.8rem;
+  color: #4b4b4b60;
+  padding-top: 10%;
 }
 /***************prueba de login****************/
