@@ -1,14 +1,10 @@
 export const Login = (onNavigate) => {
-  
   const $section = document.createElement('section');
-  $section.className = 'container';
-  $section.innerHTML = ` <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
-    <h4 class="container__title">Sign In</h4>`;
-const $formL= document.createElement('form');
-  $formL.id = 'registerForm';
-  $formL.className = 'container form';
-  $formL.innerHTML = `
-  <div class="containerInput">  
+  $section.className = 'containerLogin';
+  $section.innerHTML = ` <img class="containerLogin__logo-login"src="./assets/img/logo_horizontal.png" alt="logo">
+    <h4 class="container__title">Sign In</h4>
+  <form class="containerLogin_form">
+   <div class="containerInput">  
       <input class="containerInput__box" type="email" name="User_email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" title="the format does not match what was requested" required>  
       <span class=containerInput__line></span>  
       <label for="email"class="containerInput__label">Email</label>
@@ -19,18 +15,16 @@ const $formL= document.createElement('form');
       <label for="password" class="containerInput__label">Password</label>
       <span class=containerInput__line></span>
     </div>
-    <input class="container__button__signup" type="submit" value="Sign In">
+    <input class="container__button__login" type="submit" value="Sign In">
+    </form>
   `;
+/*
+  const $button = document.querySelector('.container__button__signup');
 
-
-  const $button = document.createElement('button');
-
-
-  $button.addEventListener('click', () => {
+  $button.addEventListener('submit', (e) => {
+    e.preventDefault();
     onNavigate('/');
   });
-
-  $div.append($title, $inputName, $button, $buttonBack);
+*/
   return $section;
-
 };
