@@ -7,7 +7,7 @@ export const Register = (onNavigate) => {
 
   $section.innerHTML = `
     <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
-    <h4 class="container__title">Sign Up</h4>`;
+   `;
   const $formR = document.createElement('form');
   $formR.id = 'registerForm';
   $formR.className = 'container__form';
