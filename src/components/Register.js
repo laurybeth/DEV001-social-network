@@ -3,14 +3,14 @@ import { registerFunction/*,registerGoogleFunction*/ } from '../lib_firebase/aut
 
 export const Register = (onNavigate) => {
   const $section = document.createElement('section');
-  $section.className = 'container register';
+  $section.className = 'container';
 
   $section.innerHTML = `
     <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
     <h4 class="container__title">Sign Up</h4>`;
   const $formR = document.createElement('form');
   $formR.id = 'registerForm';
-  $formR.className = 'container form';
+  $formR.className = 'container__form';
   // $formR.action="./lib/index.js"
   $formR.innerHTML = `
      <div class="containerInput">  
@@ -34,11 +34,11 @@ export const Register = (onNavigate) => {
       <input class="input__date" type="date" required>
       <span class=containerDate__line></span>
     </div>
-      <div class="container__terms-conditions">
+    <div class="container__terms-conditions">
         <input class="input__conditions" type="checkbox" required>
         <label class="label__conditions" >I agree with terms and conditions</label>
       </div>
-    <input class="container__button__signup" type="submit" value="Sign Up">`;
+    <input class="container__button__signup btnsubmit" type="submit" value="Sign Up">`;
 
   const $cGoogle = document.createElement('div');
   $cGoogle.className = 'containerGoogle';
@@ -54,8 +54,12 @@ export const Register = (onNavigate) => {
   $cGoogle.append($imgGoogle, $linkGoogle);
 
   $section.append($formR, $cGoogle);
-  $section.innerHTML += `
-  <p class="container__alreadyAccount">Already have an account? <strong>Sign in</strong><p/>`;
+  $section.insertAdjacentHTML('beforeend', `
+  <span class="container__alreadyAccount">Already have an account? 
+  <a href="/login">
+  <strong>Sign in</strong>
+  </a>
+  </span>`);
 
   // button retorna al welcome
   $formR.addEventListener('submit', (e) => {
