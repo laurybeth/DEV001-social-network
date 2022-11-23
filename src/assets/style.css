@@ -4,53 +4,78 @@
     margin: 0;
     box-sizing: border-box;
 }
+html{
+  font-family:'Lato', sans-serif;
+}
 
 .container{
     display:flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content: space-evenly;
     align-items:center;
     font-family: 'Lato', sans-serif;
+    width: 100%;
+    height:100vh;
+ 
 }
 
-.container__img,.container__logo {
+.container__img,
+.container__logo {
  max-width: 100%;
  height: auto;
 }
 
 .container__logo{
- max-width: 70%;
+ max-width: 75%;
 
 }
 .container__slogan{
   text-align: center;
   margin-left:25% ;
   margin-right:25%;
-  margin-bottom: 1.5rem;
  font-family: 'Lato', sans-serif;
  font-size: 2.5vh;
  color:#4b4b4b;
 }
 
 .container__button{
-  margin-top: 11%;
+ 
   display:flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  gap:1rem;
   width: 100%;
+  height:20vh;
+ 
+  
 }
 
-.container__button__signup,.container__button__login{
+.container__button__signup,
+.container__button__login {
 width:60%;
 height: 41px;
-background-color:#E69093;
+background-color:#e69093;
 border:none;
-border-radius:0.2rem;
-box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+border-radius:0.5rem;
+
 font-weight: bold;
 color:#fff;
 font-size: 2.5vh;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+}
+.container__button__signup:hover,
+.container__button__login:hover {
+  cursor: pointer;
+}
+.container__button__signup:active,
+.container__button__login:active {
+background-color:#e69093ab;
+transition:0.1s;
+box-shadow: none;  
+}
+
+.container__button__login:active{
+   background-color:#44afaba4;  
 }
 
 .container__button__login{
@@ -58,48 +83,42 @@ font-size: 2.5vh;
 }
 
 
-/*------------------------------estilo para register------------------------------*/
+ /***************estilos para REGISTER**************/
 .container__logo-register{
-  max-width: 70%;
+  max-width: 100%;
   height: auto;
 }
+.container__title{
+  margin-bottom: 10px;
+  font-size:1.2rem;
 
-.register{
-
+}
+ .container__form{
   display: flex;
-  
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100vh;
-}
+  gap:0.5rem;
+ }
+ 
 
-.container__title{
-  margin-bottom:1rem;
-}
-.container form{
-  width: 100%;
-  gap:0.8rem;
-  display: flex;
-}
-
-/*------------------------------estilo para ,inputs------------------------------*/
-
+ /********INICIO:estilos para INPUT**********/
 .containerInput{
+  width:100%;
   position:relative;
   margin:0.5rem;
 }
 
 .containerInput__box{
+  width:100%;
  background: none;
  color: #000;
  font-size: 1rem;
  padding:0 0 0.5rem 0.1rem;
  display:block;
- width:100%;
  border:none;
  border-bottom: 1px solid #4b4b4b60;
- resize: none;
+ 
 }
 
 .containerInput__box:focus{
@@ -107,38 +126,37 @@ font-size: 2.5vh;
   color:  #000;
 }
 
-.containerInput__box:focus ~ label, .containerInput__box:valid ~ label {
+.containerInput__box:focus ~ label, 
+.containerInput__box:valid ~ label {
 position: absolute;
-top:-0.8rem;
+top:-1.2rem;
 font-size: 1rem;
 color: #44AFAC;
 }
-
 
 .containerInput__label{
 color: #4b4b4b60;
 font-size: 1rem;
 position: absolute;
-left:0.5rem;
-top: 0.8rem;
+
+top: 0.2rem;
 transition:0.5s ease all ;
 pointer-events: none;
 }
 
-.containerInput__line{
+.containerInput__line,
+.containerDate__line{
   position:relative;
   display:block;
   width:100%;
-
 }
-
 
 .containerInput__box:focus ~ .containerInput__line::before{
   width:100%;
 }
 
-.containerInput__line::before {
-  content: none;
+.containerInput__line::before{
+  content:'';
   height: 0.12rem;
   width:0;
   bottom:0;
@@ -148,102 +166,110 @@ pointer-events: none;
   transition:0.3s ease all;
 
 }
-
-/*------------------------------estilo para inputs------------------------------*/
-
-.container__terms-conditions{
-  margin-top:1rem;
-  display:flex;
-  color: #000000;
-  gap:0.9rem;
-  width: 100%;
-  /*justify-content: center;
-  align-items: center ;*/
-}
-.input__conditions{
-  position: relative;
-  bottom: 50%;
-}
-.label__conditions{
-  position: relative;
-  bottom: 50%;
-  font-weight:300;
-  font-size: 0.9rem;
-}
-.container form > *{
-  width:70%;
-  height:33px;
-  padding: 8px;
-}
+ /*************** FIN:estilos para INPUT**************/
 #date{
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.5rem;
-  width:66.5%;
-  height:60px;
-  padding: 0px;
+  width:100%;
   color: #44AFAC;
+ 
   
 }
 .label__date{
-  font-family: 'Lato', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 400;
   color: #44AFAC;
 }
 .input__date{
-  font-family: 'Lato', sans-serif; 
+  font-size: 1rem;
   width:100%;
-  height:33px;
-  text-align: start;
+  
   color: #4b4b4b60;
-  border-radius: 0.4rem;
   border:none;
 }
 
 .input__date:focus{
-  border: none;
+   outline:none;
+   color:  #000;
+ 
 }
 .containerDate__line{
-  background: none;
- color: #000;
- font-size: 1rem;
- display:block;
- width:100%;
- border:none;
-
  border-bottom: 1px solid #4b4b4b60;
- resize: none;
+
+}
+
+.container__terms-conditions{
+  margin-top:10px;
+  display:flex;
+Justify-content: center;
+  align-items: center ;
+  color: #4b4b4b60;
+  gap:0.3rem;
+  width: 100%;
+ 
+}
+
+.label__conditions{
+  font-weight:300;
+  font-size: 0.9rem;
+}
+
+.btnsubmit{
+  margin-top: 15px;
+  width: 90%;
 }
 
 .containerGoogle{
+  margin-top: 20px;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
-  gap: 1rem;
-  padding-top: 5%;
+  gap: 0.3rem;
+
 }
 .containerGoogle__link{
-  outline:none;
-  margin:none ;
  text-decoration: none;
  font-size: 0.7rem;
+ font-weight: bold;
  color:#4A90E2;
 
 }
 
 .containerGoogle__logo{
-  width:1.5rem;
+width: 1.5rem;
   height:1.5rem;
-  
 }
 .container__alreadyAccount{
  text-align: center;
+  margin-top: 10px;
   font-size: 0.8rem;
   color: #4b4b4b60;
-  padding-top: 10%;
 }
-/***************prueba de login****************/
+
+/*************INICIO:login********************/
+.containerLogin{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+
+    width: 100%;
+    height:100vh;
+
+}
+
+.containerLogin__logo-login{
+  max-width:100%;
+  height: auto;
+}
+.containerLogin_form{
+  width: 80%;
+  height: 40vh;
+  display:flex;
+  flex-direction: column;
+  justify-content:space-evenly;
+  align-items: center;
+}
