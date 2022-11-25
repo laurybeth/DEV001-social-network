@@ -2,7 +2,7 @@ export const Login = (onNavigate) => {
   const $section = document.createElement('section');
   $section.className = 'containerLogin';
   $section.innerHTML = ` <img class="containerLogin__logo-login"src="./assets/img/logo_horizontal.png" alt="logo">
-    <h4 class="container__title">Sign In</h4>
+    
   <form class="containerLogin_form">
    <div class="containerInput">  
       <input class="containerInput__box" type="email" name="User_email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" title="the format does not match what was requested" required>  
