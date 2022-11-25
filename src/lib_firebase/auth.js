@@ -1,15 +1,14 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { createUserWithEmailAndPassword,signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../firebase';
 
 export const registerFunction = async (email, password) => {
   await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-   
       const user = userCredential.user;
-      alert("Registrado satisfactoriamente")
+      alert('Registrado satisfactoriamente');
+
       console.log('User: ', user);
-    // ...
+      return user;
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -24,10 +23,9 @@ export const registerFunction = async (email, password) => {
 export const registerGoogleFunction = async (provider) => {
   await signInWithPopup(auth, provider)
     .then((result) => {
-   
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
-     
+
       const user = result.user;
     // ...
     })

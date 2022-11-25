@@ -6,6 +6,7 @@
 }
 html{
   font-family:'Lato', sans-serif;
+  color:#4b4b4b;
 }
 
 .container{
@@ -112,7 +113,7 @@ box-shadow: none;
 .containerInput__box{
   width:100%;
  background: none;
- color: #000;
+ color: #4b4b4b;
  font-size: 1rem;
  padding:0 0 0.5rem 0.1rem;
  display:block;
@@ -205,7 +206,7 @@ pointer-events: none;
   display:flex;
 Justify-content: center;
   align-items: center ;
-  color: #4b4b4b60;
+  color: #4b4b4b;
   gap:0.3rem;
   width: 100%;
  
