@@ -5,6 +5,6 @@ describe('registerFunction', () => {
     expect(typeof registerFunction).toBe('function');
   });
   it('deberia retornar un objeto con la propiedad email', () => registerFunction('123@gmail.com', 'Ahb*78sd').then((userCredential) => {
-    expect(userCredential.user.email).toBe("123@gmail.com");
+    expect(userCredential.user.email).toBe('123@gmail.com');
   }));
 });
