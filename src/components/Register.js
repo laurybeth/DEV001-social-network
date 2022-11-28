@@ -1,4 +1,8 @@
 import { registerFunction, registerGoogleFunction } from '../lib_firebase/auth';
+import { Modal } from './Modal.js';
+import { modalOpen } from '../lib_firebase/index';
+
+
 
 export const Register = (onNavigate) => {
   const $section = document.createElement('section');
@@ -69,7 +73,10 @@ export const Register = (onNavigate) => {
     registerFunction(userEmail, userPassword)
       .then((userCredential) => {
         const user = userCredential.user;
-       alert('Registrado satisfactoriamente');
+        alert('Registrado satisfactoriamente');
+
+        Modal('Felicitaciones: ', 'Registrado satisfactoriamente');
+        modalOpen(Modal);
 
         console.log('User: ', user);
         return userCredential.user;
@@ -78,7 +85,13 @@ export const Register = (onNavigate) => {
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        // console.log('errorCode: ', errorCode);
+        // Modal('Error en el registro', errorMessage);
+        console.log('errorMessage: ', errorMessage);
+        Modal('hola modal: ', errorMessage);
+        modalOpen(Modal);
+        console.log(Modal('hola modal: ', errorMessage));
+       
+
         // console.log('errorMessage ', errorMessage);
         // ..
       });
