@@ -1,5 +1,4 @@
-/*import { endBefore } from 'firebase/firestore/lite';*/
-import { registerFunction/*,registerGoogleFunction*/ } from '../lib_firebase/auth';
+import { registerFunction, registerGoogleFunction } from '../lib_firebase/auth';
 
 export const Register = (onNavigate) => {
   const $section = document.createElement('section');
@@ -67,10 +66,43 @@ export const Register = (onNavigate) => {
     const userEmail = e.srcElement[0].value;
     const userPassword = e.srcElement[2].value;
 
-    registerFunction(userEmail, userPassword);
+    registerFunction(userEmail, userPassword)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // alert('Registrado satisfactoriamente');
+
+        console.log('User: ', user);
+        return userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        // console.log('errorCode: ', errorCode);
+        // console.log('errorMessage ', errorMessage);
+        // ..
+      });
   });
 
-  //$linkGoogle.addEventListener('click')
+  $linkGoogle.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    registerGoogleFunction()
+      .then((result) => {
+        alert('Te registraste con google');
+        const user = result.user;
+        console.log('UserG: ', user);
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+      });
+  });
 
   return ($section);
 };
