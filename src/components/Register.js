@@ -30,7 +30,7 @@ export const Register = (onNavigate) => {
     </div>
     <div id="date" class="container__date">
       <label class="label__date">Date of Birth</label>
-      <input class="input__date" type="date" required>
+      <input class="input__date" type="date" required  min="1900-01-01" max="2004-12-31">
       <span class=containerDate__line></span>
     </div>
     <div class="container__terms-conditions">
@@ -69,7 +69,7 @@ export const Register = (onNavigate) => {
     registerFunction(userEmail, userPassword)
       .then((userCredential) => {
         const user = userCredential.user;
-        // alert('Registrado satisfactoriamente');
+       alert('Registrado satisfactoriamente');
 
         console.log('User: ', user);
         return userCredential.user;
