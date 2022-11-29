@@ -1,5 +1,8 @@
-/*import { endBefore } from 'firebase/firestore/lite';*/
-import { registerFunction/*,registerGoogleFunction*/ } from '../lib_firebase/auth';
+import { registerFunction, registerGoogleFunction } from '../lib_firebase/auth';
+import { Modal } from './Modal.js';
+import { modalOpen } from '../lib_firebase/index';
+
+
 
 export const Register = (onNavigate) => {
   const $section = document.createElement('section');
@@ -7,7 +10,7 @@ export const Register = (onNavigate) => {
 
   $section.innerHTML = `
     <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
-    <h4 class="container__title">Sign Up</h4>`;
+   `;
   const $formR = document.createElement('form');
   $formR.id = 'registerForm';
   $formR.className = 'container__form';
@@ -31,7 +34,7 @@ export const Register = (onNavigate) => {
     </div>
     <div id="date" class="container__date">
       <label class="label__date">Date of Birth</label>
-      <input class="input__date" type="date" required>
+      <input class="input__date" type="date" required  min="1900-01-01" max="2004-12-31">
       <span class=containerDate__line></span>
     </div>
     <div class="container__terms-conditions">
@@ -67,10 +70,52 @@ export const Register = (onNavigate) => {
     const userEmail = e.srcElement[0].value;
     const userPassword = e.srcElement[2].value;
 
-    registerFunction(userEmail, userPassword);
+    registerFunction(userEmail, userPassword)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        alert('Registrado satisfactoriamente');
+
+        Modal('Felicitaciones: ', 'Registrado satisfactoriamente');
+        modalOpen(Modal);
+
+        console.log('User: ', user);
+        return userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        // Modal('Error en el registro', errorMessage);
+        console.log('errorMessage: ', errorMessage);
+        Modal('hola modal: ', errorMessage);
+        modalOpen(Modal);
+        console.log(Modal('hola modal: ', errorMessage));
+       
+
+        // console.log('errorMessage ', errorMessage);
+        // ..
+      });
   });
 
-  //$linkGoogle.addEventListener('click')
+  $linkGoogle.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    registerGoogleFunction()
+      .then((result) => {
+        alert('Te registraste con google');
+        const user = result.user;
+        console.log('UserG: ', user);
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+      });
+  });
 
   return ($section);
 };
