@@ -21,3 +21,4 @@ describe('Test a enlace de registro con Google', () => {
     expect(linkG).not.toBeNull();
   });
 });
+
