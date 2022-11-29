@@ -1,6 +1,6 @@
 import { registerFunction, registerGoogleFunction } from '../lib_firebase/auth';
 import { Modal } from './Modal.js';
-import { modalOpen } from '../lib_firebase/index';
+import { modalOpen } from '../controllers/c-modal';
 
 
 
@@ -87,12 +87,9 @@ export const Register = (onNavigate) => {
 
         // Modal('Error en el registro', errorMessage);
         console.log('errorMessage: ', errorMessage);
-        Modal('hola modal: ', errorMessage);
-        modalOpen(Modal);
-        console.log(Modal('hola modal: ', errorMessage));
-       
-
-        // console.log('errorMessage ', errorMessage);
+        console.log("hola modal",Modal('hola modal: ', errorMessage));
+        //Modal('hola modal: ', errorMessage);
+        modalOpen(Modal('hola modal: ', errorMessage));
         // ..
       });
   });

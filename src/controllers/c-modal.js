@@ -2,17 +2,13 @@
 
 // When the user clicks the button, open the modal
 export const modalOpen = (modal) => {
+  console.log('modalOpen', modal);
   modal.style.display = 'block';
 };
 
-// When the user clicks on <span> (x), close the modal
-export const modalClose = (modal) => {
-  modal.style.display = 'none';
-};
-
 // When the user clicks anywhere outside of the modal, close it
-export const outsideClick = (modal, e) => {
-  if (e.target === modal) {
+export const closeClick = (modal, closeModalId, e) => {
+  if ((e.target === modal) || (e.target.getAttribute('id') === closeModalId)) {
     modal.style.display = 'none';
   }
 };
