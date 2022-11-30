@@ -3,18 +3,13 @@ import { Modal } from '../src/components/Modal.js';
 
 /* const element = Modal(); */
 
-const data = document.createElement('div');
-data.innerHTML = `<div class="modal" id="myModal">
-<div class="modal__content"> 
- <span class="modal__close" id="modal-close">&times;</span>
- <h2>hola soy modal</h2>
- <p>hola soy el mensaje de modal</p> 
- </div>
- </div>`;
 describe('test function Modal', () => {
   /* const contentModal = element.querySelector('.modal__content'); */
-  it('Probar si existe el elemento modal', () => {
+  it('Should test if the modal element exists', () => {
     expect(Modal('hola soy modal', 'hola soy el mensaje de modal')).toMatchSnapshot();
-   
+  });
+
+  it('Should check that the modal closes', () => {
+    expect(Modal('hola soy modal', 'hola soy el mensaje de modal')).toMatchSnapshot();
   });
 });

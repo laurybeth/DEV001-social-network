@@ -2,22 +2,22 @@ import { Register } from '../src/components/Register.js';
 
 const element = Register();
 
-describe('Test a register', () => {
+describe('Test to register', () => {
   const button = element.querySelector('.container__button__signup');
   const form = element.querySelector('.container__form');
-  it('Probar si existe el botón registro', () => {
+  it('Should test if the register button exists', () => {
     expect(button).not.toBeNull();
   });
-  it('Probar si al dar submit al botón de registro este envía un formulario', () => {
+  it('Should test if on submit to the register button sends a form', () => {
     button.dispatchEvent(new Event('submit'));
     expect(form).not.toBeNull();
   });
 });
 
-describe('Test a enlace de registro con Google', () => {
+describe('Test to the register link with Google', () => {
   const linkG = element.querySelector('.containerGoogle__link');
 
-  it('Probar si existe el enlace de registro con Google', () => {
+  it('Should test if the register link with Google exists', () => {
     expect(linkG).not.toBeNull();
   });
 });
