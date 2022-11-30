@@ -1,5 +1,6 @@
 import { registerFunction, registerGoogleFunction } from '../src/lib_firebase/auth.js';
 
+
 describe('registerFunction', () => {
   it('is a function', () => {
     expect(typeof registerFunction).toBe('function');

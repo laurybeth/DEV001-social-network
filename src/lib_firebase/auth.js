@@ -1,4 +1,6 @@
-import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { auth } from '../firebase';
 
 /**
@@ -12,4 +14,11 @@ export const registerGoogleFunction = () => {
   // const token = credential.accessToken;
 
   return signInWithPopup(auth, provider);
+};
+
+export const loginFunction = (email, password) => signInWithEmailAndPassword(auth, email, password);
+export const loginGoogleFunction = () => {
+  const provider = new GoogleAuthProvider();
+
+  signInWithPopup(auth, provider);
 };
