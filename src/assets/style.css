@@ -124,7 +124,7 @@ box-shadow: none;
 
 .containerInput__box:focus{
   outline:none;
-  color:  #000;
+  color: #4b4b4b;
 }
 
 .containerInput__box:focus ~ label, 
@@ -139,7 +139,6 @@ color: #44AFAC;
 color: #4b4b4b60;
 font-size: 1rem;
 position: absolute;
-
 top: 0.2rem;
 transition:0.5s ease all ;
 pointer-events: none;
@@ -168,6 +167,10 @@ pointer-events: none;
 
 }
  /*************** FIN:estilos para INPUT**************/
+
+
+
+/*
 #date{
   display: flex;
   flex-direction: column;
@@ -178,6 +181,8 @@ pointer-events: none;
  
   
 }
+
+
 .label__date{
   font-size: 1rem;
   font-weight: 400;
@@ -186,20 +191,22 @@ pointer-events: none;
 .input__date{
   font-size: 1rem;
   width:100%;
-  
-  color: #4b4b4b60;
   border:none;
+  color: #4b4b4b;
+  
 }
+.input__date::placeholder{
+   color: #4b4b4b60;
+}
+
 
 .input__date:focus{
    outline:none;
-   color:  #000;
- 
 }
 .containerDate__line{
  border-bottom: 1px solid #4b4b4b60;
 
-}
+}*/
 
 .container__terms-conditions{
   margin-top:10px;
@@ -209,6 +216,7 @@ Justify-content: center;
   color: #4b4b4b;
   gap:0.3rem;
   width: 100%;
+  
  
 }
 
@@ -216,6 +224,33 @@ Justify-content: center;
   font-weight:300;
   font-size: 0.9rem;
 }
+.input__conditions{
+  display:none;
+}
+.input__conditions+.label__conditions{
+  cursor :pointer;
+}
+.label__conditions:before{
+  content:'';
+  background:transparent;
+  border:2.5px solid #44AFAC;
+  border-radius:4px;
+  display:inline-block;
+  height:1rem;
+  margin-right:4px;
+  text-align: center;
+  vertical-align: middle;
+  text-shadow: 1px -0.5px 1px  #44AFAC;
+  width:1rem;
+}
+.input__conditions:checked +.label__conditions:before{
+  content:'✓';
+  font-size: 13px;
+  color: #44AFAC;
+  
+}
+
+
 
 .btnsubmit{
   margin-top: 15px;
@@ -292,25 +327,27 @@ width: 1.5rem;
 
 /* Modal Content */
 .modal__content {
-  background-color: #fefefe;
+  background-color: #fff;
   margin: auto;
   padding: 20px;
-  border: 1px solid #888;
+ /* border:3px solid #e69093;*/
+  border-radius:0.5rem;
   width: 80%;
 }
 
-/* The Close Button */
+/* The Close Button #44AFAC  #44afaba4*/
 .modal__close {
-  color: #aaaaaa;
+  color: #44AFAC;
   float: right;
-  font-size: 28px;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 
 .modal__close:hover,
 .modal__close:focus {
-  color: #000;
+  color: #44afaba4;
   text-decoration: none;
+  transition:0.2s;
   cursor: pointer;
 }
 
