@@ -12,7 +12,7 @@ export const Welcome = (onNavigate) => {
   $buttonSignUp.className = 'container__button__signup ';
 
   $buttonSignUp.textContent = 'Sign Up';
-  $buttonLogin.textContent = 'Log in';
+  $buttonLogin.textContent = 'Sign in';
 
   $buttonLogin.addEventListener('click', () => {
     onNavigate('/login');

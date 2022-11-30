@@ -1,4 +1,3 @@
-
 import { registerFunction, registerGoogleFunction } from '../lib_firebase/auth';
 import { Modal } from './Modal.js';
 
@@ -66,13 +65,12 @@ export const Register = (onNavigate) => {
   // button retorna al welcome
   $formR.addEventListener('submit', (e) => {
     e.preventDefault();
-    const userEmail = e.srcElement[0].value;
-    const userPassword = e.srcElement[2].value;
+    const userEmail = $formR[0].value;
+    const userPassword = $formR[2].value;
 
     registerFunction(userEmail, userPassword)
       .then((userCredential) => {
         const user = userCredential.user;
-        //alert('Registrado satisfactoriamente');
 
         Modal('Congratulations: ', 'Successful registration');
 
@@ -85,9 +83,9 @@ export const Register = (onNavigate) => {
 
         // Modal('Error en el registro', errorMessage);
         console.log('errorMessage: ', errorMessage);
-      Modal('Error:', 'Mail already exist');
+        Modal('Error:', 'Mail already exist');
         // Modal('hola modal: ', errorMessage);
-        
+
         // ..
       });
   });
@@ -97,7 +95,7 @@ export const Register = (onNavigate) => {
 
     registerGoogleFunction()
       .then((result) => {
-        //alert('Te registraste con google');
+        // alert('Te registraste con google');
         Modal('Congratulations: ', 'Successful registration');
         const user = result.user;
         console.log('UserG: ', user);

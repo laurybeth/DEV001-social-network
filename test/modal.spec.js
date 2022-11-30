@@ -1,20 +1,21 @@
-import { Modal } from '../src/components/Modal.js';
+import { closeClick, Modal } from '../src/components/Modal.js';
 /* import { modalOpen } from '../src/controllers/c-modal'; */
 
-/* const element = Modal(); */
+// const element = Modal();
 
-const data = document.createElement('div');
-data.innerHTML = `<div class="modal" id="myModal">
-<div class="modal__content"> 
- <span class="modal__close" id="modal-close">&times;</span>
- <h2>hola soy modal</h2>
- <p>hola soy el mensaje de modal</p> 
- </div>
- </div>`;
 describe('test function Modal', () => {
   /* const contentModal = element.querySelector('.modal__content'); */
-  it('Probar si existe el elemento modal', () => {
+  it('Should test if the modal element exists', () => {
     expect(Modal('hola soy modal', 'hola soy el mensaje de modal')).toMatchSnapshot();
-   
+  });
+
+  it('Should check that the modal closes', () => {
+    const element = Modal('hola soy modal', 'hola soy el mensaje de modal');
+    const closeModal = document.getElementById('modal-close');
+    const e=new Event('click');
+    console.log(closeModal.dispatchEvent(e));
+    //closeClick(element, closeModal.id);
+   // closeClick(element, closeModal, e.target);
+    expect(element.style.display).toHaveBeenCalled();
   });
 });
