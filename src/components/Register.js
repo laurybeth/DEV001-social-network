@@ -1,8 +1,6 @@
+
 import { registerFunction, registerGoogleFunction } from '../lib_firebase/auth';
 import { Modal } from './Modal.js';
-import { modalOpen } from '../controllers/c-modal';
-
-
 
 export const Register = (onNavigate) => {
   const $section = document.createElement('section');
@@ -30,16 +28,17 @@ export const Register = (onNavigate) => {
       <input class="containerInput__box" type="password" name="User_password" pattern= "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$" title="The password must have between 8 and 16 characters, at least one digit, at least one lowercase letter, at least one uppercase letter, and at least one non-alphanumeric character." required>
       <span class=containerInput__line></span>
       <label for="password" class="containerInput__label">Password</label>
-      <span class=containerInput__line></span>
+ 
     </div>
-    <div id="date" class="container__date">
-      <label class="label__date">Date of Birth</label>
-      <input class="input__date" type="date" required  min="1900-01-01" max="2004-12-31">
-      <span class=containerDate__line></span>
+    <div  id="date" class="containerInput ">
+    <input  id="user_date" onfocus="(this.type = 'date')" class="containerInput__box " type="text" required  min="1900-01-01" max="2004-12-31">
+     <span class=containerInput__line></span>
+      <label class="containerInput__label">Date of Birth</label>
+  
     </div>
     <div class="container__terms-conditions">
-        <input class="input__conditions" type="checkbox" required>
-        <label class="label__conditions" >I agree with terms and conditions</label>
+        <input id="input__conditions" class="input__conditions" type="checkbox" required>
+        <label for="input__conditions" class="label__conditions" >I agree with terms and conditions</label>
       </div>
     <input class="container__button__signup btnsubmit" type="submit" value="Sign Up">`;
 
@@ -73,10 +72,9 @@ export const Register = (onNavigate) => {
     registerFunction(userEmail, userPassword)
       .then((userCredential) => {
         const user = userCredential.user;
-        alert('Registrado satisfactoriamente');
+        //alert('Registrado satisfactoriamente');
 
-        Modal('Felicitaciones: ', 'Registrado satisfactoriamente');
-        modalOpen(Modal);
+        Modal('Congratulations: ', 'Successful registration');
 
         console.log('User: ', user);
         return userCredential.user;
@@ -87,9 +85,9 @@ export const Register = (onNavigate) => {
 
         // Modal('Error en el registro', errorMessage);
         console.log('errorMessage: ', errorMessage);
-        console.log("hola modal",Modal('hola modal: ', errorMessage));
-        //Modal('hola modal: ', errorMessage);
-        modalOpen(Modal('hola modal: ', errorMessage));
+      Modal('Error:', 'Mail already exist');
+        // Modal('hola modal: ', errorMessage);
+        
         // ..
       });
   });
@@ -99,7 +97,8 @@ export const Register = (onNavigate) => {
 
     registerGoogleFunction()
       .then((result) => {
-        alert('Te registraste con google');
+        //alert('Te registraste con google');
+        Modal('Congratulations: ', 'Successful registration');
         const user = result.user;
         console.log('UserG: ', user);
         // ...
@@ -111,6 +110,7 @@ export const Register = (onNavigate) => {
         // The email of the user's account used.
         const email = error.customData.email;
         // The AuthCredential type that was used.
+        Modal('Error:', 'Mail already exist');
       });
   });
 

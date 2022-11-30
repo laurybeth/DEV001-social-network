@@ -11,25 +11,10 @@ data.innerHTML = `<div class="modal" id="myModal">
  <p>hola soy el mensaje de modal</p> 
  </div>
  </div>`;
-describe('Test a elemento modal', () => {
+describe('test function Modal', () => {
   /* const contentModal = element.querySelector('.modal__content'); */
   it('Probar si existe el elemento modal', () => {
-    expect(Modal('hola soy modal', 'hola soy el mensaje de modal')).toBe(data);
+    expect(Modal('hola soy modal', 'hola soy el mensaje de modal')).toMatchSnapshot();
+   
   });
 });
-
-/*
-expected"
-    <div class=\"modal__content\">·
-    <span class=\"modal__close\" id=\"modal-close\">×</span>
-    <h2>hola soy modal</h2>
-    <p>hola soy el mensaje de modal</p>·
-    </div>"
-*/
-
-/* Received
-<div class="modal" id="myModal">
-     <div class="modal__content">·
-      <span class="modal__close" id="modal-close">×</span>
-      <h2>hola soy modal</h2>·
-     <p>hola soy el mensaje de modal</p> </div></div>*/
