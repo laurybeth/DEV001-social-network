@@ -1,16 +1,39 @@
-import {wallFunction} from '../lib_firebase/auth';
+/* import {wallFunction} from '../lib_firebase/auth'; */
 
 export const Wall = (onNavigate) => {
-    const $section = document.createElement('section');
-    $section.className = 'container';
+  const $section = document.createElement('section');
+  $section.className = 'container';
     $section.innerHTML = `
-    <div>
+    <header>
+        <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
+    </header>
+
+    <section class="createPost">
         <img src="">
-        <textarea rows="5" placeholder="¿Que estás <br> pensando ,Yin Yang?"></textarea>
+        <textarea rows="5" placeholder="What are you thinking, Yin Yang?"></textarea>
         <img src="">
-    </div>
+    </section>
+
+    <section class='viewPost'>
+        <div>
+            <img src="">
+            <label></label>
+            <img src="">
+        </div>
+        <div>
+            <img src="">
+        </div>
+        <div class="containerButtons">
+            <button src="../src/assets/img/icon_like.png" class="containerButtons__likes"></button>
+            <button src="../src/assets/img/icon_comments.png" class="containerButtons__comments"></button>
+        </div>
+        <div>
+            <img src="">
+            <textarea placeholder="Add a comment"></textarea>
+        </div>
+    </section>
    `;
-   
 
   return $section;
-}
+ 
+};

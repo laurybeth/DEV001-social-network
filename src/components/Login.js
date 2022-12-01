@@ -54,10 +54,6 @@ export const Login = (onNavigate) => {
   });
 */
 
-  $buttonLogin.addEventListener('click', () => {
-  onNavigate('/Wall');
-  });
-
   $formR.addEventListener('submit', (e) => {
     e.preventDefault();
     const userEmail = $formR[0].value;
@@ -84,8 +80,8 @@ export const Login = (onNavigate) => {
 
       // ..
       });
+    onNavigate('/Wall');
   });
-
   $linkGoogle.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -106,6 +102,7 @@ export const Login = (onNavigate) => {
         // The AuthCredential type that was used.
         Modal('Error:', 'Mail already exist');
       });
+      onNavigate('/Wall');
   });
 
   return $section;
