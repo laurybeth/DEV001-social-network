@@ -54,6 +54,10 @@ export const Login = (onNavigate) => {
   });
 */
 
+  $buttonLogin.addEventListener('click', () => {
+  onNavigate('/Wall');
+  });
+
   $formR.addEventListener('submit', (e) => {
     e.preventDefault();
     const userEmail = $formR[0].value;
