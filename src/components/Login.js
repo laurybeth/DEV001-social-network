@@ -41,7 +41,7 @@ export const Login = (onNavigate) => {
   $section.append($formR, $cGoogle);
   $section.insertAdjacentHTML('beforeend', `
   <span class="container__alreadyAccount">Don’t have an account? 
-  <a href="/Register">
+  <a href="/register">
   <strong>Sign up here</strong>
   </a>
   </span>`);
