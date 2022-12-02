@@ -12,7 +12,7 @@ describe('test function Modal', () => {
   it('Should check that the modal closes', () => {
     const element = Modal('hola soy modal', 'hola soy el mensaje de modal');
     const closeModal = document.getElementById('modal-close');
-    const e=new Event('click');
+    const e = new Event('click');
     console.log(closeModal.dispatchEvent(e));
     //closeClick(element, closeModal.id);
    // closeClick(element, closeModal, e.target);

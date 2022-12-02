@@ -1,5 +1,5 @@
 import {
-  createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword,
+  createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword,onAuthStateChanged
 } from 'firebase/auth';
 import { auth } from '../firebase';
 
@@ -22,3 +22,5 @@ export const loginGoogleFunction = () => {
 
   signInWithPopup(auth, provider);
 };
+
+/*export const wallFunction = (user) => onAuthStateChanged (function callback(user));*/

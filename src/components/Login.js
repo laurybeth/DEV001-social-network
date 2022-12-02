@@ -80,8 +80,8 @@ export const Login = (onNavigate) => {
 
       // ..
       });
+    onNavigate('/Wall');
   });
-
   $linkGoogle.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -102,6 +102,7 @@ export const Login = (onNavigate) => {
         // The AuthCredential type that was used.
         Modal('Error:', 'Mail already exist');
       });
+      onNavigate('/Wall');
   });
 
   return $section;
