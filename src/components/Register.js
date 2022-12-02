@@ -80,13 +80,11 @@ export const Register = (onNavigate) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        const email = error.customData.email;
 
-        // Modal('Error en el registro', errorMessage);
-        console.log('errorMessage: ', errorMessage);
-        Modal('Error:', 'Mail already exist');
-        // Modal('hola modal: ', errorMessage);
+        if (errorCode === 'auth/email-already-in-use') { Modal('Error:', 'Email already in use'); } else { Modal('Error:', 'Something went wrong'); }
 
-        // ..
+        console.log('Error en el registro', errorCode);
       });
   });
 
@@ -107,8 +105,7 @@ export const Register = (onNavigate) => {
         const errorMessage = error.message;
         // The email of the user's account used.
         const email = error.customData.email;
-        // The AuthCredential type that was used.
-        Modal('Error:', 'Mail already exist');
+        if (errorCode === 'auth/email-already-in-use') { Modal('Error:', 'Email already in use'); } else { Modal('Error:', 'Something went wrong'); }
       });
   });
 

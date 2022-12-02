@@ -17,7 +17,7 @@ export const Login = (onNavigate) => {
       <label for="email"class="containerInput__label">Email</label>
     </div>
       <div class="containerInput">
-      <input class="containerInput__box" type="password" name="User_password" pattern= "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$" title="The password must have between 8 and 16 characters, at least one digit, at least one lowercase letter, at least one uppercase letter, and at least one non-alphanumeric character." required>
+      <input class="containerInput__box" type="password" name="User_password" required>
       <span class=containerInput__line></span>
       <label for="password" class="containerInput__label">Password</label>
       <span class=containerInput__line></span>
@@ -73,10 +73,7 @@ export const Login = (onNavigate) => {
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        // Modal('Error en el registro', errorMessage);
-        console.log('errorMessage: ', errorMessage);
-        Modal('Error:', errorCode);
-        // Modal('hola modal: ', errorMessage);
+        if (errorCode === 'auth/wrong-password') { Modal('Error:', 'Wrong-password'); } else { Modal('Error:', 'Something went wrong'); }
 
       // ..
       });
@@ -100,9 +97,9 @@ export const Login = (onNavigate) => {
         // The email of the user's account used.
         const email = error.customData.email;
         // The AuthCredential type that was used.
-        Modal('Error:', 'Mail already exist');
+        if (errorCode === 'auth/wrong-password') { Modal('Error:', 'Wrong-password'); } else { Modal('Error:', 'Something went wrong'); }
       });
-      onNavigate('/Wall');
+    onNavigate('/Wall');
   });
 
   return $section;
