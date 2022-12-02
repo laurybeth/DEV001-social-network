@@ -64,6 +64,7 @@ export const Login = (onNavigate) => {
       .then((userCredential) => {
         const user = userCredential.user;
         Modal('Congratulations: ', 'Successful registration');
+        onNavigate('/wall');
 
         console.log('User: ', user);
 
@@ -77,7 +78,6 @@ export const Login = (onNavigate) => {
 
       // ..
       });
-    onNavigate('/Wall');
   });
   $linkGoogle.addEventListener('click', (e) => {
     e.preventDefault();
@@ -88,6 +88,7 @@ export const Login = (onNavigate) => {
         Modal('Congratulations: ', 'Successful registration');
         const user = result.user;
         console.log('UserG: ', user);
+        onNavigate('/wall');
         // ...
       })
       .catch((error) => {
@@ -99,7 +100,6 @@ export const Login = (onNavigate) => {
         // The AuthCredential type that was used.
         if (errorCode === 'auth/wrong-password') { Modal('Error:', 'Wrong-password'); } else { Modal('Error:', 'Something went wrong'); }
       });
-    onNavigate('/Wall');
   });
 
   return $section;
