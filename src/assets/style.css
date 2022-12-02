@@ -168,8 +168,6 @@ pointer-events: none;
 }
  /*************** FIN:estilos para INPUT**************/
 
-
-
 /*
 #date{
   display: flex;
@@ -178,7 +176,6 @@ pointer-events: none;
   gap: 0.5rem;
   width:100%;
   color: #44AFAC;
- 
   
 }
 
@@ -352,3 +349,18 @@ width: 1.5rem;
 }
 
  /*************** FIN:estilos para modal **************/
+
+  /*************** INICIO:estilos para wall **************/
+.container-header{
+  justify-content: start;
+  margin:1rem;
+}
+.container-header__logo{
+ width:40%;
+}
+
+.container-addPost{
+
+  }
+
+   /*************** FIN:estilos para modal **************/
