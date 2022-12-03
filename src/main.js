@@ -8,8 +8,8 @@ const root = document.getElementById('root');
 const routes = {
   '/': Welcome,
   '/login': Login,
-  '/Register': Register,
-  '/Wall': Wall,
+  '/register': Register,
+  '/wall': Wall,
 };
 
 const onNavigate = (pathname) => {

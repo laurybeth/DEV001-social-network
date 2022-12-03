@@ -1,4 +1,5 @@
-import { registerFunction, registerGoogleFunction } from '../lib_firebase/auth';
+import { registerFunction, googleFunction } from '../lib_firebase/auth';
+import { createItem } from '../lib_firebase/db';
 import { Modal } from './Modal.js';
 
 export const Register = (onNavigate) => {
@@ -30,13 +31,13 @@ export const Register = (onNavigate) => {
  
     </div>
     <div  id="date" class="containerInput ">
-    <input  id="user_date" onfocus="(this.type = 'date')" class="containerInput__box " type="text" required  min="1900-01-01" max="2004-12-31">
+    <input  id="user_date" onfocus="(this.type = 'date')" class="containerInput__box" type="text" required  min="1900-01-01" max="2004-12-31">
      <span class=containerInput__line></span>
-      <label class="containerInput__label">Date of Birth</label>
+      <label for ="containerInput__box" class="containerInput__label">Date of Birth</label>
   
     </div>
     <div class="container__terms-conditions">
-        <input id="input__conditions" class="input__conditions" type="checkbox" required>
+        <input class="input__conditions" id="input__conditions" name="User_terms&conditions" type="checkbox" required>
         <label for="input__conditions" class="label__conditions" >I agree with terms and conditions</label>
       </div>
     <input class="container__button__signup btnsubmit" type="submit" value="Sign Up">`;
@@ -72,7 +73,16 @@ export const Register = (onNavigate) => {
       .then((userCredential) => {
         const user = userCredential.user;
 
-        Modal('Congratulations: ', 'Successful registration');
+       // Modal('Congratulations: ', `${userCredential.user.email} Successful registration'`);
+       createItem(userCredential.user, 'users')
+       .then(data => { 
+             console.log('createItem data', data); })
+
+       .catch((error) => {
+         const errorCode = error.code;
+         console.log('Create item error', errorCode);
+       });
+        onNavigate('/wall');
 
         console.log('User: ', user);
         return userCredential.user;
@@ -80,24 +90,33 @@ export const Register = (onNavigate) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        //const email = error.customData.email;
 
-        // Modal('Error en el registro', errorMessage);
-        console.log('errorMessage: ', errorMessage);
-        Modal('Error:', 'Mail already exist');
-        // Modal('hola modal: ', errorMessage);
+        if (errorCode === 'auth/email-already-in-use') { Modal('Error:', 'Email already in use'); } else { Modal('Error:', 'Something went wrong'); }
 
-        // ..
+        console.log('Error en el registro', errorCode);
       });
   });
 
   $linkGoogle.addEventListener('click', (e) => {
     e.preventDefault();
 
-    registerGoogleFunction()
-      .then((result) => {
+    googleFunction()
+      .then((userCredential) => {
         // alert('Te registraste con google');
-        Modal('Congratulations: ', 'Successful registration');
-        const user = result.user;
+        //Modal('Congratulations: ', `${userCredential.user.email} Successful registration'`);
+
+        createItem(userCredential.user, 'users')
+          .then(data => { 
+                console.log('createItem data', data); })
+
+          .catch((error) => {
+            const errorCode = error.code;
+            console.log('Create item error', errorCode);
+          });
+
+        onNavigate('/wall');
+        const user = userCredential.user;
         console.log('UserG: ', user);
         // ...
       })
@@ -106,9 +125,8 @@ export const Register = (onNavigate) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        Modal('Error:', 'Mail already exist');
+       // const email = error.customData.email;
+        if (errorCode === 'auth/email-already-in-use') { Modal('Error:', 'Email already in use'); } else { Modal('Error:', 'Something went wrong'); }
       });
   });
 
