@@ -19,7 +19,7 @@ export const Welcome = (onNavigate) => {
   });
 
   $buttonSignUp.addEventListener('click', () => {
-    onNavigate('/Register');
+    onNavigate('/register');
   });
 
   $divButtons.append($buttonSignUp, $buttonLogin);

@@ -1,5 +1,5 @@
 export const getAuth = jest.fn();
-export const createUserWithEmailAndPassword = jest.fn(({ }, email, password) =>
+export const createUserWithEmailAndPassword = jest.fn(({}, email, password) =>
   Promise.resolve({ 
     user: { email }
   }));
