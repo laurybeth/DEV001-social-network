@@ -4,9 +4,12 @@ import {
 import { db } from '../firebase.js';
 
 // CREATE
-export const createItem = (obj1, obj2, items) => {
-  const col = db.collection(items).doc().set(obj1);
-  const colRef = col(db, items);
-  const data = addDoc(colRef, obj2);
-  return data.id;
+export const createUser = (userID, userName, userEmail, userPassword) => {
+  setDoc(doc(db, 'users', userID), {
+    id: userID,
+    name: userName,
+    email: userEmail,
+    password: userPassword,
+
+  });
 };
