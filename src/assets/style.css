@@ -327,7 +327,27 @@ width: 1.5rem;
 }
 
 .container-addPost{
-
+  width: 100%;
+  display: flex;
+  margin: 1rem;
+  border: grey solid 0.1rem ;
   }
 
+.container-imgProfile{
+  width:40px ;
+  height: 40px;
+  border: #e69093 solid 2px;
+  border-radius: 200px;
+  padding:0px;
+}
+
+.container-imgProfile__img{
+width:100% ;
+height: auto;
+}
+
+.container-addPost__add{
+  width:10% ;
+}
    /*************** FIN:estilos para modal **************/
+

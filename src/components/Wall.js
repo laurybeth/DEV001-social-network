@@ -1,4 +1,5 @@
 /* import {wallFunction} from '../lib_firebase/auth'; */
+/*import { querySnapshot } from '../lib_firebase/db.js';*/
 
 export const Wall = (onNavigate) => {
   const $section = document.createElement('section');
@@ -9,9 +10,11 @@ export const Wall = (onNavigate) => {
     </header>
 
     <section class="container-addPost">
-        <img src="">
-        <textarea rows="5" placeholder="What are you thinking, Yin Yang?"></textarea>
-        <img src="">
+        <div class="container-imgProfile">
+            <img class="container-imgProfile__img" src="./assets/img/user_photo_default.png">
+        </div>
+        <div class="container-addPost__text" rows="5" placeholder="What are you thinking, Yin Yang?"></div>
+        <img class="container-addPost__add" src="./assets/img/icon_addImage.png">
     </section>
 
     <section class='viewPost'>
@@ -25,7 +28,8 @@ export const Wall = (onNavigate) => {
         </div>
         <div class="containerButtons">
             <div class="containerButtons__likes">
-            <button src="../src/assets/img/icon_like.png" class="containerLikes">
+            <button class="containerLikes">
+              <img src="ssets/img/icon_like.png" >
               <span class="containerLikes__heart">                     
               </span>            
               <span class="containerLikes__count">                     
@@ -33,7 +37,7 @@ export const Wall = (onNavigate) => {
             </button>
             </div>
             <div class="containerButtons__comments">
-            <button src="../src/assets/img/icon_comments.png" class="containerComments">
+            <button src="./assets/img/icon_comments.png" class="containerComments">
             <span class="containerComments__comment">                     
             </span>            
             <span class="containerComments__count">                     
@@ -48,5 +52,9 @@ export const Wall = (onNavigate) => {
     </section>
    `;
 
+   const divContainerPost = document.getElementsByClassName("container-addPost__text");
+   divContainerPost.addEventListener("click");
+
   return $section;
 };
+
