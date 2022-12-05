@@ -89,17 +89,14 @@ box-shadow: none;
   max-width: 100%;
   height: auto;
 }
-.container__title{
-  margin-bottom: 10px;
-  font-size:1.2rem;
-
-}
  .container__form{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap:0.5rem;
+
+  width:70%;
  }
  
 
@@ -108,6 +105,7 @@ box-shadow: none;
   width:100%;
   position:relative;
   margin:0.5rem;
+
 }
 
 .containerInput__box{
@@ -144,8 +142,7 @@ transition:0.5s ease all ;
 pointer-events: none;
 }
 
-.containerInput__line,
-.containerDate__line{
+.containerInput__line::before{
   position:relative;
   display:block;
   width:100%;
@@ -166,44 +163,17 @@ pointer-events: none;
   transition:0.3s ease all;
 
 }
+.warnings{
+
+  margin-bottom:10px;
+font-size: 0.7rem;
+width: 100%;
+color:#e69093;
+
+
+}
  /*************** FIN:estilos para INPUT**************/
 
-/*
-#date{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
-  width:100%;
-  color: #44AFAC;
-  
-}
-
-
-.label__date{
-  font-size: 1rem;
-  font-weight: 400;
-  color: #44AFAC;
-}
-.input__date{
-  font-size: 1rem;
-  width:100%;
-  border:none;
-  color: #4b4b4b;
-  
-}
-.input__date::placeholder{
-   color: #4b4b4b60;
-}
-
-
-.input__date:focus{
-   outline:none;
-}
-.containerDate__line{
- border-bottom: 1px solid #4b4b4b60;
-
-}*/
 
 .container__terms-conditions{
   margin-top:10px;

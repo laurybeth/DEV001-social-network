@@ -4,9 +4,6 @@ import {
 import { db } from '../firebase.js';
 
 // CREATE
-export const createItem = (obj1, obj2, items) => {
-  const col = db.collection(items).doc().set(obj1);
-  const colRef = col(db, items);
-  const data = addDoc(colRef, obj2);
-  return data.id;
-};
+
+export const createItem = (userName, userEmail,userBirthday) => addDoc(collection(db, 'users'), { userName, userEmail ,userBirthday});
+// console.log(userName, userEmail, userBirthday);

@@ -1,3 +1,4 @@
+import { validateEmail, validateName, validatePassword } from '../helpers';
 import { registerFunction, googleFunction } from '../lib_firebase/auth';
 import { createItem } from '../lib_firebase/db';
 import { Modal } from './Modal.js';
@@ -15,29 +16,32 @@ export const Register = (onNavigate) => {
   // $formR.action="./lib/index.js"
   $formR.innerHTML = `
      <div class="containerInput">  
-      <input class="containerInput__box" type="email" name="User_email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" title="the format does not match what was requested" required>  
+      <input type="email" name="user_email" id='userEmail' class="containerInput__box" required>  
       <span class=containerInput__line></span>  
       <label for="email"class="containerInput__label">Email</label>
     </div>
+    <p id='warningsEmail' class='warnings'></p>
     <div class="containerInput">
-      <input class="containerInput__box" type="text"  name="User_name" pattern="\\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+" title="Only letters" required>
+      <input class="containerInput__box" type="text"  name="user_name" id="userName" required>
       <span class=containerInput__line></span>
       <label for="name" class="containerInput__label">Full name</label>
     </div>
+    <p id='warningsName' class='warnings'></p>
     <div class="containerInput">
-      <input class="containerInput__box" type="password" name="User_password" pattern= "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$" title="The password must have between 8 and 16 characters, at least one digit, at least one lowercase letter, at least one uppercase letter, and at least one non-alphanumeric character." required>
+      <input class="containerInput__box" type="password" name="User_password" id='userPassword' required>
       <span class=containerInput__line></span>
       <label for="password" class="containerInput__label">Password</label>
- 
     </div>
-    <div  id="date" class="containerInput ">
-    <input  id="user_date" onfocus="(this.type = 'date')" class="containerInput__box" type="text" required  min="1900-01-01" max="2004-12-31">
+    <p id='warningsPassword' class='warnings'></p>
+    <div class="containerInput ">
+    <input  id="userDate" onfocus="(this.type = 'date')" class="containerInput__box" type="text" required  min="1900-01-01" max="2004-12-31"
+>
      <span class=containerInput__line></span>
-      <label for ="containerInput__box" class="containerInput__label">Date of Birth</label>
-  
+    <label for ="containerInput__box" class="containerInput__label">Date of Birth</label>
     </div>
+     <p id='warningsDate' class='warnings'></p>
     <div class="container__terms-conditions">
-        <input class="input__conditions" id="input__conditions" name="User_terms&conditions" type="checkbox" required>
+        <input class="input__conditions" id="input__conditions" name="User_terms&conditions" type="checkbox" >
         <label for="input__conditions" class="label__conditions" >I agree with terms and conditions</label>
       </div>
     <input class="container__button__signup btnsubmit" type="submit" value="Sign Up">`;
@@ -63,39 +67,34 @@ export const Register = (onNavigate) => {
   </a>
   </span>`);
 
+  $section.querySelector('#userEmail').addEventListener('blur', validateEmail);
+  $section.querySelector('#userName').addEventListener('blur', validateName);
+  $section.querySelector('#userPassword').addEventListener('blur', validatePassword);
+
   // button retorna al welcome
   $formR.addEventListener('submit', (e) => {
     e.preventDefault();
+
     const userEmail = $formR[0].value;
     const userPassword = $formR[2].value;
+    const userName = $formR[1].value;
+    const userBirthday = $formR[3].value;
+    registerFunction(userEmail, userPassword).then((userCredential) => {
+      createItem(userName, userEmail, userBirthday)
+        .then((userCredential) => { alert('registro exitosamente')})
+        .catch((error) => { alert(error) });
 
-    registerFunction(userEmail, userPassword)
-      .then((userCredential) => {
-        const user = userCredential.user;
+      const user = userCredential.user;
+      onNavigate('/wall');
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // const email = error.customData.email;
+      if (errorCode === 'auth/email-already-in-use') { Modal('Error:', 'Email already in use'); } else { Modal('Error:', 'Something went wrong'); }
+      console.log('Error en el registro', errorCode);
+    });
 
-       // Modal('Congratulations: ', `${userCredential.user.email} Successful registration'`);
-       createItem(userCredential.user, 'users')
-       .then(data => { 
-             console.log('createItem data', data); })
-
-       .catch((error) => {
-         const errorCode = error.code;
-         console.log('Create item error', errorCode);
-       });
-        onNavigate('/wall');
-
-        console.log('User: ', user);
-        return userCredential.user;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        //const email = error.customData.email;
-
-        if (errorCode === 'auth/email-already-in-use') { Modal('Error:', 'Email already in use'); } else { Modal('Error:', 'Something went wrong'); }
-
-        console.log('Error en el registro', errorCode);
-      });
+    $formR.reset();
   });
 
   $linkGoogle.addEventListener('click', (e) => {
@@ -104,11 +103,12 @@ export const Register = (onNavigate) => {
     googleFunction()
       .then((userCredential) => {
         // alert('Te registraste con google');
-        //Modal('Congratulations: ', `${userCredential.user.email} Successful registration'`);
+        // Modal('Congratulations: ', `${userCredential.user.email} Successful registration'`);
 
         createItem(userCredential.user, 'users')
-          .then(data => { 
-                console.log('createItem data', data); })
+          .then((data) => {
+            console.log('createItem data', data);
+          })
 
           .catch((error) => {
             const errorCode = error.code;
@@ -125,7 +125,7 @@ export const Register = (onNavigate) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
-       // const email = error.customData.email;
+        // const email = error.customData.email;
         if (errorCode === 'auth/email-already-in-use') { Modal('Error:', 'Email already in use'); } else { Modal('Error:', 'Something went wrong'); }
       });
   });
