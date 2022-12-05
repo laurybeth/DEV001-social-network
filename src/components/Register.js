@@ -1,6 +1,6 @@
 import { validateEmail, validateName, validatePassword } from '../helpers';
 import { registerFunction, googleFunction } from '../lib_firebase/auth';
-import { createItem } from '../lib_firebase/db';
+import { createUser } from '../lib_firebase/db';
 import { Modal } from './Modal.js';
 
 export const Register = (onNavigate) => {
@@ -76,7 +76,9 @@ export const Register = (onNavigate) => {
     e.preventDefault();
 
     const userEmail = $formR[0].value;
+    const userName = $formR[1].value;
     const userPassword = $formR[2].value;
+
     const userName = $formR[1].value;
     const userBirthday = $formR[3].value;
     registerFunction(userEmail, userPassword).then((userCredential) => {
@@ -105,7 +107,8 @@ export const Register = (onNavigate) => {
         // alert('Te registraste con google');
         // Modal('Congratulations: ', `${userCredential.user.email} Successful registration'`);
 
-        createItem(userCredential.user, 'users')
+        createUser(userCredential.user, 'users')
+
           .then((data) => {
             console.log('createItem data', data);
           })
