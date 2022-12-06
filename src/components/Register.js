@@ -1,6 +1,7 @@
 import { validateEmail, validateName, validatePassword } from '../helpers';
 import { registerFunction, googleFunction } from '../lib_firebase/auth';
-import { createUser } from '../lib_firebase/db';
+import { saveCollectionUser } from '../lib_firebase/db';
+
 import { Modal } from './Modal.js';
 
 export const Register = (onNavigate) => {
@@ -78,13 +79,17 @@ export const Register = (onNavigate) => {
     const userEmail = $formR[0].value;
     const userName = $formR[1].value;
     const userPassword = $formR[2].value;
-
-    const userName = $formR[1].value;
     const userBirthday = $formR[3].value;
+
     registerFunction(userEmail, userPassword).then((userCredential) => {
-      createItem(userName, userEmail, userBirthday)
-        .then((userCredential) => { alert('registro exitosamente')})
-        .catch((error) => { alert(error) });
+      saveCollectionUser(userName, userEmail, userBirthday)
+        .then((docRef) => {
+          console.log('docRef', docRef.id);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          console.log('Create user error', errorCode);
+        });
 
       const user = userCredential.user;
       onNavigate('/wall');
@@ -107,17 +112,14 @@ export const Register = (onNavigate) => {
         // alert('Te registraste con google');
         // Modal('Congratulations: ', `${userCredential.user.email} Successful registration'`);
 
-        createUser(userCredential.user, 'users')
-
-          .then((data) => {
-            console.log('createItem data', data);
+        saveCollectionUser(userCredential.user, 'users')
+          .then((docRef) => {
+            console.log('docRef', docRef.id);
           })
-
           .catch((error) => {
             const errorCode = error.code;
-            console.log('Create item error', errorCode);
+            console.log('Create user error', errorCode);
           });
-
         onNavigate('/wall');
         const user = userCredential.user;
         console.log('UserG: ', user);
