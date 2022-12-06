@@ -20,7 +20,7 @@ export const Modal = (title, message) => {
   const closeModal = document.getElementById($closeId);
 
   // When the user clicks on <span> (x), close the modal
-  window.addEventListener('click', (e) => {
+  $modalDiv.addEventListener('click', (e) => {
     closeClick($modalDiv, closeModal.id, e);
   });
 
