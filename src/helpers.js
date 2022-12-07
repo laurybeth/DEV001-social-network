@@ -17,7 +17,7 @@ export function validateName() {
   const $warningsName = document.getElementById('warningsName');
   const regexName = /[a-zA-ZÀ-ÖØ-öø-ÿ]+\.?(( |-)[a-zA-ZÀ-ÖØ-öø-ÿ]+\.?)/;
   if (!regexName.test($userName.value)) {
-    $warningsName.innerHTML = 'A name and a surname, only letters <br> Example: Melania palomino';
+    $warningsName.innerHTML = 'A name and a surname, only letters <br> Example: Melania Palomino';
     $userName.value = '';
   } else {
     $warningsName.innerHTML = '';

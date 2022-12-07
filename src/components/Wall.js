@@ -1,5 +1,6 @@
 /* import {wallFunction} from '../lib_firebase/auth'; */
 /* import { querySnapshot } from '../lib_firebase/db.js'; */
+import { Menu } from './Menu.js';
 import { Modal } from './Modal.js';
 
 export const Wall = (onNavigate) => {
@@ -94,8 +95,12 @@ export const Wall = (onNavigate) => {
             <textarea class='containerComment__text' placeholder="Add a comment"></textarea>
         </div>
       </div>
+      
     </section>
+  
    `;
+const root = document.getElementById('root');
+  root.appendChild(Menu());
 
   $section.addEventListener('click', (e) => {
     e.preventDefault();

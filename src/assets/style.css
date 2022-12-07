@@ -508,4 +508,33 @@ text-align: left;
 }
 
    /*************** FIN:estilos para wall **************/
+   
+   /*************** inicio:estilos para header **************/
+.containerHeader{
+  background-color:#7DBA93;
+  width:100%;
+  height: 7vh;
+  display:flex;
+ display:flex;
+  justify-content:center;
+  align-items: center;
+  position: fixed;
+  top:93vh;
+}
+.containeMenu{
+ width:90%;
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
+  
+}
+
+.containeMenu__iconImg{
+  width:35px ;
+  height:35px ;
+
+  
+}
+
+   /*************** FIN:estilos para header **************/
 
