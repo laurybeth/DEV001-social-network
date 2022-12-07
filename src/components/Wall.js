@@ -4,7 +4,7 @@ import { Modal } from './Modal.js';
 
 export const Wall = (onNavigate) => {
   const $section = document.createElement('section');
-  $section.className = 'container';
+  $section.className = 'container containerWall';
   $section.innerHTML = `
     <header class="container-header">
         <img class="container-header__logo" src="./assets/img/logo_horizontal.png" alt="logo">
@@ -14,41 +14,84 @@ export const Wall = (onNavigate) => {
         <div class="container-imgProfile">
             <img class="container-imgProfile__img" src="./assets/img/user_photo_default.png">
         </div>
-        <div class="container-addPost__text" id="addPost" >What are you thinking, Yin Yang?</div>
+        <div class="container-addPost__text" id="addPost" >What are you thinking,<br> Yin Yang?</div>
    </section>
 
    <section class='container-Posts'>
     <div class='container-Posts__Post'>
         <div class="container-headerPost">
-            <img src="">
-            <label></label>
-            <img src="">
+          <div class="container-headerPost__img">
+            <img  class='container-headerPost__img__user'src="./assets/img/user_photo_default.png" 
+            width="25px" height="25px">
+              <p>Nombre</p>
+            </div>
+          
+            <img class='container-headerPost__icon' src="./assets/img/icon_hamburguer.png">
         </div>
-        <div>
-            <img src="">
+        <div class='container-imgPost'>
+            <img   class='container-imgPost__img' src="./assets/img/cuy.jpg">
         </div>
         <div class="containerButtons">
             <div class="containerButtons__likes">
-            <button class="containerLikes">
-              <img src="ssets/img/icon_like.png" >
-              <span class="containerLikes__heart">                     
-              </span>            
-              <span class="containerLikes__count">                     
-              </span>    
-            </button>
+             <div class="containerLikes">
+                <img  class="containerLikes__heart" src="assets/img/icon_like.png" >
+                <span class="containerLikes__count"> 300k                     
+                </span>    
+                
+              </div>
             </div>
+
             <div class="containerButtons__comments">
-            <button src="./assets/img/icon_comments.png" class="containerComments">
-            <span class="containerComments__comment">                     
-            </span>            
-            <span class="containerComments__count">                     
-            </span>   
-            </button>
+              <div class="containerComments" >
+               <img  class="containerComments__comment" src="assets/img/icon_comments.png" >           
+                <span class="containerComments__count"> 
+                1 k                   
+                </span>   
+              </div>
             </div>
         </div>
-        <div class="containerComments">
-            <img src="">
-            <textarea placeholder="Add a comment"></textarea>
+          <div class="containerComment">
+          <img class="containerComments__comment" src="./assets/img/user_photo_default.png">
+          <textarea class='containerComment__text' placeholder="Add a comment"></textarea>
+          </div>
+      </div>
+
+
+      <div class='container-Posts__Post'>
+        <div class="container-headerPost">
+          <div class="container-headerPost__img">
+            <img  class='container-headerPost__img__user'src="./assets/img/user_photo_default.png" 
+            width="25px" height="25px">
+              <p>Nombre</p>
+            </div>
+          
+            <img class='container-headerPost__icon' src="./assets/img/icon_hamburguer.png">
+        </div>
+        <div class='container-imgPost'>
+            <img   class='container-imgPost__img' src="./assets/img/cuy.jpg" >
+        </div>
+        <div class="containerButtons">
+            <div class="containerButtons__likes">
+             <div class="containerLikes">
+                <img  class="containerLikes__heart" src="assets/img/icon_like.png" >
+                <span class="containerLikes__count"> 300k                     
+                </span>    
+                
+              </div>
+            </div>
+
+            <div class="containerButtons__comments">
+              <div class="containerComments" >
+               <img  class="containerComments__comment" src="assets/img/icon_comments.png" >           
+                <span class="containerComments__count"> 
+                1 k                   
+                </span>   
+              </div>
+            </div>
+        </div>
+        <div class="containerComment">
+            <img class="containerComments__comment" src="./assets/img/user_photo_default.png">
+            <textarea class='containerComment__text' placeholder="Add a comment"></textarea>
         </div>
       </div>
     </section>
