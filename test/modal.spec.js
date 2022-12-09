@@ -1,4 +1,4 @@
-import {Modal } from '../src/components/Modal.js';
+import { Modal } from '../src/components/Modal.js';
 /* import { modalOpen } from '../src/controllers/c-modal'; */
 
 // const element = Modal();
@@ -10,12 +10,17 @@ describe('test function Modal', () => {
   });
 
   it('Should check that the modal closes', () => {
-    const element = Modal('hola soy modal', 'hola soy el mensaje de modal');
-    const closeModal = document.getElementById('modal-close');
-    const e = new Event('click');
-    closeModal.dispatchEvent(e);
+    Modal('hola soy modal', 'hola soy el mensaje de modal');
+    const $closeModalElement = document.getElementById('closeModal');
+
+    // const e = new Event('click',{bubbles: true});
+    // closeModal.dispatchEvent(e);
+
+    $closeModalElement.click();
+
+    // console.log(document.getElementById('modal').style.display, element.style.display);
     // closeClick(element, closeModal.id);
     // closeClick(element, closeModal, e.target);
-    expect(element.style.display).toBe('none');
+    expect(document.getElementById('modal').style.display).toBe('none');
   });
 });

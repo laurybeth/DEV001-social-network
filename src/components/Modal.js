@@ -1,28 +1,29 @@
-export const closeClick = (modal, closeModalId, e) => {
-  if ((e.target === modal) || (e.target.getAttribute('id') === closeModalId)) {
-    modal.style.display = 'none';
+const closeModal = ($modal, $closeModalElement, e) => {
+  if ((e.target === $modal) || (e.target === $closeModalElement)) {
+    $modal.style.display = 'none';
   }
 };
 
 export const Modal = (title, message) => {
-  const $modalDiv = document.createElement('div');
-  $modalDiv.id = 'myModal';
-  $modalDiv.className = 'modal';
-  const $closeId = 'modal-close';
-  $modalDiv.innerHTML = `
-  <div class="modal__content"> 
-  <span class="modal__close" id="${$closeId}">&times;</span>
+  const $modal = document.createElement('div');
+  $modal.id = 'modal';
+  $modal.className = 'container-modal';
+  const $closeId = 'closeModal';
+  $modal.innerHTML = `
+  <div class="container-modal__content"> 
+  <span class="container-modal__close" id="${$closeId}">&times;</span>
   <h2>${title}</h2> 
   <p>${message}</p> </div>`;
 
-  document.body.appendChild($modalDiv);
-  $modalDiv.style.display = 'block';
-  const closeModal = document.getElementById($closeId);
+  document.body.appendChild($modal);
+  $modal.style.display = 'block';
+
+  const $closeModalElement = document.getElementById($closeId);
 
   // When the user clicks on <span> (x), close the modal
-  $modalDiv.addEventListener('click', (e) => {
-    closeClick($modalDiv, closeModal.id, e);
+  $modal.addEventListener('click', (e) => {
+    closeModal($modal, $closeModalElement, e);
   });
 
-  return $modalDiv;
+  return $modal;
 };

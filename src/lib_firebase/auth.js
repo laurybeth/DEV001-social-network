@@ -8,7 +8,7 @@ import { auth } from '../firebase';
  */
 export const registerFunction = (email, password) => createUserWithEmailAndPassword(auth, email, password);
 
-export const googleFunction = () => {
+export const signInGoogle = () => {
   const provider = new GoogleAuthProvider();
   // const credential = provider.credentialFromResult(result);
   // const token = credential.accessToken;

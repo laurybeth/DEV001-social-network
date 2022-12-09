@@ -1,6 +1,6 @@
 import { validateEmail, validateName, validatePassword } from '../helpers';
-import { registerFunction, googleFunction } from '../lib_firebase/auth';
-import { saveCollectionUser } from '../lib_firebase/db';
+import { registerFunction, signInGoogle } from '../lib_firebase/auth';
+import { saveCollectionUsersDoc } from '../lib_firebase/db';
 
 import { Modal } from './Modal.js';
 
@@ -107,12 +107,12 @@ export const Register = (onNavigate) => {
   $linkGoogle.addEventListener('click', (e) => {
     e.preventDefault();
 
-    googleFunction()
+    signInGoogle()
       .then((userCredential) => {
         // alert('Te registraste con google');
         // Modal('Congratulations: ', `${userCredential.user.email} Successful registration'`);
 
-        saveCollectionUser(userCredential.user, 'users')
+        saveCollectionUsersDoc(userCredential.user, 'users')
           .then((docRef) => {
             console.log('docRef', docRef.id);
           })

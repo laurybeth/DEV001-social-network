@@ -276,7 +276,7 @@ width: 1.5rem;
 }
  /*************** INICIO:estilos para modal **************/
 
-.modal {
+.container-modal {
   display: none; 
   position: fixed; 
   z-index: 1; /* Sit on top */
@@ -291,7 +291,7 @@ width: 1.5rem;
 }
 
 /* Modal Content */
-.modal__content {
+.container-modal__content {
   background-color: #fff;
   margin: auto;
   padding: 20px;
@@ -301,15 +301,15 @@ width: 1.5rem;
 }
 
 /* The Close Button #44AFAC  #44afaba4*/
-.modal__close {
+.container-modal__close {
   color: #44AFAC;
   float: right;
   font-size: 2.5rem;
   font-weight: bold;
 }
 
-.modal__close:hover,
-.modal__close:focus {
+.container-modal__close:hover,
+.container-modal__close:focus {
   color: #44afaba4;
   text-decoration: none;
   transition:0.2s;
