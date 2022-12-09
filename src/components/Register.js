@@ -82,8 +82,9 @@ export const Register = (onNavigate) => {
     const userBirthday = $formR[3].value;
 
     registerFunction(userEmail, userPassword).then((userCredential) => {
-      saveCollectionUser(userName, userEmail, userBirthday)
+      saveCollectionUsersDoc(userName, userEmail, userBirthday)
         .then((docRef) => {
+          onNavigate('/wall');
           console.log('docRef', docRef.id);
         })
         .catch((error) => {
@@ -92,7 +93,7 @@ export const Register = (onNavigate) => {
         });
 
       const user = userCredential.user;
-      onNavigate('/wall');
+    
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
