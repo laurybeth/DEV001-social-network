@@ -1,4 +1,4 @@
-import { registerFunction, googleFunction } from '../src/lib_firebase/auth.js';
+import { registerFunction, signInGoogle } from '../src/lib_firebase/auth.js';
 
 describe('registerFunction', () => {
   it('is a function', () => {
@@ -9,11 +9,11 @@ describe('registerFunction', () => {
   }));
 });
 
-describe('registerGoogleFunction', () => {
+describe('signInGoogle', () => {
   it('is a function', () => {
-    expect(typeof registerFunction).toBe('function');
+    expect(typeof signInGoogle).toBe('function');
   });
-  it('Should return an object with the property email', () => googleFunction().then((userCredential) => {
-    expect(userCredential.user.email).toBe('123@gmail.com');
+  it('Should return an object with the property email', () => signInGoogle().then((userCredential) => {
+    expect(userCredential.user.email).toBe('');
   }));
 });

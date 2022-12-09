@@ -85,11 +85,13 @@ export const Login = (onNavigate) => {
 
     signInGoogle()
       .then((userCredential) => {
-        // alert('Te registraste con google');
-        Modal('Welcome: ', `${userCredential.user.email}`);
+        // alert('Te registraste con google');     
+      
+        Modal('Welcome: ', `${userCredential.user.email}`); 
+        onNavigate('/wall');
         const user = userCredential.user;
         console.log('UserG: ', user);
-        onNavigate('/wall');
+   
         // ...
       })
       .catch((error) => {

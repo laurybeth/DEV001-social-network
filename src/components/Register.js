@@ -114,13 +114,14 @@ export const Register = (onNavigate) => {
 
         saveCollectionUsersDoc(userCredential.user, 'users')
           .then((docRef) => {
+            onNavigate('/wall');
             console.log('docRef', docRef.id);
           })
           .catch((error) => {
             const errorCode = error.code;
             console.log('Create user error', errorCode);
           });
-        onNavigate('/wall');
+
         const user = userCredential.user;
         console.log('UserG: ', user);
         // ...
