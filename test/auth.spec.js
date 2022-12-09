@@ -23,6 +23,6 @@ describe('signInGoogle', () => {
     expect(typeof signInGoogle).toBe('function');
   });
   it('Should return an object with the property email', () => signInGoogle().then((userCredential) => {
-    expect(userCredential.user.email).toBe('');
+    expect(userCredential.user.email).toBe('123@gmail.com');
   }));
 });

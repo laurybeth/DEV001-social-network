@@ -11,4 +11,4 @@ export const signInWithEmailAndPassword = jest.fn((getAuth, email, password) => 
 // export class GoogleAuthProvider {}
 export const GoogleAuthProvider = jest.fn(() => ({}));
 
-export const signInWithPopup = jest.fn((getAuth, GoogleAuthProvider) => Promise.resolve({ user: { email: '' } }));
+export const signInWithPopup = jest.fn((getAuth, GoogleAuthProvider) => Promise.resolve({ user: { email: '123@gmail.com' } }));
