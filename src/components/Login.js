@@ -34,7 +34,7 @@ export const Login = (onNavigate) => {
   $linkGoogle.href = '#';
   $linkGoogle.id = 'googleLink';
   $linkGoogle.className = 'containerGoogle__link';
-  $linkGoogle.textContent = 'SING IN WITH GOOGLE';
+  $linkGoogle.textContent = 'SIGN IN WITH GOOGLE';
 
   $cGoogle.append($imgGoogle, $linkGoogle);
 
