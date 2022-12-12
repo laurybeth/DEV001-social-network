@@ -1,55 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test function Modal Should check that the modal closes 1`] = `
-<div
-  class="modal"
-  id="myModal"
-  style="display: block;"
->
-  
-  
-  <div
-    class="modal__content"
-  >
-     
-  
-    <span
-      class="modal__close"
-      id="modal-close"
-    >
-      ×
-    </span>
-    
-  
-    <h2>
-      hola soy modal
-    </h2>
-     
-  
-    <p>
-      hola soy el mensaje de modal
-    </p>
-     
-  </div>
-</div>
-`;
-
 exports[`test function Modal Should test if the modal element exists 1`] = `
 <div
-  class="modal"
-  id="myModal"
+  class="container-modal"
+  id="modal"
   style="display: block;"
 >
   
   
   <div
-    class="modal__content"
+    class="container-modal__content"
   >
      
   
     <span
-      class="modal__close"
-      id="modal-close"
+      class="container-modal__close"
+      id="closeModal"
     >
       ×
     </span>
