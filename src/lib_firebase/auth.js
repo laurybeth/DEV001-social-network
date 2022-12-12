@@ -10,6 +10,7 @@ export const registerFunction = (email, password) => createUserWithEmailAndPassw
 
 export const signInGoogle = () => {
   const provider = new GoogleAuthProvider();
+ //console.log('hola soy provider', provider);
   // const credential = provider.credentialFromResult(result);
   // const token = credential.accessToken;
 
