@@ -1,6 +1,6 @@
 import { validateEmail, validateName, validatePassword } from '../helpers';
-import { registerFunction, googleFunction } from '../lib_firebase/auth';
-import { saveCollectionUser } from '../lib_firebase/db';
+import { registerFunction, signInGoogle } from '../lib_firebase/auth';
+import { saveCollectionUsersDoc } from '../lib_firebase/db';
 
 import { Modal } from './Modal.js';
 
@@ -82,8 +82,9 @@ export const Register = (onNavigate) => {
     const userBirthday = $formR[3].value;
 
     registerFunction(userEmail, userPassword).then((userCredential) => {
-      saveCollectionUser(userName, userEmail, userBirthday)
+      saveCollectionUsersDoc(userName, userEmail, userBirthday)
         .then((docRef) => {
+          onNavigate('/wall');
           console.log('docRef', docRef.id);
         })
         .catch((error) => {
@@ -92,7 +93,6 @@ export const Register = (onNavigate) => {
         });
 
       const user = userCredential.user;
-      onNavigate('/wall');
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -107,20 +107,21 @@ export const Register = (onNavigate) => {
   $linkGoogle.addEventListener('click', (e) => {
     e.preventDefault();
 
-    googleFunction()
+    signInGoogle()
       .then((userCredential) => {
         // alert('Te registraste con google');
         // Modal('Congratulations: ', `${userCredential.user.email} Successful registration'`);
 
-        saveCollectionUser(userCredential.user, 'users')
+        saveCollectionUsersDoc(userCredential.user, 'users')
           .then((docRef) => {
+            onNavigate('/wall');
             console.log('docRef', docRef.id);
           })
           .catch((error) => {
             const errorCode = error.code;
             console.log('Create user error', errorCode);
           });
-        onNavigate('/wall');
+
         const user = userCredential.user;
         console.log('UserG: ', user);
         // ...

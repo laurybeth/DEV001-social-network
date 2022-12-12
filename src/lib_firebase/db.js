@@ -3,7 +3,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase.js';
 
-export const saveCollectionUser = (userName, userEmail, userBirthday) => addDoc(collection(db, 'users'), { userName, userEmail, userBirthday });
+export const saveCollectionUsersDoc = (userName, userEmail, userBirthday) => addDoc(collection(db, 'users'), { userName, userEmail, userBirthday });
 
 /*export const querySnapshot = () => getDocs(collection(db, 'users'));
 querySnapshot.forEach((doc) => {

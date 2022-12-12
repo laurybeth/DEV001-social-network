@@ -1,4 +1,4 @@
-import { loginFunction, googleFunction } from '../lib_firebase/auth';
+import { loginFunction, signInGoogle } from '../lib_firebase/auth';
 import { Modal } from './Modal.js';
 
 export const Login = (onNavigate) => {
@@ -83,13 +83,15 @@ export const Login = (onNavigate) => {
   $linkGoogle.addEventListener('click', (e) => {
     e.preventDefault();
 
-    googleFunction()
+    signInGoogle()
       .then((userCredential) => {
-        // alert('Te registraste con google');
-        Modal('Welcome: ', `${userCredential.user.email}`);
+        // alert('Te registraste con google');     
+      
+        Modal('Welcome: ', `${userCredential.user.email}`); 
+        onNavigate('/wall');
         const user = userCredential.user;
         console.log('UserG: ', user);
-        onNavigate('/wall');
+   
         // ...
       })
       .catch((error) => {
