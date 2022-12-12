@@ -1,6 +1,6 @@
 import { validateEmail, validateName, validatePassword } from '../helpers';
 import { registerFunction, signInGoogle } from '../lib_firebase/auth';
-import { saveCollectionUsersDoc } from '../lib_firebase/db';
+import { readCollectionUserDoc, saveCollectionUsersDoc } from '../lib_firebase/db';
 
 import { Modal } from './Modal.js';
 
@@ -84,8 +84,21 @@ export const Register = (onNavigate) => {
     registerFunction(userEmail, userPassword).then((userCredential) => {
       saveCollectionUsersDoc(userName, userEmail, userBirthday)
         .then((docRef) => {
-          onNavigate('/wall');
-          console.log('docRef', docRef.id);
+          readCollectionUserDoc(docRef.id)
+            .then((docSnap) => {
+              if (docSnap.exists()) {
+                console.log('Document data:', docSnap.data());
+                onNavigate('/wall');
+              } else {
+              // doc.data() will be undefined in this case
+                console.log('No such document!');
+              }
+              console.log('docRef', docRef.id);
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              console.log('readCollectionUserDoc - The promise no exist', errorCode);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
