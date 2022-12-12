@@ -1,5 +1,6 @@
+import { registration } from '../controller/register_controller';
 import { validateEmail, validateName, validatePassword } from '../helpers';
-import { registerFunction, signInGoogle } from '../lib_firebase/auth';
+import { signInGoogle } from '../lib_firebase/auth';
 import { readCollectionUserDoc, saveCollectionUsersDoc } from '../lib_firebase/db';
 
 import { Modal } from './Modal.js';
@@ -81,32 +82,8 @@ export const Register = (onNavigate) => {
     const userPassword = $formR[2].value;
     const userBirthday = $formR[3].value;
 
-    registerFunction(userEmail, userPassword).then((userCredential) => {
-      saveCollectionUsersDoc(userName, userEmail, userBirthday)
-        .then((docRef) => {
-          readCollectionUserDoc(docRef.id)
-            .then((docSnap) => {
-              if (docSnap.exists()) {
-                console.log('Document data:', docSnap.data());
-                onNavigate('/wall');
-              } else {
-              // doc.data() will be undefined in this case
-                console.log('No such document!');
-              }
-              console.log('docRef', docRef.id);
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              console.log('readCollectionUserDoc - The promise no exist', errorCode);
-            });
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          console.log('Create user error', errorCode);
-        });
-
-      const user = userCredential.user;
-    }).catch((error) => {
+    registration(userName, userEmail, userBirthday, userPassword)
+    .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       // const email = error.customData.email;

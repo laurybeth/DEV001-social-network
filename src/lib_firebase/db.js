@@ -14,3 +14,5 @@ export const readCollectionUserDoc = (IdDocUser) => {
   const docRef = doc(db, 'users', IdDocUser);
   return getDoc(docRef);
 };
+
+
