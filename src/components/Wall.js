@@ -1,5 +1,6 @@
 /* import {wallFunction} from '../lib_firebase/auth'; */
 /* import { querySnapshot } from '../lib_firebase/db.js'; */
+import { readCollectionUserDoc } from '../lib_firebase/db.js';
 import { Menu } from './Menu.js';
 import { Modal } from './Modal.js';
 
