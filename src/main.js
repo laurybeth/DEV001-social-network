@@ -1,8 +1,9 @@
+import './firebase';
 import { Welcome } from './components/Welcome.js';
 import { Login } from './components/Login.js';
 import { Register } from './components/Register.js';
 import { Wall } from './components/Wall.js';
-import './firebase';
+// import { currentUser, user } from './lib_firebase/auth.js';
 
 const root = document.getElementById('root');
 const routes = {
@@ -26,3 +27,12 @@ window.onpopstate = () => {
 };
 
 root.appendChild(components(onNavigate));
+
+
+/* document.addEventListener('load', (e) => {
+  console.log('page is fully loaded');
+  currentUser();
+
+  console.log('user: ', user.email);
+});
+ */
