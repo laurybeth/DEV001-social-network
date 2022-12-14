@@ -1,7 +1,7 @@
-import { registration } from '../controller/register_controller';
+import { registerTasks } from '../controller/register_controller.js';
 import { validateEmail, validateName, validatePassword } from '../helpers';
 import { signInGoogle } from '../lib_firebase/auth';
-import { readCollectionUserDoc, saveCollectionUsersDoc } from '../lib_firebase/db';
+import { saveCollectionUsersDoc } from '../lib_firebase/db';
 
 import { Modal } from './Modal.js';
 
@@ -82,14 +82,22 @@ export const Register = (onNavigate) => {
     const userPassword = $formR[2].value;
     const userBirthday = $formR[3].value;
 
-    registration(userName, userEmail, userBirthday, userPassword)
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // const email = error.customData.email;
-      if (errorCode === 'auth/email-already-in-use') { Modal('Error:', 'Email already in use'); } else { Modal('Error:', 'Something went wrong'); }
-      console.log('Error en el registro', errorCode);
-    });
+    registerTasks(userName, userEmail, userBirthday, userPassword)
+      .then((userDoc) => {
+        console.log('register - userDoc', userDoc.id);
+        onNavigate('/wall');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // const email = error.customData.email;
+        if (errorCode === 'auth/email-already-in-use') {
+          Modal('Error:', 'Email already in use');
+        } else {
+          Modal('Error:', 'Something went wrong');
+        }
+        console.log('registerTasks-Error en el registro', errorCode);
+      });
 
     $formR.reset();
   });
@@ -109,7 +117,7 @@ export const Register = (onNavigate) => {
           })
           .catch((error) => {
             const errorCode = error.code;
-            console.log('Create user error', errorCode);
+            console.log('signInGoogle-Create user error', errorCode);
           });
 
         const user = userCredential.user;
@@ -122,7 +130,12 @@ export const Register = (onNavigate) => {
         const errorMessage = error.message;
         // The email of the user's account used.
         // const email = error.customData.email;
-        if (errorCode === 'auth/email-already-in-use') { Modal('Error:', 'Email already in use'); } else { Modal('Error:', 'Something went wrong'); }
+        if (errorCode === 'auth/email-already-in-use') {
+          Modal('Error:', 'Email already in use');
+        } else {
+          Modal('Error:', 'Something went wrong');
+          console.log('signInGoogle-Create user error', errorCode);
+        }
       });
   });
 
