@@ -15,7 +15,7 @@ export const Wall = (onNavigate) => {
 
     <section class="container-addPost">
         <div class="container-imgProfile">
-            <img class="container-imgProfile__img" src="./assets/img/user_photo_default.png">
+            <img class="container-imgProfile__img" src="${currentUser().imgProfile}">
         </div>
         <div class="container-addPost__text" id="addPost" >What are you thinking,<br> Yin Yang?</div>
    </section>
@@ -24,9 +24,9 @@ export const Wall = (onNavigate) => {
     <div class='container-Posts__Post'>
         <div class="container-headerPost">
           <div class="container-headerPost__img">
-            <img  class='container-headerPost__img__user'src="./assets/img/user_photo_default.png" 
+            <img  class='container-headerPost__img__user'src="${currentUser().imgProfile}" 
             width="25px" height="25px">
-              <p> ${currentUser().email} </p>
+              <p> ${currentUser().displayName} </p>
             </div>
           
             <img class='container-headerPost__icon' src="./assets/img/icon_hamburguer.png">
@@ -65,7 +65,7 @@ export const Wall = (onNavigate) => {
           <div class="container-headerPost__img">
             <img  class='container-headerPost__img__user'src="./assets/img/user_photo_default.png" 
             width="25px" height="25px">
-              <p>${currentUser().email}</p>
+              <p>${currentUser().displayName}</p>
             </div>
           
             <img class='container-headerPost__icon' src="./assets/img/icon_hamburguer.png">
@@ -101,6 +101,8 @@ export const Wall = (onNavigate) => {
     </section>
   
    `;
+  
+  console.log('soygfhsddddddddd', currentUser());
   const root = document.getElementById('root');
   root.appendChild(Menu());
 
