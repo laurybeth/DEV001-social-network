@@ -21,4 +21,3 @@ describe('Test to the register link with Google', () => {
     expect(linkG).not.toBeNull();
   });
 });
-

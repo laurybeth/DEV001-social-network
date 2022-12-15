@@ -3,8 +3,10 @@ import { register, signInGoogle } from '../lib_firebase/auth.js';
 
 export const registerTasks = (name, email, birthday, password, imgProfile) => register(email, password)
   .then((userCredential) => {
-    const newUid = userCredential.user.uid;
-    return saveCollectionUsersDoc(newUid, name, email, birthday, imgProfile);
+    const uid = userCredential.user.uid;
+    userCredential.user.displayName=name;
+    console.log('soy userCredential de registerTasks en register-controller ', userCredential.user);
+    return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile);
   });
 
 /* readCollectionUserDoc(docRef.id)
@@ -13,13 +15,13 @@ export const registerTasks = (name, email, birthday, password, imgProfile) => re
 
 export const registerGoopgleTasks = () => signInGoogle()
   .then((userCredential) => {
-    console.log('soy google:', userCredential.user);
-    const newUid = userCredential.user.uid;
+    console.log('registerGoogleTasks:', userCredential.user);
+    const uid = userCredential.user.uid;
     const name = userCredential.user.displayName;
     const email = userCredential.user.email;
     const birthday = userCredential.user.metadata.creationTime;
     const imgProfile = userCredential.user.photoURL;
-    console.log(newUid, name, email, birthday, imgProfile);
+    console.log(uid, name, email, birthday, imgProfile);
 
-    return saveCollectionUsersDoc(newUid, name, email, birthday,imgProfile);
+    return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile);
   });
