@@ -9,7 +9,7 @@ export const Wall = (onNavigate) => {
   $section.className = 'container containerWall';
   $section.innerHTML = `
     <header class="container-header">
-        <img class="container-header__logo" src="./assets/img/logo_horizontal.png" alt="logo">
+        <img class="container-header__logo" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/imgProfileDefault.png" alt="logo">
     </header>
 
     <section class="container-addPost">

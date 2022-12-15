@@ -4,6 +4,7 @@ import { register, signInGoogle } from '../lib_firebase/auth.js';
 export const registerTasks = (name, email, birthday, password, imgProfile) => register(email, password)
   .then((userCredential) => {
     const uid = userCredential.user.uid;
+    userCredential.user.displayName=name;
     console.log('soy userCredential de registerTasks en register-controller ', userCredential.user);
     return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile);
   });

@@ -83,8 +83,9 @@ export const Register = (onNavigate) => {
 
     registerTasks(userName, userEmail, userBirthday, userPassword, imgProfile)
       .then((userDoc) => {
-        console.log('register - userDoc', userDoc.id);
-        readCollectionUserDoc(userDoc.id).then((docSnap) => {
+        console.log('register - userDoc.id', userDoc.id);
+        const userDocId = userDoc.id;
+        readCollectionUserDoc(userDocId).then((docSnap) => {
           console.log('docSnap.data() ', docSnap.data());
 
           Modal('Welcome: ', `${docSnap.data().name}`);
