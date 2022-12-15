@@ -1,8 +1,7 @@
-import { registerTasks } from '../controller/register_controller.js';
+import { registerTasks, registerGoopgleTasks } from '../controller/register_controller.js';
 import { validateEmail, validateName, validatePassword } from '../helpers';
 import { signInGoogle } from '../lib_firebase/auth';
-import { saveCollectionUsersDoc } from '../lib_firebase/db';
-
+import { readCollectionUserDoc } from '../lib_firebase/db';
 import { Modal } from './Modal.js';
 
 export const Register = (onNavigate) => {
@@ -81,10 +80,15 @@ export const Register = (onNavigate) => {
     const userName = $formR[1].value;
     const userPassword = $formR[2].value;
     const userBirthday = $formR[3].value;
+    const imgProfile = './assets/img/imgProfileDefault.png';
 
-    registerTasks(userName, userEmail, userBirthday, userPassword)
+    registerTasks(userName, userEmail, userBirthday, userPassword, imgProfile)
       .then((userDoc) => {
-        console.log('register - userDoc', userDoc.id);
+        
+        console.log('hjashjaj',readCollectionUserDoc(userDoc.id));
+
+        Modal('Welcome: ', `${readCollectionUserDoc(userDoc.id)}`);
+        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
         onNavigate('/wall');
       })
       .catch((error) => {
@@ -105,27 +109,13 @@ export const Register = (onNavigate) => {
   $linkGoogle.addEventListener('click', (e) => {
     e.preventDefault();
 
-    signInGoogle()
-      .then((userCredential) => {
-        // alert('Te registraste con google');
-        // Modal('Congratulations: ', `${userCredential.user.email} Successful registration'`);
+    registerGoopgleTasks()
+      .then((userDoc) => {
+        console.log('register - userDoc GOOGLE', userDoc.id);
 
-        saveCollectionUsersDoc(userCredential.user, 'users')
-          .then((docRef) => {
-            onNavigate('/wall');
-            console.log('docRef', docRef.id);
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            console.log('signInGoogle-Create user error', errorCode);
-          });
-
-        const user = userCredential.user;
-        console.log('UserG: ', user);
-        // ...
+        onNavigate('/wall');
       })
       .catch((error) => {
-        // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
