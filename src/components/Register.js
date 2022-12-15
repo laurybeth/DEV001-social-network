@@ -1,6 +1,6 @@
 import { registerTasks, registerGoopgleTasks } from '../controller/register_controller.js';
 import { validateEmail, validateName, validatePassword } from '../helpers';
-
+import { signInGoogle } from '../lib_firebase/auth';
 import { readCollectionUserDoc } from '../lib_firebase/db';
 import { Modal } from './Modal.js';
 
@@ -117,7 +117,8 @@ export const Register = (onNavigate) => {
 
     registerTasks(userName, userEmail, userBirthday, userPassword, imgProfile)
       .then((userDoc) => {
-        console.log('hjashjaj', readCollectionUserDoc(userDoc.id));
+        
+        console.log('hjashjaj',readCollectionUserDoc(userDoc.id));
 
         Modal('Welcome: ', `${readCollectionUserDoc(userDoc.id)}`);
         setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
