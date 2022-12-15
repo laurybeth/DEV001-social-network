@@ -1,6 +1,6 @@
 import { registerTasks, registerGoopgleTasks } from '../controller/register_controller.js';
 import { validateEmail, validateName, validatePassword } from '../helpers';
-import { signInGoogle } from '../lib_firebase/auth';
+
 import { readCollectionUserDoc } from '../lib_firebase/db';
 import { Modal } from './Modal.js';
 
@@ -68,10 +68,43 @@ export const Register = (onNavigate) => {
   </a>
   </span>`);
 
-  $section.querySelector('#userEmail').addEventListener('blur', validateEmail);
-  $section.querySelector('#userName').addEventListener('blur', validateName);
-  $section.querySelector('#userPassword').addEventListener('blur', validatePassword);
+  /** **********inicio:validacion del formulario register ************** */
 
+  const $userEmail = $section.querySelector('#userEmail');
+  const $warningsEmail = $section.querySelector('#warningsEmail');
+  const $userName = $section.querySelector('#userName');
+  const $warningsName = $section.querySelector('#warningsName');
+  const $userPassword = $section.querySelector('#userPassword');
+  const $warningsPassword = $section.querySelector('#warningsPassword');
+
+  $section.querySelector('#userEmail').addEventListener('blur', () => {
+    const pruebaEmail = validateEmail($userEmail.value);
+    if (!pruebaEmail) {
+      $warningsEmail.innerHTML = 'The format does not match what was requested.<br>Example: example @mail.com';
+      
+    } else {
+      $warningsEmail.innerHTML = null;
+    }
+  });
+
+  $section.querySelector('#userName').addEventListener('blur', () => {
+    const pruebaName= validateName($userName.value);
+    if (!pruebaName) {
+      $warningsName.innerHTML = 'A name and a surname, only letters <br> Example: Melania Palomino';
+    } else {
+      $warningsName.innerHTML = null;
+    }
+  });
+
+  $section.querySelector('#userPassword').addEventListener('blur', () => {
+    const pruebaPassword = validatePassword($userPassword.value);
+    if (!pruebaPassword) {
+      $warningsPassword.innerHTML = 'The password must have between 8 and 16 characters<br>Least one digit<br>Least one lowercase letter<br>Least one uppercase letter<br>Least one non-alphanumeric character.';
+    } else {
+      $warningsPassword.innerHTML = null;
+    }
+  });
+  /** ********** fin:validacion del formulario register ********************* */
   // button retorna al welcome
   $formR.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -84,8 +117,7 @@ export const Register = (onNavigate) => {
 
     registerTasks(userName, userEmail, userBirthday, userPassword, imgProfile)
       .then((userDoc) => {
-        
-        console.log('hjashjaj',readCollectionUserDoc(userDoc.id));
+        console.log('hjashjaj', readCollectionUserDoc(userDoc.id));
 
         Modal('Welcome: ', `${readCollectionUserDoc(userDoc.id)}`);
         setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
