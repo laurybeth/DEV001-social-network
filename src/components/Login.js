@@ -64,7 +64,8 @@ export const Login = (onNavigate) => {
       .then((userCredential) => {
         const user = userCredential.user;
 
-        Modal('Welcome: ', `${userCredential.user.email}`);
+        Modal('Welcome: ', `${userCredential.user.displayName}`);
+        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
         onNavigate('/wall');
 
         console.log('User: ', user);
@@ -85,13 +86,16 @@ export const Login = (onNavigate) => {
 
     signInGoogle()
       .then((userCredential) => {
-        // alert('Te registraste con google');     
-      
-        Modal('Welcome: ', `${userCredential.user.email}`); 
+        // alert('Te registraste con google');
+
+        Modal('Welcome: ', `${userCredential.user.displayName}`);
+        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
+
+        // Modal('Welcome: ', `${userCredential.user.email}`);
         onNavigate('/wall');
         const user = userCredential.user;
         console.log('UserG: ', user);
-   
+
         // ...
       })
       .catch((error) => {

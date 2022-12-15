@@ -4,7 +4,7 @@ const closeModal = ($modal, $closeModalElement, e) => {
   }
 };
 
-export const Modal = (title, message) => {
+export const Modal = (title, message = '') => {
   const $modal = document.createElement('div');
   $modal.id = 'modal';
   $modal.className = 'container-modal';
