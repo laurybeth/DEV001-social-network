@@ -1,6 +1,5 @@
 import { registerTasks, registerGoopgleTasks } from '../controller/register_controller.js';
 import { validateEmail, validateName, validatePassword } from '../helpers';
-import { signInGoogle } from '../lib_firebase/auth';
 import { readCollectionUserDoc } from '../lib_firebase/db';
 import { Modal } from './Modal.js';
 
@@ -84,12 +83,14 @@ export const Register = (onNavigate) => {
 
     registerTasks(userName, userEmail, userBirthday, userPassword, imgProfile)
       .then((userDoc) => {
-        
-        console.log('hjashjaj',readCollectionUserDoc(userDoc.id));
+        console.log('register - userDoc', userDoc.id);
+        readCollectionUserDoc(userDoc.id).then((docSnap) => {
+          console.log('docSnap.data() ', docSnap.data());
 
-        Modal('Welcome: ', `${readCollectionUserDoc(userDoc.id)}`);
-        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
-        onNavigate('/wall');
+          Modal('Welcome: ', `${docSnap.data().name}`);
+          setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
+          onNavigate('/wall');
+        });
       })
       .catch((error) => {
         const errorCode = error.code;

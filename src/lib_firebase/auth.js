@@ -13,6 +13,6 @@ export const signInGoogle = () => {
   return signInWithPopup(auth, provider);
 };
 
-export const loginFunction = (email, password) => signInWithEmailAndPassword(auth, email, password);
+export const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
 
 export const currentUser = () => auth.currentUser;

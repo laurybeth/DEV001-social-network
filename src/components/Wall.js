@@ -5,7 +5,6 @@ import { Modal } from './Modal.js';
 import { currentUser } from '../lib_firebase/auth.js';
 
 export const Wall = (onNavigate) => {
-
   const $section = document.createElement('section');
   $section.className = 'container containerWall';
   $section.innerHTML = `
@@ -26,7 +25,7 @@ export const Wall = (onNavigate) => {
           <div class="container-headerPost__img">
             <img  class='container-headerPost__img__user'src="${currentUser().imgProfile}" 
             width="25px" height="25px">
-              <p> ${currentUser().displayName} </p>
+              <p> ${currentUser().name} </p>
             </div>
           
             <img class='container-headerPost__icon' src="./assets/img/icon_hamburguer.png">
@@ -65,7 +64,7 @@ export const Wall = (onNavigate) => {
           <div class="container-headerPost__img">
             <img  class='container-headerPost__img__user'src="./assets/img/user_photo_default.png" 
             width="25px" height="25px">
-              <p>${currentUser().displayName}</p>
+              <p>${currentUser().name}</p>
             </div>
           
             <img class='container-headerPost__icon' src="./assets/img/icon_hamburguer.png">
@@ -101,8 +100,8 @@ export const Wall = (onNavigate) => {
     </section>
   
    `;
-  
-  console.log('soygfhsddddddddd', currentUser());
+
+  console.log('soy currentUser en wall', currentUser());
   const root = document.getElementById('root');
   root.appendChild(Menu());
 

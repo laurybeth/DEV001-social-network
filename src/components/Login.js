@@ -1,4 +1,4 @@
-import { loginFunction, signInGoogle } from '../lib_firebase/auth';
+import { login, signInGoogle } from '../lib_firebase/auth';
 import { Modal } from './Modal.js';
 
 export const Login = (onNavigate) => {
@@ -60,7 +60,7 @@ export const Login = (onNavigate) => {
     const userPassword = $formR[1].value;
     console.log(e.target);// pueden correrlo que sale  en esa linea
 
-    loginFunction(userEmail, userPassword)
+    login(userEmail, userPassword)
       .then((userCredential) => {
         const user = userCredential.user;
 
@@ -94,7 +94,7 @@ export const Login = (onNavigate) => {
         // Modal('Welcome: ', `${userCredential.user.email}`);
         onNavigate('/wall');
         const user = userCredential.user;
-        console.log('UserG: ', user);
+        console.log('Soy useG en login: ', user);
 
         // ...
       })
