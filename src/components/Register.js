@@ -1,6 +1,6 @@
 import { registerTasks, registerGoopgleTasks } from '../controller/register_controller.js';
 import { validateEmail, validateName, validatePassword } from '../helpers';
-import { signInGoogle } from '../lib_firebase/auth';
+
 import { readCollectionUserDoc } from '../lib_firebase/db';
 import { Modal } from './Modal.js';
 
@@ -17,19 +17,20 @@ export const Register = (onNavigate) => {
   // $formR.action="./lib/index.js"
   $formR.innerHTML = `
      <div class="containerInput">  
-      <input type="email" name="user_email" id='userEmail' class="containerInput__box" required>  
+      <input type="email" name="user_email" id='userEmail' class="containerInput__box" 
+      pattern='[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}' required>  
       <span class=containerInput__line></span>  
       <label for="email"class="containerInput__label">Email</label>
     </div>
     <p id='warningsEmail' class='warnings'></p>
     <div class="containerInput">
-      <input class="containerInput__box" type="text"  name="user_name" id="userName" required>
+      <input class="containerInput__box" type="text"  name="user_name" id="userName" required >
       <span class=containerInput__line></span>
       <label for="name" class="containerInput__label">Full name</label>
     </div>
     <p id='warningsName' class='warnings'></p>
     <div class="containerInput">
-      <input class="containerInput__box" type="password" name="User_password" id='userPassword' required>
+      <input class="containerInput__box" type="password" name="User_password" id='userPassword' required  >
       <span class=containerInput__line></span>
       <label for="password" class="containerInput__label">Password</label>
     </div>
@@ -78,27 +79,29 @@ export const Register = (onNavigate) => {
   const $warningsPassword = $section.querySelector('#warningsPassword');
 
   $section.querySelector('#userEmail').addEventListener('blur', () => {
-    const pruebaEmail = validateEmail($userEmail.value);
-    if (!pruebaEmail) {
+    const isValidEmail = validateEmail($userEmail.value);
+    if (!isValidEmail) {
       $warningsEmail.innerHTML = 'The format does not match what was requested.<br>Example: example @mail.com';
       
     } else {
+    
       $warningsEmail.innerHTML = null;
     }
   });
 
   $section.querySelector('#userName').addEventListener('blur', () => {
-    const pruebaName= validateName($userName.value);
-    if (!pruebaName) {
+    const isValidName= validateName($userName.value);
+    if (!isValidName) {
       $warningsName.innerHTML = 'A name and a surname, only letters <br> Example: Melania Palomino';
     } else {
       $warningsName.innerHTML = null;
+
     }
   });
 
   $section.querySelector('#userPassword').addEventListener('blur', () => {
-    const pruebaPassword = validatePassword($userPassword.value);
-    if (!pruebaPassword) {
+    const isValidPassword = validatePassword($userPassword.value);
+    if (!isValidPassword) {
       $warningsPassword.innerHTML = 'The password must have between 8 and 16 characters<br>Least one digit<br>Least one lowercase letter<br>Least one uppercase letter<br>Least one non-alphanumeric character.';
     } else {
       $warningsPassword.innerHTML = null;
