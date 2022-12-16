@@ -1,4 +1,4 @@
-import { currentUser } from '../lib_firebase/auth';
+import {} from '../controller/addPost_controller';
 
 const closeModalAddPost = ($AddPost, $closeAddPostElement, e) => {
   if ((e.target === $AddPost) || (e.target === $closeAddPostElement)) {
@@ -53,8 +53,8 @@ export const AddPost = (onNavigate) => {
     const texPost = $form[0].value;
     const urlFile = $form[1].value;
 
-    console.log('textPost en addPost', texPost);
-    console.log('file en addPost', urlFile);
+    console.log('textPost en addPost: ', texPost);
+    console.log('C:\\fakepath\\ en addPost: ', urlFile);
   });
 
   return $AddPost;
