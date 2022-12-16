@@ -11,6 +11,10 @@ querySnapshot.forEach((doc) => {
   console.log(`${doc.id} => ${doc.data()}`);
 }); */
 
+export const saveCollectionPostDoc = (uid, text, file) => addDoc(collection(db, 'posts'), {
+  uid, text, file,
+});
+
 export const readCollectionUserDoc = (IdDocUser) => {
   const docRef = doc(db, 'users', IdDocUser);
   return getDoc(docRef);
