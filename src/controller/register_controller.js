@@ -1,10 +1,11 @@
-import { saveCollectionUsersDoc, readCollectionUserDoc } from '../lib_firebase/db.js';
+import { saveCollectionUsersDoc } from '../lib_firebase/db.js';
 import { register, signInGoogle } from '../lib_firebase/auth.js';
 
 export const registerTasks = (name, email, birthday, password, imgProfile) => register(email, password)
   .then((userCredential) => {
     const uid = userCredential.user.uid;
-    userCredential.user.displayName=name;
+    userCredential.user.displayName = name;
+    userCredential.user.photoURL = imgProfile;
     console.log('soy userCredential de registerTasks en register-controller ', userCredential.user);
     return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile);
   });

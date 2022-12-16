@@ -26,20 +26,20 @@ export const Register = (onNavigate) => {
     <div class="containerInput">
       <input class="containerInput__box" type="text"  name="user_name" id="userName" required >
       <span class=containerInput__line></span>
-      <label for="name" class="containerInput__label">Full name</label>
+      <label for="userName" class="containerInput__label">Full name</label>
     </div>
     <p id='warningsName' class='warnings'></p>
     <div class="containerInput">
       <input class="containerInput__box" type="password" name="User_password" id='userPassword' required  >
       <span class=containerInput__line></span>
-      <label for="password" class="containerInput__label">Password</label>
+      <label for="userPassword" class="containerInput__label">Password</label>
     </div>
     <p id='warningsPassword' class='warnings'></p>
     <div class="containerInput ">
     <input  id="userDate" onfocus="(this.type = 'date')" class="containerInput__box" type="text" required  min="1900-01-01" max="2004-12-31"
 >
      <span class=containerInput__line></span>
-    <label for ="containerInput__box" class="containerInput__label">Date of Birth</label>
+    <label for ="userDate" class="containerInput__label">Date of Birth</label>
     </div>
      <p id='warningsDate' class='warnings'></p>
     <div class="container__terms-conditions">
@@ -82,20 +82,17 @@ export const Register = (onNavigate) => {
     const isValidEmail = validateEmail($userEmail.value);
     if (!isValidEmail) {
       $warningsEmail.innerHTML = 'The format does not match what was requested.<br>Example: example @mail.com';
-      
     } else {
-    
       $warningsEmail.innerHTML = null;
     }
   });
 
   $section.querySelector('#userName').addEventListener('blur', () => {
-    const isValidName= validateName($userName.value);
+    const isValidName = validateName($userName.value);
     if (!isValidName) {
       $warningsName.innerHTML = 'A name and a surname, only letters <br> Example: Melania Palomino';
     } else {
       $warningsName.innerHTML = null;
-
     }
   });
 
@@ -116,16 +113,19 @@ export const Register = (onNavigate) => {
     const userName = $formR[1].value;
     const userPassword = $formR[2].value;
     const userBirthday = $formR[3].value;
-    const imgProfile = './assets/img/imgProfileDefault.png';
+    const imgProfile = 'https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/imgProfileDefault.png';
 
     registerTasks(userName, userEmail, userBirthday, userPassword, imgProfile)
       .then((userDoc) => {
-        
-        console.log('hjashjaj',readCollectionUserDoc(userDoc.id));
+        console.log('register - userDoc.id', userDoc.id);
+        const userDocId = userDoc.id;
+        readCollectionUserDoc(userDocId).then((docSnap) => {
+          console.log('docSnap.data() ', docSnap.data());
 
-        Modal('Welcome: ', `${readCollectionUserDoc(userDoc.id)}`);
-        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
-        onNavigate('/wall');
+          Modal('Welcome: ', `${docSnap.data().name}`);
+          setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
+          onNavigate('/wall');
+        });
       })
       .catch((error) => {
         const errorCode = error.code;
