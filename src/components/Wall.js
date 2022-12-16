@@ -1,7 +1,7 @@
 /* import {wallFunction} from '../lib_firebase/auth'; */
 /* import { querySnapshot } from '../lib_firebase/db.js'; */
 import { Menu } from './Menu.js';
-import { Modal } from './Modal.js';
+import { AddPost } from './AddPost';
 import { currentUser } from '../lib_firebase/auth.js';
 
 export const Wall = (onNavigate) => {
@@ -9,23 +9,24 @@ export const Wall = (onNavigate) => {
   $section.className = 'container containerWall';
   $section.innerHTML = `
     <header class="container-header">
-        <img class="container-header__logo" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/imgProfileDefault.png" alt="logo">
+        <img class="container-header__logo" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png
+        " alt="logo">
     </header>
 
     <section class="container-addPost">
         <div class="container-imgProfile">
-            <img class="container-imgProfile__img" src="${currentUser().imgProfile}">
+            <img class="container-imgProfile__img" src="${currentUser().photoURL}">
         </div>
-        <div class="container-addPost__text" id="addPost" >What are you thinking,<br> Yin Yang?</div>
+        <div class="container-addPost__text" id="addPost" >What are you thinking,<br> ${currentUser().displayName}?</div>
    </section>
 
    <section class='container-Posts'>
     <div class='container-Posts__Post'>
         <div class="container-headerPost">
           <div class="container-headerPost__img">
-            <img  class='container-headerPost__img__user'src="${currentUser().imgProfile}" 
+            <img  class='container-headerPost__img__user'src="${currentUser().photoURL}" 
             width="25px" height="25px">
-              <p> ${currentUser().name} </p>
+              <p> ${currentUser().displayName} </p>
             </div>
           
             <img class='container-headerPost__icon' src="./assets/img/icon_hamburguer.png">
@@ -64,7 +65,7 @@ export const Wall = (onNavigate) => {
           <div class="container-headerPost__img">
             <img  class='container-headerPost__img__user'src="./assets/img/user_photo_default.png" 
             width="25px" height="25px">
-              <p>${currentUser().name}</p>
+              <p>${currentUser().displayName}</p>
             </div>
           
             <img class='container-headerPost__icon' src="./assets/img/icon_hamburguer.png">
@@ -112,7 +113,7 @@ export const Wall = (onNavigate) => {
     console.log('id', e.target.getAttribute('id'));
 
     if (e.target.getAttribute('id') === 'addPost') {
-      Modal('hola modal', 'body');
+      AddPost();
     }
   });
 
