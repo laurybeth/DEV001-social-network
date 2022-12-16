@@ -55,6 +55,10 @@ export const AddPost = (onNavigate) => {
 
     console.log('textPost en addPost: ', texPost);
     console.log('C:\\fakepath\\ en addPost: ', urlFile);
+
+    addPostTasks(texPost, urlFile);
+
+
   });
 
   return $AddPost;
