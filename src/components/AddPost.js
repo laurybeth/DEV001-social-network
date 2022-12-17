@@ -1,4 +1,4 @@
-import {} from '../controller/addPost_controller';
+import { addPostTasks } from '../controller/addPost_controller';
 
 const closeModalAddPost = ($AddPost, $closeAddPostElement, e) => {
   if ((e.target === $AddPost) || (e.target === $closeAddPostElement)) {
