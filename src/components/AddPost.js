@@ -1,4 +1,5 @@
 import { addPostTasks } from '../controller/addPost_controller';
+import { Modal } from './Modal.js';
 
 const closeModalAddPost = ($AddPost, $closeAddPostElement, e) => {
   if ((e.target === $AddPost) || (e.target === $closeAddPostElement)) {
@@ -51,14 +52,19 @@ export const AddPost = (onNavigate) => {
     e.preventDefault();
 
     const texPost = $form[0].value;
-    const urlFile = $form[1].value;
+    const objFile = $form[1].files[0];
 
+    console.log($form);
     console.log('textPost en addPost: ', texPost);
-    console.log('C:\\fakepath\\ en addPost: ', urlFile);
+    console.log('urlFile en addPost: ', objFile);
 
-    addPostTasks(texPost, urlFile);
-
-
+    addPostTasks(texPost, objFile)
+      .then((postDoc) => {
+        Modal('Success:', 'Your post was successfully created');
+      })
+      .catch((error) => {
+        Modal('Error:', 'Something went wrong');
+      });
   });
 
   return $AddPost;
