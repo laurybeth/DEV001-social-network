@@ -1,11 +1,18 @@
-import { saveCollectionPostDoc } from '../lib_firebase/db.js';
+import { saveCollectionPostDoc, readCollectionPost } from '../lib_firebase/db.js';
 import { currentUser } from '../lib_firebase/auth.js';
-import { uploadImg } from '../lib_firebase/storage.js';
+import { uploadImg, downloadImg } from '../lib_firebase/storage.js';
 
-export const addPostTasks = (textPost, urlFile) => {
+export const addPostTasks = (textPost, objImg) => {
   const newUid = currentUser().uid;
-  const newUrlFile = uploadImg(urlFile, newUid).then((snapshot) => {
-    console.log('SOY CONSOLE.LOG DE ADDPOST CONTROLLER', snapshot);
-    return saveCollectionPostDoc(newUid, textPost, newUrlFile);
+  return uploadImg(objImg, newUid).then((snapshot) => {
+    console.log('SOY snapshot DE ADDPOST CONTROLLER', snapshot);
+    return saveCollectionPostDoc(newUid, textPost, snapshot.metadata.fullPath);
+  });
+};
+
+export const showPostTasks = (idPost) => {
+  readCollectionPost().then((docRef) => {
+    console.log('doc ref en add post.....', docRef.file);
+    // downloadImg(docRef.file);
   });
 };
