@@ -1,5 +1,5 @@
 import {
-  collection, onSnapshot, getDocs, query, doc, getDoc, addDoc, deleteDoc, updateDoc, setDoc, where,
+  collection, onSnapshot, getDocs, query, doc, getDoc, addDoc, orderBy, deleteDoc, updateDoc, setDoc, where,
 } from 'firebase/firestore';
 import { db } from '../firebase.js';
 
@@ -26,7 +26,7 @@ export const readCollectionPost = (IdDocPost) => {
 };
 
 export const readAllCollectionPosts = (callback) => {
-  const q = query(collection(db, 'posts'), where('uid', '!=', ''));
+  const q = query(collection(db, 'posts'), orderBy('date', 'desc'));
   return onSnapshot(q, callback);
 };
 
