@@ -319,7 +319,7 @@ width: 1.5rem;
  /*************** FIN:estilos para modal **************/
 
   /*************** INICIO:estilos para wall **************/
-  .containerWall{
+  .container-wall{
   display:flex;
   justify-content: space-between;
 
@@ -369,7 +369,7 @@ height: auto;
  width:80% ;
  height: 80%;
   color:#CDCDCD;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
  text-align:left;
   padding:15px;
   border-radius: 10px;
@@ -420,14 +420,14 @@ height: auto;
    
  
 }
-.container-headerPost__img{
+.container-user{
   
   display:flex;
-  width:50%;
+  width:90%;
   gap: 0.5rem;
   align-items: center;
 }
-.container-headerPost__img__user,
+.container-user__imgUser,
 .containerComments__comment-imgProfile{
   border-radius: 50%;
     height: 45px;
@@ -436,7 +436,13 @@ height: auto;
     width: 45px;
     background-color:#fff;    
 }
-.container-headerPost__icon{
+
+.container-user__nameUser {
+width: 90%;
+
+}
+
+.container-headerPost__hamburguerIcon{
   width:5px;
 }
 

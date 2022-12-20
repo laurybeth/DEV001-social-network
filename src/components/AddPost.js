@@ -1,12 +1,6 @@
 import { addPostTasks } from '../controller/addPost_controller';
 import { Modal } from './Modal.js';
 
-const closeModalAddPost = ($AddPost, $closeAddPostElement, e) => {
-  if ((e.target === $AddPost) || (e.target === $closeAddPostElement)) {
-    $AddPost.style.display = 'none';
-  }
-};
-
 export const AddPost = (onNavigate) => {
   const $AddPost = document.createElement('div');
   $AddPost.id = 'addPost';
@@ -19,33 +13,34 @@ export const AddPost = (onNavigate) => {
      
      <div class='container-AddPost__title'>
       <p> Crear publicación </p>
-      <span class="container-modal__close" id="${$idCloseAddPost}">&times;</span>
-      
+      <span class="container-modal__close" id="${$idCloseAddPost}">&times;</span>   
      </div>
 
      <form class='container-AddPost__form' id="${$formID}"> 
-          <textarea class="containerInput__box  textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" ></textarea>
+          <textarea class="containerInput__box textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" ></textarea>
       
         <div class=" container-UploadFile"> 
-            <img  class="containerInput__uploadFileIcon"    src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
-            " alt="upload file icon" width="38px" height="36px">
+           <img  class="containerInput__uploadFileIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
+            " alt="upload file icon"> 
          
           <input type="file" class="" id="fileAddPost" placeholder="Upload a file" required>
         </div> 
-
         
         <input class="container__button__login AddPost btnsubmit" type="submit" value="Publicar">
      </form>
   </div>
   `;
   // console.log(currentUser());
-
-  const $closeAddPostElement = document.getElementById($idCloseAddPost);
   document.body.appendChild($AddPost);
   $AddPost.style.display = 'block';
+  const $closeAddPostElement = document.getElementById($idCloseAddPost);
 
-  $AddPost.addEventListener('click', (e) => {
-    closeModalAddPost($AddPost, $closeAddPostElement, e);
+  $closeAddPostElement.addEventListener('click', () => {
+    $AddPost.style.display = 'none';
+  });
+
+  $AddPost.addEventListener('click', () => {
+    $AddPost.style.display = 'none';
   });
 
   const $form = document.getElementById($formID);

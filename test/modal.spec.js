@@ -9,18 +9,21 @@ describe('test function Modal', () => {
     expect(Modal('hola soy modal', 'hola soy el mensaje de modal')).toMatchSnapshot();
   });
 
-  it('Should check that the modal closes', () => {
+  it('Should check that the modal closes with X', () => {
     Modal('hola soy modal', 'hola soy el mensaje de modal');
     const $closeModalElement = document.getElementById('closeModal');
 
-    // const e = new Event('click',{bubbles: true});
-    // closeModal.dispatchEvent(e);
-
     $closeModalElement.click();
 
-    // console.log(document.getElementById('modal').style.display, element.style.display);
-    // closeClick(element, closeModal.id);
-    // closeClick(element, closeModal, e.target);
+    expect(document.getElementById('modal').style.display).toBe('none');
+  });
+
+  it('Should check that the modal closes outside', () => {
+    Modal('hola soy modal', 'hola soy el mensaje de modal');
+    const $modal = document.getElementById('modal');
+
+    $modal.click();
+
     expect(document.getElementById('modal').style.display).toBe('none');
   });
 });

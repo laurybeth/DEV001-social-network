@@ -4,11 +4,11 @@ import { Menu } from './Menu.js';
 import { AddPost } from './AddPost';
 import { currentUser } from '../lib_firebase/auth.js';
 import { Posts } from './Posts.js';
-
+import { showAllPosts } from '../controller/wall_controller';
 
 export const Wall = (onNavigate) => {
   const $section = document.createElement('section');
-  $section.className = 'container containerWall';
+  $section.className = 'container container-wall';
   $section.innerHTML = `
     <header class="container-header">
         <img class="container-header__logo" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png
@@ -29,7 +29,7 @@ export const Wall = (onNavigate) => {
   
    `;
   $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts());
-  
+
   console.log('soy currentUser en wall', currentUser());
   const root = document.getElementById('root');
   root.appendChild(Menu());
@@ -43,6 +43,12 @@ export const Wall = (onNavigate) => {
     if (e.target.getAttribute('id') === 'addPost') {
       AddPost();
     }
+  });
+
+  showAllPosts((posts) => {
+    posts.forEach((post) => {
+      console.log(post.data());
+    });
   });
 
   return $section;

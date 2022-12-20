@@ -1,5 +1,5 @@
 import {
-  collection, getDocs, query, doc, getDoc, addDoc, deleteDoc, updateDoc, setDoc, where,
+  collection, onSnapshot, getDocs, query, doc, getDoc, addDoc, deleteDoc, updateDoc, setDoc, where,
 } from 'firebase/firestore';
 import { db } from '../firebase.js';
 
@@ -20,7 +20,21 @@ export const readCollectionUserDoc = (IdDocUser) => {
   return getDoc(docRef);
 };
 
- export const readCollectionPost= (IdDocPost) => {
+export const readCollectionPost = (IdDocPost) => {
   const docRef = doc(db, 'posts', IdDocPost);
   return getDoc(docRef);
 };
+
+export const readAllCollectionPosts = (callback) => {
+  const q = query(collection(db, 'posts'), where('uid', '!=', ''));
+  return onSnapshot(q, callback);
+};
+
+/*   const q = query(collection(db, "cities"), where("state", "==", "CA"));
+const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  const cities = [];
+  querySnapshot.forEach((doc) => {
+      cities.push(doc.data().name);
+  });
+  console.log("Current cities in CA: ", cities.join(", "));
+}); */
