@@ -13,8 +13,7 @@ export const AddPost = (onNavigate) => {
      
      <div class='container-AddPost__title'>
       <p> Crear publicación </p>
-      <span class="container-modal__close" id="${$idCloseAddPost}">&times;</span>
-      
+      <span class="container-modal__close" id="${$idCloseAddPost}">&times;</span>   
      </div>
 
      <form class='container-AddPost__form' id="${$formID}"> 
@@ -26,7 +25,6 @@ export const AddPost = (onNavigate) => {
          
           <input type="file" class="" id="fileAddPost" placeholder="Upload a file" required>
         </div> 
-
         
         <input class="container__button__login AddPost btnsubmit" type="submit" value="Publicar">
      </form>
