@@ -351,9 +351,7 @@ max-width:40%;
 
   }
 
-.container-addPost>*{
- 
-}
+
 
 .container-imgProfile{
   width:60px ;
@@ -569,3 +567,68 @@ text-align: left;
 
 
    /*************** FIN:estilos para header **************/
+
+   /*************** INICIO:estilos para ADDPOST **************/
+
+.container__addPost{
+  background-color: #F4F4F4;
+  width:70%;
+  display:flex;
+  flex-direction: column;
+  gap :0.2rem;
+}
+.container-AddPost__title{
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap:8rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+
+}
+
+.container-AddPost__form{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ gap:0.5rem;
+}
+
+
+ .textPost{
+  font-family: 'lato';
+  font-size: 1.2rem;
+  width: 90%;
+  height: 130px;
+  padding:8px;
+  border-radius: 1rem;
+  border:2px solid #44afac;
+  text-align:leff;
+  resize: none;
+ }
+ .container-UploadFile{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 60px;
+  background-color:#4b4b4b16;
+  border-radius: 1rem;}
+
+
+ 
+ .containerInput__uploadFileIcon{
+  width:3rem;
+  height: 3rem;
+ }
+
+
+
+
+
+
+
+
+
+   /*************** FIN:estilos para ADDPOST **************/

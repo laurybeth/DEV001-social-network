@@ -7,8 +7,7 @@ export const Posts = (arrayPost) => {
    
         <div class="container-headerPost">
           <div class="container-headerPost__img">
-            <img  class='container-headerPost__img__user'src="${currentUser().photoURL}" 
-            width="25px" height="25px">
+            <img  class='container-headerPost__img__user'src="${currentUser().photoURL}">
             <p> ${currentUser().displayName} </p>
           </div>
             <img class='container-headerPost__icon' src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_hamburguer.png">

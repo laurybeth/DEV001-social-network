@@ -15,24 +15,26 @@ export const AddPost = (onNavigate) => {
   const $formID = 'registerForm';
 
   $AddPost.innerHTML = `
-  <div class="container-modal__content">
-     <span class="container-modal__close" id="${$idCloseAddPost}">&times;</span>
+  <div class="container-modal__content container__addPost">
+     
      <div class='container-AddPost__title'>
-        <p> Crear publicación </p>
+      <p> Crear publicación </p>
+      <span class="container-modal__close" id="${$idCloseAddPost}">&times;</span>
+      
      </div>
 
      <form class='container-AddPost__form' id="${$formID}"> 
-        <div class="containerInput">
-          <input type="textarea" class="containerInput__box id="textAddPost" name="user_post" placeholder="What are you thinking?" required>
-        </div>  
-        <div class="containerInput"> 
-          <div class="containerInput__uploadFileIcon">
-            <img src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
+          <textarea class="containerInput__box  textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" ></textarea>
+      
+        <div class=" container-UploadFile"> 
+            <img  class="containerInput__uploadFileIcon"    src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
             " alt="upload file icon" width="38px" height="36px">
-          </div> 
-          <input type="file" class="containerInput__box" id="fileAddPost" placeholder="Upload a file" required>
+         
+          <input type="file" class="" id="fileAddPost" placeholder="Upload a file" required>
         </div> 
-        <input class="AddPost btnsubmit" type="submit" value="Publicar">
+
+        
+        <input class="container__button__login AddPost btnsubmit" type="submit" value="Publicar">
      </form>
   </div>
   `;
