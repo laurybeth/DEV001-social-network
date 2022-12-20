@@ -1,12 +1,6 @@
 import { addPostTasks } from '../controller/addPost_controller';
 import { Modal } from './Modal.js';
 
-const closeModalAddPost = ($AddPost, $closeAddPostElement, e) => {
-  if ((e.target === $AddPost) || (e.target === $closeAddPostElement)) {
-    $AddPost.style.display = 'none';
-  }
-};
-
 export const AddPost = (onNavigate) => {
   const $AddPost = document.createElement('div');
   $AddPost.id = 'addPost';
@@ -39,13 +33,16 @@ export const AddPost = (onNavigate) => {
   </div>
   `;
   // console.log(currentUser());
-
-  const $closeAddPostElement = document.getElementById($idCloseAddPost);
   document.body.appendChild($AddPost);
   $AddPost.style.display = 'block';
+  const $closeAddPostElement = document.getElementById($idCloseAddPost);
 
-  $AddPost.addEventListener('click', (e) => {
-    closeModalAddPost($AddPost, $closeAddPostElement, e);
+  $closeAddPostElement.addEventListener('click', () => {
+    $AddPost.style.display = 'none';
+  });
+
+  $AddPost.addEventListener('click', () => {
+    $AddPost.style.display = 'none';
   });
 
   const $form = document.getElementById($formID);

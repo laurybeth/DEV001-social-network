@@ -8,7 +8,7 @@ import { Posts } from './Posts.js';
 
 export const Wall = (onNavigate) => {
   const $section = document.createElement('section');
-  $section.className = 'container containerWall';
+  $section.className = 'container container-wall';
   $section.innerHTML = `
     <header class="container-header">
         <img class="container-header__logo" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png
