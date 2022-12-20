@@ -6,7 +6,8 @@ export const addPostTasks = (textPost, objImg) => {
   const newUid = currentUser().uid;
   return uploadImg(objImg, newUid).then((snapshot) => {
     console.log('SOY snapshot DE ADDPOST CONTROLLER', snapshot);
-    return saveCollectionPostDoc(newUid, textPost, snapshot.metadata.fullPath);
+    const newUrlImg = snapshot.metadata.fullPath;
+    return saveCollectionPostDoc(newUid, textPost, newUrlImg);
   });
 };
 

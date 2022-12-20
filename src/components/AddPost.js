@@ -17,11 +17,11 @@ export const AddPost = (onNavigate) => {
      </div>
 
      <form class='container-AddPost__form' id="${$formID}"> 
-          <textarea class="containerInput__box  textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" ></textarea>
+          <textarea class="containerInput__box textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" ></textarea>
       
         <div class=" container-UploadFile"> 
-            <img  class="containerInput__uploadFileIcon"    src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
-            " alt="upload file icon" width="38px" height="36px">
+           <img  class="containerInput__uploadFileIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
+            " alt="upload file icon"> 
          
           <input type="file" class="" id="fileAddPost" placeholder="Upload a file" required>
         </div> 
