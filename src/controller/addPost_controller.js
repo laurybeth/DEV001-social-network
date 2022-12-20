@@ -7,7 +7,9 @@ export const addPostTasks = (textPost, objImg) => {
   return uploadImg(objImg, newUid).then((snapshot) => {
     console.log('SOY snapshot DE ADDPOST CONTROLLER', snapshot);
     const newUrlImg = snapshot.metadata.fullPath;
-    return saveCollectionPostDoc(newUid, textPost, newUrlImg);
+    const date = objImg.lastModifiedDate;
+    console.log('fecha ', date);
+    return saveCollectionPostDoc(newUid, textPost, newUrlImg, date);
   });
 };
 

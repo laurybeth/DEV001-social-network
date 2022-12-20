@@ -31,7 +31,9 @@ export const AddPost = (onNavigate) => {
   </div>
   `;
   // console.log(currentUser());
-  document.body.appendChild($AddPost);
+  const root = document.getElementById('root');
+  root.appendChild($AddPost);
+
   $AddPost.style.display = 'block';
   const $closeAddPostElement = document.getElementById($idCloseAddPost);
 
@@ -39,8 +41,10 @@ export const AddPost = (onNavigate) => {
     $AddPost.style.display = 'none';
   });
 
-  $AddPost.addEventListener('click', () => {
-    $AddPost.style.display = 'none';
+  window.addEventListener('click', (e) => {
+    if ((e.target === $AddPost)) {
+      $AddPost.style.display = 'none';
+    }
   });
 
   const $form = document.getElementById($formID);
@@ -49,13 +53,13 @@ export const AddPost = (onNavigate) => {
     e.preventDefault();
 
     const texPost = $form[0].value;
-    const objFile = $form[1].files[0];
+    const objImg = $form[1].files[0];
 
     console.log($form);
     console.log('textPost en addPost: ', texPost);
-    console.log('urlFile en addPost: ', objFile);
+    console.log('urlFile en addPost: ', objImg);
 
-    addPostTasks(texPost, objFile)
+    addPostTasks(texPost, objImg)
       .then((postDoc) => {
         Modal('Success:', 'Your post was successfully created');
       })
