@@ -320,8 +320,10 @@ width: 1.5rem;
 
   /*************** INICIO:estilos para wall **************/
   .container-wall{
-  display:flex;
   justify-content: space-between;
+  gap:1rem;
+  height: auto;
+  margin-bottom:20%;
 
   }
 
@@ -330,6 +332,7 @@ width: 1.5rem;
   width:90vw;
  height:auto;
  flex-grow: 1;
+ 
  
 }
 .container-header__logo{
@@ -348,6 +351,10 @@ max-width:40%;
    flex-grow: 1;
    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.20);
    border-radius: 0.9rem;
+   
+   
+
+   
 
   }
 
@@ -358,6 +365,8 @@ max-width:40%;
   height: 60px;
   border-radius: 50%;
   clip-path: circle(50% at 50% 50%);
+  margin:3%;
+  
 }
 
 .container-imgProfile__img{
@@ -382,16 +391,20 @@ height: auto;
 
 }
 
+/*************** INICIO:estilos para POSTS **************/
 .container-Posts{
   width:100%;
- height: 80vh;
+ height: auto;
  display:flex;
   flex-direction: column;
    justify-content: center;
    align-items: center;
+   gap:1.5rem;
+   
+   
+   
   
 }
-
 
 .container-Posts__Post{
   width: 90%;
@@ -403,12 +416,11 @@ height: auto;
   justify-content:center;
   align-items:center;
   gap:0.2rem;
+  
 
    
 
 }
-
-
 
 .container-headerPost{
 
@@ -421,7 +433,7 @@ height: auto;
  
 }
 .container-user{
-  
+  margin:4% 5% 0% 0% ;
   display:flex;
   width:90%;
   gap: 0.5rem;
@@ -446,21 +458,29 @@ width: 90%;
   width:5px;
 }
 
+.container-content{
+  margin:5%;
+}
 
-.container-imgPost{
+.container-content__imgPost{
   width: 90%;
-  height:50%;
+  height:auto;
    display: flex;
    justify-items: center;
   border-radius:1.7rem;
  
 }
-.container-imgPost__img{
-
+.container-content__imgPost-img{
+  
   max-width: 100%;
-
   flex-grow: 1;
   border-radius: 1.7rem;
+}
+.container-content__textPost{
+  width: 90%;
+  height:auto;
+  text-align: left;
+  margin-top:1vw;
 }
 
 .containerButtons{
@@ -482,6 +502,7 @@ width: 90%;
  display:flex;
  align-items: center;
  cursor:pointer;
+ gap:0.2rem;
 }
 .containerLikes:hover{
   color: #A05154;
@@ -491,6 +512,7 @@ width: 90%;
 .containerLikes__heart,.containerComments__commentIcon{
 width:19px;
 height:17px;
+margin-left:9%;
 }
 .containerComments__count{
 color:#fbbc05;
@@ -505,6 +527,7 @@ outline:none;
  display:flex;
  align-items: center;
  cursor:pointer;
+ gap:0.2rem;
 }
 
 .containerLikes__count{
@@ -542,7 +565,7 @@ text-align: left;
   width: 35px;
 }
 
-   /*************** FIN:estilos para wall **************/
+   /*************** FIN:estilos para POSTS **************/
    
    /*************** inicio:estilos para header **************/
 .containerHeader{
@@ -582,6 +605,7 @@ text-align: left;
   display:flex;
   flex-direction: column;
   gap :0.2rem;
+  
 }
 .container-AddPost__title{
   display:flex;
@@ -629,6 +653,11 @@ text-align: left;
   height: 3rem;
  }
 
+
+
+.img__previsualizacion{
+  max-width:100%;
+  height: auto;}
 
 
 

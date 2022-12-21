@@ -1,5 +1,5 @@
 import {
-  collection, onSnapshot, getDocs, query, doc, getDoc, addDoc, deleteDoc, updateDoc, setDoc, where,
+  collection, onSnapshot, getDocs, query, doc, getDoc, addDoc, orderBy, deleteDoc, updateDoc, setDoc, where,
 } from 'firebase/firestore';
 import { db } from '../firebase.js';
 
@@ -11,8 +11,8 @@ querySnapshot.forEach((doc) => {
   console.log(`${doc.id} => ${doc.data()}`);
 }); */
 
-export const saveCollectionPostDoc = (uid, text, file, likes = 0, nComments = 0) => addDoc(collection(db, 'posts'), {
-  uid, text, file, likes, nComments,
+export const saveCollectionPostDoc = (uid, text, file, date, likes = 0, nComments = 0) => addDoc(collection(db, 'posts'), {
+  uid, text, file, likes, nComments, date,
 });
 
 export const readCollectionUserDoc = (IdDocUser) => {
@@ -26,15 +26,6 @@ export const readCollectionPost = (IdDocPost) => {
 };
 
 export const readAllCollectionPosts = (callback) => {
-  const q = query(collection(db, 'posts'), where('uid', '!=', ''));
+  const q = query(collection(db, 'posts'), orderBy('date', 'asc'));
   return onSnapshot(q, callback);
 };
-
-/*   const q = query(collection(db, "cities"), where("state", "==", "CA"));
-const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  const cities = [];
-  querySnapshot.forEach((doc) => {
-      cities.push(doc.data().name);
-  });
-  console.log("Current cities in CA: ", cities.join(", "));
-}); */

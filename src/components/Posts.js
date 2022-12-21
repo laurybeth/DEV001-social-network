@@ -1,6 +1,6 @@
 import { currentUser } from '../lib_firebase/auth.js';
 
-export const Posts = (arrayPost) => {
+export const Posts = (post) => {
   const $section = document.createElement('div');
   $section.className = 'container-Posts__Post';
   $section.innerHTML = `
@@ -12,22 +12,27 @@ export const Posts = (arrayPost) => {
           </div>
             <img class='container-headerPost__hamburguerIcon' src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_hamburguer.png">
         </div>
-        <div class='container-imgPost'>
-            <img   class='container-imgPost__img' src="./assets/img/cuy.jpg">
+        <div class='container-content'>
+              <div  class='container-content__textPost'>
+              <p>${post.text}</p> 
+              </div>
+              <div class='container-content__imgPost'>
+              <img class='container-content__imgPost-img' src="${post.file}">
+              </div>
         </div>
 
         <div class="containerButtons">
             <div class="containerButtons__likes">
              <div class="containerLikes">
                 <img  class="containerLikes__heart" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_like.png" >
-                <span class="containerLikes__count"> 300k                     
+                <span class="containerLikes__count">  ${post.likes}                    
                 </span>                 
               </div>
             </div>
             <div class="containerButtons__comments">
               <div class="containerComments" >
                <img  class="containerComments__commentIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_comments.png" >           
-                <span class="containerComments__count"> 1k                   
+                <span class="containerComments__count">  ${post.nComments}               
                 </span>   
               </div>
             </div>
@@ -38,6 +43,8 @@ export const Posts = (arrayPost) => {
           <textarea class='containerComment__text' placeholder="Add a comment"></textarea>
         </div>
       `;
+
+  console.log('post en wall', post);
 
   return $section;
 };

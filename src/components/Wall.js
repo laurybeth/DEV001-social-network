@@ -23,16 +23,12 @@ export const Wall = (onNavigate) => {
    </section>
 
    <section class='container-Posts'>
-  
     
     </section>
   
    `;
-  $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts());
 
   console.log('soy currentUser en wall', currentUser());
-  const root = document.getElementById('root');
-  root.appendChild(Menu());
 
   $section.addEventListener('click', (e) => {
     e.preventDefault();
@@ -46,10 +42,13 @@ export const Wall = (onNavigate) => {
   });
 
   showAllPosts((posts) => {
+    $section.querySelector('.container-Posts').innerHTML = '';
     posts.forEach((post) => {
-      console.log(post.data());
+      $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data()));
     });
   });
 
+  const root = document.getElementById('root');
+  root.appendChild(Menu());
   return $section;
 };
