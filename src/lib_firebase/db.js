@@ -26,6 +26,6 @@ export const readCollectionPost = (IdDocPost) => {
 };
 
 export const readAllCollectionPosts = (callback) => {
-  const q = query(collection(db, 'posts'), orderBy('date', 'desc'));
+  const q = query(collection(db, 'posts'), orderBy('date', 'asc'));
   return onSnapshot(q, callback);
 };

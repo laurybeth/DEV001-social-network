@@ -23,7 +23,6 @@ export const Wall = (onNavigate) => {
    </section>
 
    <section class='container-Posts'>
-  
     
     </section>
   
@@ -45,7 +44,7 @@ export const Wall = (onNavigate) => {
   showAllPosts((posts) => {
     $section.querySelector('.container-Posts').innerHTML = '';
     posts.forEach((post) => {
-      $section.querySelector('.container-Posts').insertAdjacentElement('afterend', Posts(post.data()));
+      $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data()));
     });
   });
 
