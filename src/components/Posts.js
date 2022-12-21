@@ -13,10 +13,14 @@ export const Posts = (post) => {
             <img class='container-headerPost__hamburguerIcon' src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_hamburguer.png">
         </div>
         <div class='container-content'>
-              <p   class='container-content__textPost'>${post.text}</p> 
-              <img   class='container-content__imgPost' src="./assets/img/cuy.jpg">
+              <div  class='container-content__textPost'>
+              <p>${post.text}</p> 
+              </div>
+              <div class='container-content__imgPost'>
+              <img class='container-content__imgPost-img' src="./assets/img/cuy.jpg">
+              </div>
         </div>
-        
+
         <div class="containerButtons">
             <div class="containerButtons__likes">
              <div class="containerLikes">
