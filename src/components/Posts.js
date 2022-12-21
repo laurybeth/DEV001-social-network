@@ -17,7 +17,7 @@ export const Posts = (post) => {
               <p>${post.text}</p> 
               </div>
               <div class='container-content__imgPost'>
-              <img class='container-content__imgPost-img' src="./assets/img/cuy.jpg">
+              <img class='container-content__imgPost-img' src="${post.file}">
               </div>
         </div>
 

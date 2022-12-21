@@ -18,7 +18,9 @@ export const AddPost = (onNavigate) => {
 
      <form class='container-AddPost__form' id="${$formID}"> 
           <textarea class="containerInput__box textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" ></textarea>
-      
+         <div class="container__previsualizacion">
+        <img class="img__previsualizacion" id="imagPrevisualizacion" >
+      </div>
         <div class=" container-UploadFile"> 
            <img  class="containerInput__uploadFileIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
             " alt="upload file icon"> 
@@ -30,6 +32,23 @@ export const AddPost = (onNavigate) => {
      </form>
   </div>
   `;
+  /** *********previsualizar************************ */
+  const $seleccionArchivos = $AddPost.querySelector('#fileAddPost');
+  const $imagenPrevisualizacion = $AddPost.querySelector('#imagPrevisualizacion');
+  const $previsualizacion = $AddPost.querySelector('.container__previsualizacion');
+  $seleccionArchivos.addEventListener('change', () => {
+    if (!$seleccionArchivos.files || !$seleccionArchivos.files.length) {
+      $imagenPrevisualizacion.src = '';
+      return;
+    }
+
+    $previsualizacion.insertAdjacentHTML('afterbegin', '<span id="img__previsualizacion__close">X</span>');
+    $imagenPrevisualizacion.src = URL.createObjectURL($seleccionArchivos.files[0]);
+  });
+  const $close = $AddPost.querySelector('.container__previsualizacion');
+
+  /** ***************************************** */
+
   // console.log(currentUser());
   const root = document.getElementById('root');
   root.appendChild($AddPost);

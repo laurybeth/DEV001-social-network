@@ -402,6 +402,7 @@ height: auto;
    gap:1.5rem;
    
    
+   
   
 }
 
@@ -457,6 +458,9 @@ width: 90%;
   width:5px;
 }
 
+.container-content{
+  margin:5%;
+}
 
 .container-content__imgPost{
   width: 90%;
@@ -467,7 +471,7 @@ width: 90%;
  
 }
 .container-content__imgPost-img{
-  margin:5%;
+  
   max-width: 100%;
   flex-grow: 1;
   border-radius: 1.7rem;
@@ -476,8 +480,7 @@ width: 90%;
   width: 90%;
   height:auto;
   text-align: left;
-  margin-left:5%;
-  margin-top:5%;
+  margin-top:1vw;
 }
 
 .containerButtons{
@@ -650,6 +653,11 @@ text-align: left;
   height: 3rem;
  }
 
+
+
+.img__previsualizacion{
+  max-width:100%;
+  height: auto;}
 
 
 

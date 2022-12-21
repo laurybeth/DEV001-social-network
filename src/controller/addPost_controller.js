@@ -5,6 +5,15 @@ import { uploadImg, downloadImg } from '../lib_firebase/storage.js';
 export const addPostTasks = (textPost, objImg) => {
   const newUid = currentUser().uid;
   return uploadImg(objImg, newUid).then((snapshot) => {
+    const newUrlImg = snapshot.metadata.fullPath;
+    const date = objImg.lastModifiedDate;
+    return downloadImg(newUrlImg).then((url) => saveCollectionPostDoc(newUid, textPost, url, date));
+  });
+};
+
+/* export const addPostTasks = (textPost, objImg) => {
+  const newUid = currentUser().uid;
+  return uploadImg(objImg, newUid).then((snapshot) => {
     console.log('SOY snapshot DE ADDPOST CONTROLLER', snapshot);
     const newUrlImg = snapshot.metadata.fullPath;
     const date = objImg.lastModifiedDate;
@@ -12,6 +21,7 @@ export const addPostTasks = (textPost, objImg) => {
     return saveCollectionPostDoc(newUid, textPost, newUrlImg, date);
   });
 };
+ */
 
 export const showPostTasks = (idPost) => {
   readCollectionPost().then((docRef) => {

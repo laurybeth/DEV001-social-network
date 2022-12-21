@@ -43,8 +43,9 @@ export const Wall = (onNavigate) => {
   });
 
   showAllPosts((posts) => {
+    $section.querySelector('.container-Posts').innerHTML = '';
     posts.forEach((post) => {
-      $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data()));
+      $section.querySelector('.container-Posts').insertAdjacentElement('afterend', Posts(post.data()));
     });
   });
 
