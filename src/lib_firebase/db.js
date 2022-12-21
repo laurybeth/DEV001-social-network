@@ -15,17 +15,22 @@ export const saveCollectionPostDoc = (uid, text, file, date, likes = 0, nComment
   uid, text, file, likes, nComments, date,
 });
 
-export const readCollectionUserDoc = (IdDocUser) => {
-  const docRef = doc(db, 'users', IdDocUser);
+export const readCollectionUserDoc = (idDocUser) => {
+  const docRef = doc(db, 'users', idDocUser);
   return getDoc(docRef);
 };
 
-export const readCollectionPost = (IdDocPost) => {
-  const docRef = doc(db, 'posts', IdDocPost);
+export const readCollectionPost = (idDocPost) => {
+  const docRef = doc(db, 'posts', idDocPost);
   return getDoc(docRef);
 };
 
 export const readAllCollectionPosts = (callback) => {
   const q = query(collection(db, 'posts'), orderBy('date', 'asc'));
   return onSnapshot(q, callback);
+};
+
+export const deleteItem = (idDoc, collectionName) => {
+  const colRef = collection(db, collectionName);
+  return deleteDoc(doc(colRef, idDoc));
 };
