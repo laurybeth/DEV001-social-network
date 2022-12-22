@@ -1,3 +1,5 @@
-import { readAllCollectionPosts } from '../lib_firebase/db';
+import { readAllCollectionPosts, deleteItem } from '../lib_firebase/db';
 
 export const showAllPosts = (callback) => readAllCollectionPosts(callback);
+
+export const deletePost = (idPost) => deleteItem(idPost);
