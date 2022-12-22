@@ -4,7 +4,7 @@ import { Menu } from './Menu.js';
 import { AddPost } from './AddPost';
 import { currentUser } from '../lib_firebase/auth.js';
 import { Posts } from './Posts.js';
-import { showAllPosts } from '../controller/wall_controller';
+import { deletePost, showAllPosts } from '../controller/wall_controller';
 
 export const Wall = (onNavigate) => {
   const $section = document.createElement('section');
@@ -30,6 +30,13 @@ export const Wall = (onNavigate) => {
 
   console.log('soy currentUser en wall', currentUser());
 
+  showAllPosts((posts) => {
+    $section.querySelector('.container-Posts').innerHTML = '';
+    posts.forEach((post) => {
+      $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data(), post.id));
+    });
+  });
+
   $section.addEventListener('click', (e) => {
     e.preventDefault();
     console.log('target:', e.target);
@@ -39,13 +46,16 @@ export const Wall = (onNavigate) => {
     if (e.target.getAttribute('id') === 'addPost') {
       AddPost();
     }
-  });
 
-  showAllPosts((posts) => {
-    $section.querySelector('.container-Posts').innerHTML = '';
-    posts.forEach((post) => {
-      $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data()));
-    });
+    if (e.target.getAttribute('çlass') === 'container-headerPost__options') {
+      deletePost(idPost).then(() => {
+        alert('your post deleted successfully');
+      })
+        .catch((error) => {
+          alert(' Uh-oh, an error occurred!');
+        });
+    }
+    console.log('class', e.target.getAttribute('class')); 
   });
 
   const root = document.getElementById('root');

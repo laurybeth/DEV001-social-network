@@ -1,8 +1,10 @@
 import { currentUser } from '../lib_firebase/auth.js';
 
-export const Posts = (post) => {
+export const Posts = (post, postId) => {
   const $section = document.createElement('div');
   $section.className = 'container-Posts__Post';
+  $section.id = postId;
+  console.log('soy id de post en posts.js', $section.id);
   $section.innerHTML = `
    
         <div class="container-headerPost">
@@ -10,7 +12,9 @@ export const Posts = (post) => {
             <img  class='container-user__imgUser'src="${currentUser().photoURL}">
             <p class='container-user__nameUser'> ${currentUser().displayName} </p>
           </div>
-            <img class='container-headerPost__hamburguerIcon' src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_hamburguer.png">
+          <button class="container-headerPost__options">
+            <img class='container-headerPost__hamburguerIcon' src="./assets/img/icon_delete.png">
+          </button>
         </div>
         <div class='container-content'>
               <div  class='container-content__textPost'>
@@ -45,6 +49,8 @@ export const Posts = (post) => {
       `;
 
   console.log('post en wall', post);
+
+
 
   return $section;
 };
