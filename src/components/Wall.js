@@ -47,7 +47,7 @@ export const Wall = (onNavigate) => {
       AddPost();
     }
 
-    /* if (e.target.getAttribute('çlass') === 'container-headerPost__options') {
+    if (e.target.getAttribute('çlass') === 'container-headerPost__options') {
       deletePost(idPost).then(() => {
         alert('your post deleted successfully');
       })
@@ -55,16 +55,7 @@ export const Wall = (onNavigate) => {
           alert(' Uh-oh, an error occurred!');
         });
     }
-    console.log('class', e.target.getAttribute('class')); */
-
-    onclick.e.target.getAttribute('çlass') => {
-      deletePost(idPost).then(() => {
-        alert('your post deleted successfully');
-      })
-        .catch((error) => {
-          alert(' Uh-oh, an error occurred!');
-        });
-    };
+    console.log('class', e.target.getAttribute('class')); 
   });
 
   const root = document.getElementById('root');
