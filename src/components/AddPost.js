@@ -18,14 +18,14 @@ export const AddPost = (onNavigate) => {
 
      <form class='container-AddPost__form' id="${$formID}"> 
           <textarea class="containerInput__box textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" ></textarea>
-         <div class="container__previsualizacion">
-        <img class="img__previsualizacion" id="imagPrevisualizacion" >
+         <div class="container-imgPreview">
+        <img class="container-imgPreview__img" id="imgPreview" >
       </div>
         <div class=" container-UploadFile"> 
            <img  class="containerInput__uploadFileIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
             " alt="upload file icon"> 
          
-          <input type="file" class="" id="fileAddPost" placeholder="Upload a file" required>
+          <input type="file" id="fileAddPost" placeholder="Upload a file" required>
         </div> 
         
         <input class="container__button__login AddPost btnsubmit" type="submit" value="Publicar">
@@ -33,19 +33,19 @@ export const AddPost = (onNavigate) => {
   </div>
   `;
   /** *********previsualizar************************ */
-  const $seleccionArchivos = $AddPost.querySelector('#fileAddPost');
-  const $imagenPrevisualizacion = $AddPost.querySelector('#imagPrevisualizacion');
-  const $previsualizacion = $AddPost.querySelector('.container__previsualizacion');
-  $seleccionArchivos.addEventListener('change', () => {
-    if (!$seleccionArchivos.files || !$seleccionArchivos.files.length) {
-      $imagenPrevisualizacion.src = '';
+  const $inputFile = $AddPost.querySelector('#fileAddPost');
+  const $imgPreview = $AddPost.querySelector('#imgPreview');
+  const $containerImgPreview = $AddPost.querySelector('.container-imgPreview');
+  $inputFile.addEventListener('change', () => {
+    if (!$inputFile.files || !$inputFile.files.length) {
+      $imgPreview.src = '';
       return;
     }
 
-    $previsualizacion.insertAdjacentHTML('afterbegin', '<span id="img__previsualizacion__close">X</span>');
-    $imagenPrevisualizacion.src = URL.createObjectURL($seleccionArchivos.files[0]);
+    $containerImgPreview.insertAdjacentHTML('afterbegin', '<span id="img__previsualizacion__close">X</span>');
+    $imgPreview.src = URL.createObjectURL($inputFile.files[0]);// src="blob:http://localhost:5173/89cd66cf-5a27-4269-b4ba-33a34869aa40"
   });
-  const $close = $AddPost.querySelector('.container__previsualizacion');
+  const $close = $AddPost.querySelector('.container-imgPreview');
 
   /** ***************************************** */
 
@@ -80,10 +80,15 @@ export const AddPost = (onNavigate) => {
 
     addPostTasks(texPost, objImg)
       .then((postDoc) => {
+       /* document.getElementById('addPost').style.display = 'none';*/
         Modal('Success:', 'Your post was successfully created');
+        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
       })
       .catch((error) => {
+        console.log('Error en addPostTasks en addPost', error.code);
+        /*document.getElementById('addPost').style.display = 'none';*/
         Modal('Error:', 'Something went wrong');
+        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
       });
   });
 

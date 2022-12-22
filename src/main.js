@@ -27,12 +27,3 @@ window.onpopstate = () => {
 };
 
 root.appendChild(components(onNavigate));
-
-
-/* document.addEventListener('load', (e) => {
-  console.log('page is fully loaded');
-  currentUser();
-
-  console.log('user: ', user.email);
-});
- */

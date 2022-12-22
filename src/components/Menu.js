@@ -1,3 +1,4 @@
+import { AddPost } from "./AddPost";
 export const Menu = (onNavigate) => {
   const $header = document.createElement('header');
   $header.className = 'containerHeader';
@@ -13,6 +14,10 @@ export const Menu = (onNavigate) => {
   </a>
   </nav>
   `;
+   $header.querySelector('.containeMenu__addPost-icon').addEventListener('click', (e) => {
+    e.preventDefault();
+    AddPost();
+  });
   return $header;
 }
 

@@ -110,7 +110,7 @@ box-shadow: none;
 }
 
 .containerInput__box{
-  width:100%;
+width:100%;
  background: none;
  color: #4b4b4b;
  font-size: 1rem;
@@ -118,6 +118,7 @@ box-shadow: none;
  display:block;
  border:none;
  border-bottom: 1px solid #4b4b4b60;
+ font-family:'Lato', sans-serif;
  
 }
 
@@ -630,18 +631,21 @@ text-align: left;
  gap:0.5rem;
 }
 
-
- .textPost{
-  font-family: 'lato';
-  font-size: 1.2rem;
-  width: 90%;
-  height: 130px;
-  padding:8px;
-  border-radius: 1rem;
-  border:2px solid #44afac;
-  text-align:leff;
-  resize: none;
+.textPost:hover{
+   border:2px solid #44afac;
+    transition:1s;
  }
+ .container-UploadFile{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 98%;
+   padding: 8px;
+  height: 60px;
+  gap:5px;
+  background-color:#4b4b4b16;
+  border-radius: 0.5rem;}
+
  .container-UploadFile{
   display: flex;
   align-items: center;
@@ -660,7 +664,7 @@ text-align: left;
 
 
 
-.img__previsualizacion{
+.container-imgPreview__img{
   max-width:100%;
   height: auto;}
 
