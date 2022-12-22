@@ -1,4 +1,5 @@
 import { currentUser } from '../lib_firebase/auth.js';
+import { deletePost } from '../controller/posts_controller';
 
 export const Posts = (post, postId) => {
   const $section = document.createElement('div');
@@ -12,7 +13,7 @@ export const Posts = (post, postId) => {
             <img  class='container-user__imgUser'src="${currentUser().photoURL}">
             <p class='container-user__nameUser'> ${currentUser().displayName} </p>
           </div>
-          <button class="container-headerPost__options">
+          <button id='${postId}' class="container-headerPost__options">
             <img class='container-headerPost__hamburguerIcon' src="./assets/img/icon_delete.png">
           </button>
         </div>
@@ -50,7 +51,16 @@ export const Posts = (post, postId) => {
 
   console.log('post en wall', post);
 
-
+  const $postDelete = $section.querySelector('.container-headerPost__options');
+  $postDelete.addEventListener('click', () => {
+    console.log('idPost en posts', postId);
+    deletePost(postId).then(() => {
+      alert('your post deleted successfully');
+    })
+      .catch((error) => {
+        alert(' Uh-oh, an error occurred!',error.code);
+      });
+  });
 
   return $section;
 };

@@ -4,7 +4,7 @@ import { Menu } from './Menu.js';
 import { AddPost } from './AddPost';
 import { currentUser } from '../lib_firebase/auth.js';
 import { Posts } from './Posts.js';
-import { deletePost, showAllPosts } from '../controller/wall_controller';
+import { showAllPosts } from '../controller/wall_controller';
 
 export const Wall = (onNavigate) => {
   const $section = document.createElement('section');
@@ -17,9 +17,9 @@ export const Wall = (onNavigate) => {
 
     <section class="container-addPost">
         <div class="container-imgProfile">
-            <img class="container-imgProfile__img" src="${currentUser().photoURL}">
+            <img class="container-imgProfile__img" src="${currentUser() ? currentUser().photoURL : 0}">
         </div>
-        <div class="container-addPost__text" id="addPost" >What are you thinking, ${currentUser().displayName} ?</div>
+        <div class="container-addPost__text" id="addPost" >What are you thinking, ${currentUser() ? currentUser().displayName : 'usuario'}? </div>
    </section>
 
    <section class='container-Posts'>
@@ -37,15 +37,19 @@ export const Wall = (onNavigate) => {
     });
   });
 
-  $section.addEventListener('click', (e) => {
+  const $addPostElement = $section.querySelector('.container-addPost__text');
+
+  $addPostElement.addEventListener('click', (e) => {
     e.preventDefault();
     console.log('target:', e.target);
-
-    console.log('id', e.target.getAttribute('id'));
 
     if (e.target.getAttribute('id') === 'addPost') {
       AddPost();
     }
+  });
+
+  /*  const idPost=e.target.getAttribute('id');
+console.log(e.target.getAttribute('class'));
 
     if (e.target.getAttribute('çlass') === 'container-headerPost__options') {
       deletePost(idPost).then(() => {
@@ -55,8 +59,7 @@ export const Wall = (onNavigate) => {
           alert(' Uh-oh, an error occurred!');
         });
     }
-    console.log('class', e.target.getAttribute('class')); 
-  });
+    console.log('class', e.target.getAttribute('class'));  */
 
   const root = document.getElementById('root');
   root.appendChild(Menu());
