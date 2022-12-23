@@ -352,13 +352,7 @@ max-width:40%;
    flex-grow: 1;
    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.20);
    border-radius: 0.9rem;
-   
-   
-
-   
-
   }
-
 
 
 .container-imgProfile{
@@ -367,7 +361,7 @@ max-width:40%;
   border-radius: 50%;
   clip-path: circle(50% at 50% 50%);
   margin:3%;
-  
+
 }
 
 .container-imgProfile__img{
@@ -401,10 +395,6 @@ height: auto;
    justify-content: center;
    align-items: center;
    gap:1.5rem;
-   
-   
-   
-  
 }
 
 .container-Posts__Post{
@@ -417,10 +407,6 @@ height: auto;
   justify-content:center;
   align-items:center;
   gap:0.2rem;
-  
-
-   
-
 }
 
 .container-headerPost{
@@ -429,13 +415,8 @@ height: auto;
   width: 90%;
   height:12%;
   justify-content:space-between;
-  align-items: center;
-   
- 
+  align-items: center; 
 }
-
-
-
 
 .container-user{
   margin:4% 5% 0% 0% ;
@@ -600,7 +581,7 @@ text-align: left;
 .containeMenu{
  width:90%;
   display:flex;
-  justify-content:space-between;
+  justify-content:center;
   align-items: center;
   
 }
