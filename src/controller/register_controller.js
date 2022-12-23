@@ -16,7 +16,7 @@ export const registerTasks = (name, email, birthday, password, imgProfile) => re
 
 export const registerGoopgleTasks = () => signInGoogle()
   .then((userCredential) => {
-    console.log('registerGoogleTasks:', userCredential.user);
+    console.log('userCredential.user en registerGoogleTasks:', userCredential.user);
     const uid = userCredential.user.uid;
     const name = userCredential.user.displayName;
     const email = userCredential.user.email;
