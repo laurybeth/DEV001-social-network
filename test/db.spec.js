@@ -9,11 +9,12 @@ const user = {
   imgProfile: 'https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/imgProfileDefault.png',
 };
 
-describe.only('saveCollectionFunction', () => {
+describe('saveCollectionFunction', () => {
   it('is a function', () => {
     expect(typeof saveCollectionUsersDoc).toBe('function');
   });
-  /* it('Should return an object with the new colletion', () => saveCollectionUsersDoc(user.id, user.name1, user.email, user.birthday, user.imgProfile).then((userDoc) => {
+  /* it('Should return an object with the new colletion', () => saveCollectionUsersDoc(
+    user.id, user.name1, user.email, user.birthday, user.imgProfile).then((userDoc) => {
     expect(userDoc.id).toBe(user.id);
   })); */
 

@@ -1,6 +1,5 @@
-import { login, signInGoogle, suscribeLogin } from '../lib_firebase/auth';
+import { login, signInGoogle } from '../lib_firebase/auth';
 import { Modal } from './Modal.js';
-
 
 export const Login = (onNavigate) => {
   const $section = document.createElement('section');
@@ -75,7 +74,6 @@ export const Login = (onNavigate) => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
 
         if (errorCode === 'auth/wrong-password') { Modal('Error:', 'Wrong-password'); } else { Modal('Error:', 'Something went wrong'); }
 
@@ -102,11 +100,14 @@ export const Login = (onNavigate) => {
       .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
-        const errorMessage = error.message;
         // The email of the user's account used.
-        //const email = error.customData.email;
+        // const email = error.customData.email;
         // The AuthCredential type that was used.
-        if (errorCode === 'auth/wrong-password') { Modal('Error:', 'Wrong-password'); } else { Modal('Error:', 'Something went wrong'); }
+        if (errorCode === 'auth/wrong-password') {
+          Modal('Error:', 'Wrong-password');
+        } else {
+          Modal('Error:', 'Something went wrong');
+        }
       });
   });
 

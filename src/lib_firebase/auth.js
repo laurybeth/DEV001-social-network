@@ -1,5 +1,7 @@
 import {
-  createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithPopup, GoogleAuthProvider,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { auth } from '../firebase';
 

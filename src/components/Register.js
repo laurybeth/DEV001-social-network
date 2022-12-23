@@ -129,7 +129,6 @@ export const Register = (onNavigate) => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         // const email = error.customData.email;
         if (errorCode === 'auth/email-already-in-use') {
           Modal('Error:', 'Email already in use');
@@ -153,7 +152,6 @@ export const Register = (onNavigate) => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         // The email of the user's account used.
         // const email = error.customData.email;
         if (errorCode === 'auth/email-already-in-use') {

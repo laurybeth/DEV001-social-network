@@ -1,5 +1,6 @@
-import { AddPost } from "./AddPost";
-export const Menu = (onNavigate) => {
+import { AddPost } from './AddPost';
+
+export const Menu = () => {
   const $header = document.createElement('header');
   $header.className = 'containerHeader';
   $header.innerHTML = `
@@ -9,10 +10,9 @@ export const Menu = (onNavigate) => {
    </a>
   </nav>
   `;
-   $header.querySelector('.containeMenu__addPost-icon').addEventListener('click', (e) => {
+  $header.querySelector('.containeMenu__addPost-icon').addEventListener('click', (e) => {
     e.preventDefault();
     AddPost();
   });
   return $header;
-}
-
+};

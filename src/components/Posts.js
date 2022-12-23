@@ -5,7 +5,7 @@ export const Posts = (post, postId) => {
   const $section = document.createElement('div');
   $section.className = 'container-Posts__Post';
   $section.id = postId;
-  console.log('soy id de post en posts.js', $section.id);
+  // console.log('soy id de post en posts.js', $section.id);
   $section.innerHTML = `
    
         <div class="container-headerPost">

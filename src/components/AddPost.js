@@ -1,7 +1,7 @@
 import { addPostTasks } from '../controller/addPost_controller';
 import { Modal } from './Modal.js';
 
-export const AddPost = (onNavigate) => {
+export const AddPost = () => {
   const $AddPost = document.createElement('div');
   $AddPost.id = 'addPost';
   $AddPost.className = 'container-modal';
@@ -35,17 +35,14 @@ export const AddPost = (onNavigate) => {
   /** *********previsualizar************************ */
   const $inputFile = $AddPost.querySelector('#fileAddPost');
   const $imgPreview = $AddPost.querySelector('#imgPreview');
-  const $containerImgPreview = $AddPost.querySelector('.container-imgPreview');
   $inputFile.addEventListener('change', () => {
     if (!$inputFile.files || !$inputFile.files.length) {
       $imgPreview.src = '';
       return;
     }
 
-    $containerImgPreview.insertAdjacentHTML('afterbegin', '<span id="img__previsualizacion__close">X</span>');
     $imgPreview.src = URL.createObjectURL($inputFile.files[0]);// src="blob:http://localhost:5173/89cd66cf-5a27-4269-b4ba-33a34869aa40"
   });
-  const $close = $AddPost.querySelector('.container-imgPreview');
 
   /** ***************************************** */
 
@@ -79,14 +76,14 @@ export const AddPost = (onNavigate) => {
     console.log('urlFile en addPost: ', objImg);
 
     addPostTasks(texPost, objImg)
-      .then((postDoc) => {
-       /* document.getElementById('addPost').style.display = 'none';*/
+      .then(() => { // then (postDoc)
+        /* document.getElementById('addPost').style.display = 'none'; */
         Modal('Success:', 'Your post was successfully created');
         setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
       })
       .catch((error) => {
         console.log('Error en addPostTasks en addPost', error.code);
-        /*document.getElementById('addPost').style.display = 'none';*/
+        /* document.getElementById('addPost').style.display = 'none'; */
         Modal('Error:', 'Something went wrong');
         setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
       });

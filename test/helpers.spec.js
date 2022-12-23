@@ -45,7 +45,7 @@ describe('validatePassword', () => {
   });
   it('Does not accept only numeric values', () => {
     expect(validatePassword('532356465')).toBeFalsy();
-   });
+  });
   it('Does not accept only letters', () => {
     expect(validatePassword('eerrrrrrrrrrrrrrr')).toBeFalsy();
   });

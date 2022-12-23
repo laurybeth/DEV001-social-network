@@ -433,6 +433,10 @@ height: auto;
    
  
 }
+
+
+
+
 .container-user{
   margin:4% 5% 0% 0% ;
   display:flex;
@@ -455,8 +459,16 @@ width: 90%;
 
 }
 
+.container-headerPost__options{
+display: flex;
+justify-content: right;
+border:none;
+width: 10%;
+background-color: rgba(255, 255, 255, 0);
+}
+
 .container-headerPost__hamburguerIcon{
-  width:5px;
+  width:100%;
 }
 
 .container-content{
@@ -666,7 +678,8 @@ text-align: left;
 
 .container-imgPreview__img{
   max-width:100%;
-  height: auto;}
+  height: auto;
+}
 
 
 

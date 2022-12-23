@@ -6,8 +6,6 @@ export const registerTasks = (name, email, birthday, password, imgProfile) => re
     const uid = userCredential.user.uid;
     userCredential.user.displayName = name;
     userCredential.user.photoURL = imgProfile;
-   
-    /* console.log('soy userCredential de registerTasks en register-controller ', userCredential.user); */ 
     return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile);
   });
 

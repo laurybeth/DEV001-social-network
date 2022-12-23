@@ -1,12 +1,10 @@
-/* import {wallFunction} from '../lib_firebase/auth'; */
-/* import { querySnapshot } from '../lib_firebase/db.js'; */
+import { currentUser } from '../lib_firebase/auth.js';
 import { Menu } from './Menu.js';
 import { AddPost } from './AddPost';
-import { currentUser } from '../lib_firebase/auth.js';
 import { Posts } from './Posts.js';
 import { showAllPosts } from '../controller/wall_controller';
 
-export const Wall = (onNavigate) => {
+export const Wall = () => {
   const $section = document.createElement('section');
   $section.className = 'container container-wall';
   $section.innerHTML = `
@@ -47,19 +45,6 @@ export const Wall = (onNavigate) => {
       AddPost();
     }
   });
-
-  /*  const idPost=e.target.getAttribute('id');
-console.log(e.target.getAttribute('class'));
-
-    if (e.target.getAttribute('çlass') === 'container-headerPost__options') {
-      deletePost(idPost).then(() => {
-        alert('your post deleted successfully');
-      })
-        .catch((error) => {
-          alert(' Uh-oh, an error occurred!');
-        });
-    }
-    console.log('class', e.target.getAttribute('class'));  */
 
   const root = document.getElementById('root');
   root.appendChild(Menu());

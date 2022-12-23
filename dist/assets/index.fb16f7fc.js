@@ -18904,8 +18904,8 @@ const storage = getStorage(app);
 const Welcome = (onNavigate2) => {
   const $section = document.createElement("section");
   $section.className = "container";
-  $section.innerHTML = `<img class="container__img" src="./assets/img/portada_01.png" alt="front page petbook"> 
-  <img  class="container__logo"src="./assets/img/logo_horizontal.png" alt="logo">
+  $section.innerHTML = `<img class="container__img" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/portada_01.png" alt="front page petbook"> 
+  <img  class="container__logo"src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png" alt="logo">
   <p class="container__slogan">The best social application to show the daily life of your pets.</p>`;
   const $divButtons = document.createElement("div");
   $divButtons.className = "container__button";
@@ -18957,7 +18957,7 @@ const Login = (onNavigate2) => {
   const $section = document.createElement("section");
   $section.className = "container";
   $section.innerHTML = `
-  <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
+  <img class="container__logo-register"src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png" alt="logo">
  `;
   const $formR = document.createElement("form");
   $formR.id = "registerForm";
@@ -18980,7 +18980,7 @@ const Login = (onNavigate2) => {
   $cGoogle.className = "containerGoogle";
   const $imgGoogle = document.createElement("img");
   $imgGoogle.className = "containerGoogle__logo";
-  $imgGoogle.src = "./assets/img/2000px-Google_G_Logo.svg_.png";
+  $imgGoogle.src = "https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/2000px-Google_G_Logo.svg_.png";
   const $linkGoogle = document.createElement("a");
   $linkGoogle.href = "#";
   $linkGoogle.id = "googleLink";
@@ -19099,7 +19099,7 @@ const Register = (onNavigate2) => {
   const $section = document.createElement("section");
   $section.className = "container";
   $section.innerHTML = `
-    <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
+    <img class="container__logo-register"src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png" alt="logo">
    `;
   const $formR = document.createElement("form");
   $formR.id = "registerForm";
@@ -19140,7 +19140,7 @@ const Register = (onNavigate2) => {
   $cGoogle.className = "containerGoogle";
   const $imgGoogle = document.createElement("img");
   $imgGoogle.className = "containerGoogle__logo";
-  $imgGoogle.src = "./assets/img/2000px-Google_G_Logo.svg_.png";
+  $imgGoogle.src = "https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/2000px-Google_G_Logo.svg_.png";
   const $linkGoogle = document.createElement("a");
   $linkGoogle.href = "#";
   $linkGoogle.id = "googleLink";
@@ -19334,14 +19334,9 @@ const Menu = (onNavigate2) => {
   $header.className = "containerHeader";
   $header.innerHTML = `
   <nav class='containeMenu'>
-  <a href='#' class='containeMenu__wall-icon'>
-   <img  class='containeMenu__iconImg' src='./assets/img/icon_wall.png' alt='icon wall'></a>
-  <a href='#'class='containeMenu__addPost-icon'>
-   <img  class='containeMenu__iconImg'src='./assets/img/icon_addPost.png' alt='icon wall'>
+  <a href='#'class='containeMenu__addPost-icon'> 
+   <img  class='containeMenu__iconImg'src='https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addPost.png' alt='icon wall'>
    </a>
-  <a href='#' class='containeMenu__user-icon'> 
-  <img  class='containeMenu__iconImg'src='./assets/img/icon_user.png' alt='icon wall'>
-  </a>
   </nav>
   `;
   $header.querySelector(".containeMenu__addPost-icon").addEventListener("click", (e) => {
@@ -19367,7 +19362,7 @@ const Posts = (post, postId) => {
             <p class='container-user__nameUser'> ${currentUser().displayName} </p>
           </div>
           <button id='${postId}' class="container-headerPost__options">
-            <img class='container-headerPost__hamburguerIcon' src="./assets/img/icon_delete.png">
+            <img class='container-headerPost__hamburguerIcon' src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_delete.png">
           </button>
         </div>
         <div class='container-content'>
@@ -19387,19 +19382,7 @@ const Posts = (post, postId) => {
                 </span>                 
               </div>
             </div>
-            <div class="containerButtons__comments">
-              <div class="containerComments" >
-               <img  class="containerComments__commentIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_comments.png" >           
-                <span class="containerComments__count">  ${post.nComments}               
-                </span>   
-              </div>
-            </div>
-        </div>
-        
-        <div class="containerComment">
-          <img class="containerComments__comment-imgProfile" src="${currentUser().photoURL}">
-          <textarea class='containerComment__text' placeholder="Add a comment"></textarea>
-        </div>
+        </div>   
       `;
   console.log("post en wall", post);
   const $postDelete = $section.querySelector(".container-headerPost__options");
