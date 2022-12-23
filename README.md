@@ -2,7 +2,7 @@
 
 Petbook es una red social creada para que las personas que tienen mascotas puedan compartir las mejores imagenes de éstas con su comunidad
 
-# 1. Usuarios
+## 1. Usuarios
 
 Dueños de mascotas
 
@@ -11,7 +11,7 @@ Dueños de mascotas
 * Crear cuenta con gmail y loguerase con ella
 * Crear y borrar publicacciones.
 
-### 3. Historias de usuario
+## 3. Historias de usuario
 Prototipos de alta y baja
 
  **HDU1- Yo como visitante del sitio quiero ver una pantalla de bienvenida para entender sobre que trata la SN**

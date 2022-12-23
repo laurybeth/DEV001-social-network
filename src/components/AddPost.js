@@ -46,7 +46,6 @@ export const AddPost = () => {
 
   /** ***************************************** */
 
-  // console.log(currentUser());
   const root = document.getElementById('root');
   root.appendChild($AddPost);
 

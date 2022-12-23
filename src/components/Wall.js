@@ -55,7 +55,7 @@ export const Wall = () => {
 
   $addPostElement.addEventListener('click', (e) => {
     e.preventDefault();
-    console.log('target:', e.target);
+    console.log('escucha para agregar un post:', e.target);
 
     if (e.target.getAttribute('id') === 'addPost') {
       AddPost();
