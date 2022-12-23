@@ -14,7 +14,7 @@ export const Posts = (post, postId) => {
             <p class='container-user__nameUser'> ${currentUser().displayName} </p>
           </div>
           <button id='${postId}' class="container-headerPost__options">
-            <img class='container-headerPost__hamburguerIcon' src="./assets/img/icon_delete.png">
+            <img class='container-headerPost__hamburguerIcon' src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_delete.png">
           </button>
         </div>
         <div class='container-content'>
