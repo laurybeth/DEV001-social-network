@@ -34,20 +34,20 @@ export const Posts = (post, postId) => {
                 </span>                 
               </div>
             </div>
-            <div class="containerButtons__comments">
+        </div>   
+      `;
+
+  /* <div class="containerButtons__comments">
               <div class="containerComments" >
-               <img  class="containerComments__commentIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_comments.png" >           
-                <span class="containerComments__count">  ${post.nComments}               
-                </span>   
+               <img  class="containerComments__commentIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_comments.png">
+                <span class="containerComments__count">  ${post.nComments}
+                </span>
               </div>
-            </div>
-        </div>
-        
-        <div class="containerComment">
+        </div> */
+  /* <div class="containerComment">
           <img class="containerComments__comment-imgProfile" src="${currentUser().photoURL}">
           <textarea class='containerComment__text' placeholder="Add a comment"></textarea>
-        </div>
-      `;
+        </div> */
 
   console.log('post en wall', post);
 
@@ -58,7 +58,7 @@ export const Posts = (post, postId) => {
       alert('your post deleted successfully');
     })
       .catch((error) => {
-        alert(' Uh-oh, an error occurred!',error.code);
+        alert(' Uh-oh, an error occurred!', error.code);
       });
   });
 
