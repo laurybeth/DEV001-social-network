@@ -28,26 +28,3 @@ export const addPostTasks = (textPost, objImg) => {
       console.log('ERROR snapshot NO devuelto en uploadImg en controller addPost', error.code);
     });
 };
-
-/* const newUid = currentUser().uid;
-console.log('currentUser().uid en addpost controller', currentUser().uid);
-return uploadImg(objImg, newUid).then((snapshot) => {
-  console.log('soy snapshot !!!!!!!!!!!!!', snapshot);
-  const newUrlImg = snapshot.metadata.fullPath;
-  console.log('snapshot.metadata.fullPath (newUrlImg) en addpost controller', newUrlImg);
-  const date = snapshot.metadata.timeCreated;
-  console.log('date  en addpost controller ', date);
-
-  return downloadImg(newUrlImg).then((url) => {
-    return saveCollectionPostDoc(newUid, textPost, url, date)
-      .then(() => { console.log('se descargo'); })
-      .catch((error) => {
-        console.log('Error en saveCollectionPostDoc', error.code);
-      });
-
-    console.log('url en downloadImg en controller addPost', url);
-  }).catch((error) => {
-    console.log('Error en downloadImg en addpost controller', error.code);
-  });
-});
- */

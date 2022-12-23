@@ -24,7 +24,7 @@ export const Wall = () => {
         <div class="container-imgProfile">
             <img class="container-imgProfile__img" src='${currentUser() ? currentUser().photoURL : 0}'>
         </div>
-        <div class="container-addPost__text" id="addPost" >What are you thinking, ${currentUser() ? currentUser().displayName : 'usuario'}? </div>
+        <div class="container-addPost__text" id="addPostBlock" >What are you thinking, ${currentUser() ? currentUser().displayName : 'usuario'}? </div>
    </section>
 
    <section class='container-Posts'>
@@ -57,8 +57,11 @@ export const Wall = () => {
     e.preventDefault();
     console.log('escucha para agregar un post:', e.target);
 
-    if (e.target.getAttribute('id') === 'addPost') {
+    if (e.target.getAttribute('id') === 'addPostBlock') {
+      console.log('click para agregar un post:', e.target);
       AddPost();
+      const $AddPost = document.getElementById('addPostModal');
+      $AddPost.style.display = 'block';
     }
   });
 

@@ -16,7 +16,6 @@ export const saveCollectionPostDoc = (uid, text, file, date, likes = 0, nComment
 
 export const readCollectionUserDoc = (idDocUser) => {
   const docRef = doc(db, 'users', idDocUser);
-  console.log('!!!!!!!!!CONSOLEEEEEEEEE!!!', docRef);
   return getDoc(docRef);
 };
 
