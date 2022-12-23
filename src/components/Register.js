@@ -9,7 +9,7 @@ export const Register = (onNavigate) => {
   $section.className = 'container';
 
   $section.innerHTML = `
-    <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
+    <img class="container__logo-register"src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png" alt="logo">
    `;
   const $formR = document.createElement('form');
   $formR.id = 'registerForm';
@@ -52,7 +52,7 @@ export const Register = (onNavigate) => {
   $cGoogle.className = 'containerGoogle';
   const $imgGoogle = document.createElement('img');
   $imgGoogle.className = 'containerGoogle__logo';
-  $imgGoogle.src = './assets/img/2000px-Google_G_Logo.svg_.png';
+  $imgGoogle.src = 'https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/2000px-Google_G_Logo.svg_.png';
   const $linkGoogle = document.createElement('a');
   $linkGoogle.href = '#';
   $linkGoogle.id = 'googleLink';
@@ -129,7 +129,6 @@ export const Register = (onNavigate) => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         // const email = error.customData.email;
         if (errorCode === 'auth/email-already-in-use') {
           Modal('Error:', 'Email already in use');
@@ -153,7 +152,6 @@ export const Register = (onNavigate) => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         // The email of the user's account used.
         // const email = error.customData.email;
         if (errorCode === 'auth/email-already-in-use') {

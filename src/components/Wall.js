@@ -1,12 +1,17 @@
-/* import {wallFunction} from '../lib_firebase/auth'; */
-/* import { querySnapshot } from '../lib_firebase/db.js'; */
+import { currentUser } from '../lib_firebase/auth.js';
 import { Menu } from './Menu.js';
 import { AddPost } from './AddPost';
-import { currentUser } from '../lib_firebase/auth.js';
 import { Posts } from './Posts.js';
-import { showAllPosts } from '../controller/wall_controller';
+import { showAllPosts, subscribedUser } from '../controller/wall_controller';
 
-export const Wall = (onNavigate) => {
+/* const currentUser = subscribedUser((user) => {
+  console.log('suscribedUser en wall', user);
+  return user;
+}); */
+
+//console.log('retorna suscribedUser en wall', currentUser());
+
+export const Wall = () => {
   const $section = document.createElement('section');
   $section.className = 'container container-wall';
   $section.innerHTML = `
@@ -17,7 +22,7 @@ export const Wall = (onNavigate) => {
 
     <section class="container-addPost">
         <div class="container-imgProfile">
-            <img class="container-imgProfile__img" src="${currentUser() ? currentUser().photoURL : 0}">
+            <img class="container-imgProfile__img" src='${currentUser() ? currentUser().photoURL : 0}'>
         </div>
         <div class="container-addPost__text" id="addPost" >What are you thinking, ${currentUser() ? currentUser().displayName : 'usuario'}? </div>
    </section>
@@ -48,20 +53,8 @@ export const Wall = (onNavigate) => {
     }
   });
 
-  /*  const idPost=e.target.getAttribute('id');
-console.log(e.target.getAttribute('class'));
-
-    if (e.target.getAttribute('çlass') === 'container-headerPost__options') {
-      deletePost(idPost).then(() => {
-        alert('your post deleted successfully');
-      })
-        .catch((error) => {
-          alert(' Uh-oh, an error occurred!');
-        });
-    }
-    console.log('class', e.target.getAttribute('class'));  */
-
   const root = document.getElementById('root');
   root.appendChild(Menu());
+
   return $section;
 };

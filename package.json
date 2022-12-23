@@ -16,7 +16,6 @@
     "stylelint": "stylelint --aei src/**/*.css",
     "pretestoff": "npm run htmlhint && npm run eslint && npm run stylelint",
     "test": "jest --coverage --env=jsdom",
-
     "start": "npm run dev",
     "dev": "vite dev src",
     "build": "vite build",
@@ -27,6 +26,7 @@
     "@babel/preset-env": "^7.19.4",
     "eslint": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^25.3.0",
     "htmlhint": "^1.0.0",

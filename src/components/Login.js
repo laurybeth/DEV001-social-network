@@ -1,12 +1,11 @@
-import { login, signInGoogle, suscribeLogin } from '../lib_firebase/auth';
+import { login, signInGoogle } from '../lib_firebase/auth';
 import { Modal } from './Modal.js';
-
 
 export const Login = (onNavigate) => {
   const $section = document.createElement('section');
   $section.className = 'container';
   $section.innerHTML = `
-  <img class="container__logo-register"src="./assets/img/logo_horizontal.png" alt="logo">
+  <img class="container__logo-register"src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png" alt="logo">
  `;
   const $formR = document.createElement('form');
   $formR.id = 'registerForm';
@@ -30,7 +29,7 @@ export const Login = (onNavigate) => {
   $cGoogle.className = 'containerGoogle';
   const $imgGoogle = document.createElement('img');
   $imgGoogle.className = 'containerGoogle__logo';
-  $imgGoogle.src = './assets/img/2000px-Google_G_Logo.svg_.png';
+  $imgGoogle.src = 'https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/2000px-Google_G_Logo.svg_.png';
   const $linkGoogle = document.createElement('a');
   $linkGoogle.href = '#';
   $linkGoogle.id = 'googleLink';
@@ -75,7 +74,6 @@ export const Login = (onNavigate) => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
 
         if (errorCode === 'auth/wrong-password') { Modal('Error:', 'Wrong-password'); } else { Modal('Error:', 'Something went wrong'); }
 
@@ -102,11 +100,14 @@ export const Login = (onNavigate) => {
       .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
-        const errorMessage = error.message;
         // The email of the user's account used.
-        //const email = error.customData.email;
+        // const email = error.customData.email;
         // The AuthCredential type that was used.
-        if (errorCode === 'auth/wrong-password') { Modal('Error:', 'Wrong-password'); } else { Modal('Error:', 'Something went wrong'); }
+        if (errorCode === 'auth/wrong-password') {
+          Modal('Error:', 'Wrong-password');
+        } else {
+          Modal('Error:', 'Something went wrong');
+        }
       });
   });
 

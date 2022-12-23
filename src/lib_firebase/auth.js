@@ -1,5 +1,7 @@
 import {
-  createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithPopup, GoogleAuthProvider,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { auth } from '../firebase';
 
@@ -17,4 +19,4 @@ export const signInGoogle = () => {
 export const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
 
 export const currentUser = () => auth.currentUser;
-export const suscribeLogin = (callback) => auth.onAuthStateChanged(callback);
+export const userState = (callback) => auth.onAuthStateChanged(callback);

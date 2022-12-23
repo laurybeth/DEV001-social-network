@@ -8,7 +8,6 @@ html{
   font-family:'Lato', sans-serif;
   color:#4b4b4b;
 }
-
 .container{
     display:flex;
     flex-direction: column;
@@ -19,14 +18,11 @@ html{
     height:100vh;
   
 }
-
-
 .container__img,
 .container__logo {
  max-width: 100%;
  height: auto;
 }
-
 .container__logo{
  max-width: 75%;
 
@@ -39,7 +35,6 @@ html{
  font-size: 2.5vh;
  color:#4b4b4b;
 }
-
 .container__button{
  
   display:flex;
@@ -51,7 +46,6 @@ html{
  
   
 }
-
 .container__button__signup,
 .container__button__login {
 width:60%;
@@ -75,22 +69,18 @@ background-color:#e69093ab;
 transition:0.1s;
 box-shadow: none;  
 }
-
 .container__button__login:active{
    background-color:#44afaba4;  
 }
-
 .container__button__login{
  background-color:#44AFAC; 
 }
-
-
- /***************estilos para REGISTER**************/
+/***************estilos para REGISTER**************/
 .container__logo-register{
   max-width: 100%;
   height: auto;
 }
- .container__form{
+.container__form{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,16 +89,13 @@ box-shadow: none;
 
   width:70%;
  }
- 
-
- /********INICIO:estilos para INPUT**********/
+/********INICIO:estilos para INPUT**********/
 .containerInput{
   width:100%;
   position:relative;
   margin:0.5rem;
 
 }
-
 .containerInput__box{
 width:100%;
  background: none;
@@ -121,12 +108,10 @@ width:100%;
  font-family:'Lato', sans-serif;
  
 }
-
 .containerInput__box:focus{
   outline:none;
   color: #4b4b4b;
 }
-
 .containerInput__box:focus ~ label, 
 .containerInput__box:valid ~ label {
 position: absolute;
@@ -134,7 +119,6 @@ top:-1.2rem;
 font-size: 1rem;
 color: #44AFAC;
 }
-
 .containerInput__label{
 color: #4b4b4b60;
 font-size: 1rem;
@@ -143,17 +127,14 @@ top: 0.2rem;
 transition:0.5s ease all ;
 pointer-events: none;
 }
-
 .containerInput__line::before{
   position:relative;
   display:block;
   width:100%;
 }
-
 .containerInput__box:focus ~ .containerInput__line::before{
   width:100%;
 }
-
 .containerInput__line::before{
   content:'';
   height: 0.12rem;
@@ -174,9 +155,7 @@ color:#e69093;
 
 
 }
- /*************** FIN:estilos para INPUT**************/
-
-
+/*************** FIN:estilos para INPUT**************/
 .container__terms-conditions{
   margin-top:10px;
   display:flex;
@@ -187,7 +166,6 @@ Justify-content: center;
   width: 100%;
    
 }
-
 .label__conditions{
   font-weight:300;
   font-size: 0.9rem;
@@ -217,12 +195,10 @@ Justify-content: center;
   color: #44AFAC;
   
 }
-
 .btnsubmit{
   margin-top: 15px;
   width: 90%;
 }
-
 .containerGoogle{
   margin-top: 20px;
   display: flex;
@@ -239,7 +215,6 @@ Justify-content: center;
  color:#4A90E2;
 
 }
-
 .containerGoogle__logo{
 width: 1.5rem;
   height:1.5rem;
@@ -250,7 +225,6 @@ width: 1.5rem;
   font-size: 0.8rem;
   color: #4b4b4b60;
 }
-
 /*************INICIO:login********************/
 .containerLogin{
     display:flex;
@@ -262,7 +236,6 @@ width: 1.5rem;
     height:100vh;
 
 }
-
 .containerLogin__logo-login{
   max-width:100%;
   height: auto;
@@ -275,8 +248,7 @@ width: 1.5rem;
   justify-content:space-evenly;
   align-items: center;
 }
- /*************** INICIO:estilos para modal **************/
-
+/*************** INICIO:estilos para modal **************/
 .container-modal {
   display: none; 
   position: fixed; 
@@ -290,7 +262,6 @@ width: 1.5rem;
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
 /* Modal Content */
 .container-modal__content {
   background-color: #fff;
@@ -300,7 +271,6 @@ width: 1.5rem;
   border-radius:0.5rem;
   width: 80%;
 }
-
 /* The Close Button #44AFAC  #44afaba4*/
 .container-modal__close {
   color: #44AFAC;
@@ -308,7 +278,6 @@ width: 1.5rem;
   font-size: 2.5rem;
   font-weight: bold;
 }
-
 .container-modal__close:hover,
 .container-modal__close:focus {
   color: #44afaba4;
@@ -316,18 +285,15 @@ width: 1.5rem;
   transition:0.2s;
  
 }
-
- /*************** FIN:estilos para modal **************/
-
-  /*************** INICIO:estilos para wall **************/
-  .container-wall{
+/*************** FIN:estilos para modal **************/
+/*************** INICIO:estilos para wall **************/
+.container-wall{
   justify-content: space-between;
   gap:1rem;
   height: auto;
   margin-bottom:20%;
 
   }
-
 .container-header{
   justify-content: start;
   width:90vw;
@@ -341,7 +307,6 @@ max-width:40%;
  height: auto;
 
 }
-
 .container-addPost{
 
   width: 90vw;
@@ -352,23 +317,24 @@ max-width:40%;
    flex-grow: 1;
    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.20);
    border-radius: 0.9rem;
+   
+   
+
+   
+
   }
-
-
 .container-imgProfile{
   width:60px ;
   height: 60px;
   border-radius: 50%;
   clip-path: circle(50% at 50% 50%);
   margin:3%;
-
+  
 }
-
 .container-imgProfile__img{
 max-width:100% ;
 height: auto;
 }
-
 .container-addPost__text{
  width:80% ;
  height: 80%;
@@ -385,7 +351,6 @@ height: auto;
   cursor: pointer;
 
 }
-
 /*************** INICIO:estilos para POSTS **************/
 .container-Posts{
   width:100%;
@@ -395,8 +360,11 @@ height: auto;
    justify-content: center;
    align-items: center;
    gap:1.5rem;
+   
+   
+   
+  
 }
-
 .container-Posts__Post{
   width: 90%;
   height: 85%;
@@ -407,17 +375,21 @@ height: auto;
   justify-content:center;
   align-items:center;
   gap:0.2rem;
-}
+  
 
+   
+
+}
 .container-headerPost{
 
   display:flex;
   width: 90%;
   height:12%;
   justify-content:space-between;
-  align-items: center; 
+  align-items: center;
+   
+ 
 }
-
 .container-user{
   margin:4% 5% 0% 0% ;
   display:flex;
@@ -434,12 +406,10 @@ height: auto;
     width: 45px;
     background-color:#fff;    
 }
-
 .container-user__nameUser {
 width: 90%;
 
 }
-
 .container-headerPost__options{
 display: flex;
 justify-content: right;
@@ -447,18 +417,15 @@ border:none;
 width: 10%;
 background-color: rgba(255, 255, 255, 0);
 }
-
 .container-headerPost__hamburguerIcon{
   width:100%;
 }
-
 .container-content{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-
 .container-content__imgPost{
   width: 90%;
   height:auto;
@@ -481,7 +448,6 @@ background-color: rgba(255, 255, 255, 0);
   margin-top:1vw;
   margin-bottom: 2vw;
 }
-
 .containerButtons{
    width:90%;
    height: 10%;
@@ -507,7 +473,6 @@ background-color: rgba(255, 255, 255, 0);
   color: #A05154;
   transition:0.2s;
 }
-
 .containerLikes__heart,.containerComments__commentIcon{
 width:19px;
 height:17px;
@@ -517,7 +482,6 @@ margin-left:9%;
 color:#fbbc05;
 font-weight:bold;
 }
-
 .containerComments{
 outline:none;
  background-color:#FEF1CD;
@@ -528,12 +492,10 @@ outline:none;
  cursor:pointer;
  gap:0.2rem;
 }
-
 .containerLikes__count{
   color:#E52320;
   font-weight:bold;
 }
-
 .containerComment{
   display:flex;
   width:90%;
@@ -563,10 +525,8 @@ text-align: left;
   height: 35px;
   width: 35px;
 }
-
-   /*************** FIN:estilos para POSTS **************/
-   
-   /*************** inicio:estilos para header **************/
+/*************** FIN:estilos para POSTS **************/
+/*************** inicio:estilos para header **************/
 .containerHeader{
   background-color:#7DBA93;
   width:100%;
@@ -581,23 +541,18 @@ text-align: left;
 .containeMenu{
  width:90%;
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
   align-items: center;
   
 }
-
 .containeMenu__iconImg{
   width:35px ;
   height:35px ;
 
   
 }
-
-
-   /*************** FIN:estilos para header **************/
-
-   /*************** INICIO:estilos para ADDPOST **************/
-
+/*************** FIN:estilos para header **************/
+/*************** INICIO:estilos para ADDPOST **************/
 .container__addPost{
   background-color: #F4F4F4;
   width:70%;
@@ -615,7 +570,6 @@ text-align: left;
   font-weight: bold;
 
 }
-
 .container-AddPost__form{
   display:flex;
   flex-direction: column;
@@ -623,12 +577,11 @@ text-align: left;
   align-items: center;
  gap:0.5rem;
 }
-
 .textPost:hover{
    border:2px solid #44afac;
     transition:1s;
  }
- .container-UploadFile{
+.container-UploadFile{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -638,8 +591,7 @@ text-align: left;
   gap:5px;
   background-color:#4b4b4b16;
   border-radius: 0.5rem;}
-
- .container-UploadFile{
+.container-UploadFile{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -647,26 +599,12 @@ text-align: left;
   height: 60px;
   background-color:#4b4b4b16;
   border-radius: 1rem;}
-
-
- 
- .containerInput__uploadFileIcon{
+.containerInput__uploadFileIcon{
   width:3rem;
   height: 3rem;
  }
-
-
-
 .container-imgPreview__img{
   max-width:100%;
   height: auto;
 }
-
-
-
-
-
-
-
-
-   /*************** FIN:estilos para ADDPOST **************/
+/*************** FIN:estilos para ADDPOST **************/
