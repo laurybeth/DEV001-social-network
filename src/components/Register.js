@@ -145,8 +145,8 @@ export const Register = (onNavigate) => {
     e.preventDefault();
 
     registerGoopgleTasks()
-      .then((userDoc) => {
-        console.log('register - userDoc GOOGLE', userDoc.id);
+      .then(() => {
+       // console.log('register - userDoc GOOGLE', userDoc.id);
 
         onNavigate('/wall');
       })

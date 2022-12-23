@@ -2,14 +2,14 @@ import { currentUser } from '../lib_firebase/auth.js';
 import { Menu } from './Menu.js';
 import { AddPost } from './AddPost';
 import { Posts } from './Posts.js';
-import { showAllPosts, subscribedUser } from '../controller/wall_controller';
+import { showAllPosts, postOwner } from '../controller/wall_controller';
 
 /* const currentUser = subscribedUser((user) => {
   console.log('suscribedUser en wall', user);
   return user;
 }); */
 
-//console.log('retorna suscribedUser en wall', currentUser());
+// console.log('retorna suscribedUser en wall', currentUser());
 
 export const Wall = () => {
   const $section = document.createElement('section');
@@ -38,7 +38,16 @@ export const Wall = () => {
   showAllPosts((posts) => {
     $section.querySelector('.container-Posts').innerHTML = '';
     posts.forEach((post) => {
-      $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data(), post.id));
+      const idPostOwner = post.data().uid;
+      postOwner(idPostOwner)
+        .then((docPostOwner) => {
+          $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data(), post.id, docPostOwner.data()));
+          console.log('soy docPostOwner en wall', docPostOwner.data());
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          console.log('Error en obtener el id del propietario del post', errorCode);
+        });
     });
   });
 

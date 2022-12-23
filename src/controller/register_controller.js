@@ -4,6 +4,7 @@ import { register, signInGoogle } from '../lib_firebase/auth.js';
 export const registerTasks = (name, email, birthday, password, imgProfile) => register(email, password)
   .then((userCredential) => {
     const uid = userCredential.user.uid;
+ 
     userCredential.user.displayName = name;
     userCredential.user.photoURL = imgProfile;
     return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile);
@@ -22,6 +23,7 @@ export const registerGoopgleTasks = () => signInGoogle()
     const birthday = userCredential.user.metadata.creationTime;
     const imgProfile = userCredential.user.photoURL;
     console.log(uid, name, email, birthday, imgProfile);
+
 
     return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile);
   });
