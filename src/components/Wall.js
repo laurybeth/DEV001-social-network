@@ -2,7 +2,7 @@ import { currentUser } from '../lib_firebase/auth.js';
 import { Menu } from './Menu.js';
 import { AddPost } from './AddPost';
 import { Posts } from './Posts.js';
-import { showAllPosts, postOwner } from '../controller/wall_controller';
+import { showAllPosts, postOwner, subscribedUser } from '../controller/wall_controller';
 
 /* const currentUser = subscribedUser((user) => {
   console.log('suscribedUser en wall', user);
@@ -11,9 +11,19 @@ import { showAllPosts, postOwner } from '../controller/wall_controller';
 
 // console.log('retorna suscribedUser en wall', currentUser());
 
+/* subscribedUser((user) => {
+  if (user) {
+    console.log('suscribedUser en wall', user);
+    $section.querySelector('.container-imgProfile__img')
+
+  }
+}); */
+
 export const Wall = () => {
   const $section = document.createElement('section');
   $section.className = 'container container-wall';
+
+  // console.log('suscribedUser en wall', user);
   $section.innerHTML = `
     <header class="container-header">
         <img class="container-header__logo" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png

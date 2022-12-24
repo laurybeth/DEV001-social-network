@@ -13,12 +13,12 @@ export const AddPost = () => {
   <div class="container-modal__content container__addPost">
      
      <div class='container-AddPost__title'>
-      <p> Crear publicación </p>
+      <p class='createPublicationText'> Crear publicación </p>
       <span class="container-modal__close" id="${$idCloseAddPost}">&times;</span>   
      </div>
 
      <form class='container-AddPost__form' id="${$formID}"> 
-          <textarea class="containerInput__box textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" required></textarea>
+          <textarea class="textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" required></textarea>
          <div class="container-imgPreview">
         <img class="container-imgPreview__img" id="imgPreview" >
       </div>
@@ -26,7 +26,7 @@ export const AddPost = () => {
            <img  class="containerInput__uploadFileIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
             " alt="upload file icon"> 
          
-          <input type="file" id="fileAddPost" placeholder="Upload a file" required>
+          <input class="containerInput__uploadFileInput" type="file" id="fileAddPost" required>
         </div> 
         
         <input class="container__button__login AddPost btnsubmit" type="submit" value="Publicar">

@@ -3,6 +3,7 @@ import { Welcome } from './components/Welcome.js';
 import { Login } from './components/Login.js';
 import { Register } from './components/Register.js';
 import { Wall } from './components/Wall.js';
+//import { subscribedUser } from './controller/wall_controller';
 // import { currentUser, user } from './lib_firebase/auth.js';
 
 const root = document.getElementById('root');
@@ -26,4 +27,19 @@ window.onpopstate = () => {
   root.append(components(onNavigate));
 };
 
+
+
+/* subscribedUser((user) => {
+  if (user) {
+    console.log('suscribedUser en main', user);
+
+    const $imgProfile = document.querySelector('.container-imgProfile');
+    const $containerAddPost = document.querySelector('.container-addPost');
+    console.log('soy en main....',$imgProfile, $containerAddPost);
+
+    $imgProfile.innerHTML = `<img class="container-imgProfile__img" src='${user.photoURL}'>`;
+    $containerAddPost.insertAdjacentHTML('afterend', `<div class="container-addPost__text" id="addPostBlock" >What are you thinking, ${user.displayName}? </div>`);
+  }
+});
+ */
 root.appendChild(components(onNavigate));

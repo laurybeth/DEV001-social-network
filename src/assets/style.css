@@ -480,6 +480,7 @@ background-color: rgba(255, 255, 255, 0);
   text-align: left;
   margin-top:1vw;
   margin-bottom: 2vw;
+  
 }
 
 .containerButtons{
@@ -600,28 +601,42 @@ text-align: left;
 
 .container__addPost{
   background-color: #F4F4F4;
-  width:70%;
+  width:80%;
   display:flex;
   flex-direction: column;
-  gap :0.2rem;
+  gap :1.5rem;
   
 }
 .container-AddPost__title{
   display:flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  gap:8rem;
-  font-size: 1.4rem;
+  gap:1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
-
 }
 
+.createPublicationText{
+  text-align:center;
+}
 .container-AddPost__form{
   display:flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
  gap:0.5rem;
+}
+
+.textPost{
+  border:1px solid #44afac;
+  width: 98%;
+  height: 100px;
+  font-family:'Lato', sans-serif;
+  resize: none;
+  padding: 10px;
+  font-size:1rem ;
+  border-radius: 0.8rem;
+
 }
 
 .textPost:hover{
@@ -633,11 +648,12 @@ text-align: left;
   align-items: center;
   justify-content: center;
   width: 98%;
-   padding: 8px;
+   padding: 15px;
   height: 60px;
   gap:5px;
   background-color:#4b4b4b16;
   border-radius: 0.5rem;}
+
 
  .container-UploadFile{
   display: flex;
@@ -655,7 +671,11 @@ text-align: left;
   height: 3rem;
  }
 
+.containerInput__uploadFileInput{
 
+  width:150px;
+  height: 22px;
+}
 
 .container-imgPreview__img{
   max-width:100%;
