@@ -12350,6 +12350,11 @@ class hl extends tl {
     return new Xc(this.firestore, null, e);
   }
 }
+function ml(t2, e, n) {
+  t2 = jc(t2, Xc);
+  const s = jc(t2.firestore, $a), i = el(t2.converter, e, n);
+  return El(s, [fh(lh(s), "setDoc", t2._key, i, null !== t2.converter, n).toMutation(t2._key, On.none())]);
+}
 function yl(t2) {
   return El(jc(t2.firestore, $a), [new zn(t2._key, On.none())]);
 }
@@ -19010,7 +19015,6 @@ const Login = (onNavigate2) => {
       return userCredential.user;
     }).catch((error) => {
       const errorCode = error.code;
-      error.message;
       if (errorCode === "auth/wrong-password") {
         Modal("Error:", "Wrong-password");
       } else {
@@ -19030,7 +19034,6 @@ const Login = (onNavigate2) => {
       console.log("Soy useG en login: ", user);
     }).catch((error) => {
       const errorCode = error.code;
-      error.message;
       if (errorCode === "auth/wrong-password") {
         Modal("Error:", "Wrong-password");
       } else {
@@ -19040,13 +19043,16 @@ const Login = (onNavigate2) => {
   });
   return $section;
 };
-const saveCollectionUsersDoc = (id2, name2, email, birthday, imgProfile) => pl(ea(db, "users"), {
-  id: id2,
-  name: name2,
-  email,
-  birthday,
-  imgProfile
-});
+const saveCollectionUsersDoc = (id2, name2, email, birthday, imgProfile) => {
+  const docRef = sa(db, "users", id2);
+  return ml(docRef, {
+    id: id2,
+    name: name2,
+    email,
+    birthday,
+    imgProfile
+  });
+};
 const saveCollectionPostDoc = (uid, text, file, date, likes = 0, nComments = 0) => pl(ea(db, "posts"), {
   uid,
   text,
@@ -19074,7 +19080,7 @@ const registerTasks = (name2, email, birthday, password, imgProfile) => register
   return saveCollectionUsersDoc(uid, name2, email, birthday, imgProfile);
 });
 const registerGoopgleTasks = () => signInGoogle().then((userCredential) => {
-  console.log("registerGoogleTasks:", userCredential.user);
+  console.log("userCredential.user en registerGoogleTasks:", userCredential.user);
   const uid = userCredential.user.uid;
   const name2 = userCredential.user.displayName;
   const email = userCredential.user.email;
@@ -19204,7 +19210,6 @@ const Register = (onNavigate2) => {
       });
     }).catch((error) => {
       const errorCode = error.code;
-      error.message;
       if (errorCode === "auth/email-already-in-use") {
         Modal("Error:", "Email already in use");
       } else {
@@ -19216,12 +19221,11 @@ const Register = (onNavigate2) => {
   });
   $linkGoogle.addEventListener("click", (e) => {
     e.preventDefault();
-    registerGoopgleTasks().then((userDoc) => {
-      console.log("register - userDoc GOOGLE", userDoc.id);
+    registerGoopgleTasks().then(() => {
+      console.log("registerGoopgleTasks");
       onNavigate2("/wall");
     }).catch((error) => {
       const errorCode = error.code;
-      error.message;
       if (errorCode === "auth/email-already-in-use") {
         Modal("Error:", "Email already in use");
       } else {
@@ -19236,7 +19240,6 @@ const uploadImg = (objImg, userId) => {
   console.log("userId en storage.js", userId);
   const imgName = objImg.name;
   const imgRef = ref(storage, `posts-${userId}/${imgName}`);
-  console.log("Soy imgRef de storage.js", imgRef);
   return uploadBytes(imgRef, objImg);
 };
 const downloadImg = (urlImg) => {
@@ -19246,18 +19249,29 @@ const downloadImg = (urlImg) => {
 const addPostTasks = (textPost, objImg) => {
   const newUid = currentUser().uid;
   return uploadImg(objImg, newUid).then((snapshot) => {
-    console.log("soy snapshot !!!!!!!!!!!!!", snapshot);
     const newUrlImg = snapshot.metadata.fullPath;
+    console.log("newUrlImg en uploadImg", newUrlImg);
     const date = snapshot.metadata.timeCreated;
-    return downloadImg(newUrlImg).then((url) => saveCollectionPostDoc(newUid, textPost, url, date));
+    return downloadImg(newUrlImg).then((url) => {
+      console.log("url en downloadImg", url);
+      return saveCollectionPostDoc(newUid, textPost, url, date).then((postDoc) => {
+        console.log("Se guard\xF3 el documento en la colleci\xF3n Posts", postDoc);
+      }).catch((error) => {
+        console.log("ERROR no guard\xF3 el documento en la colecci\xF3n Posts", error.code);
+      });
+    }).catch((error) => {
+      console.log("ERROR URL NO devuelto en downloadImg en controller addPost", error.code);
+    });
+  }).catch((error) => {
+    console.log("ERROR snapshot NO devuelto en uploadImg en controller addPost", error.code);
   });
 };
-const AddPost = (onNavigate2) => {
+const AddPost = () => {
   const $AddPost = document.createElement("div");
-  $AddPost.id = "addPost";
   $AddPost.className = "container-modal";
+  $AddPost.id = "addPostModal";
   const $idCloseAddPost = "closeAddPost";
-  const $formID = "registerForm";
+  const $formID = "registerFormPost";
   $AddPost.innerHTML = `
   <div class="container-modal__content container__addPost">
      
@@ -19267,7 +19281,7 @@ const AddPost = (onNavigate2) => {
      </div>
 
      <form class='container-AddPost__form' id="${$formID}"> 
-          <textarea class="containerInput__box textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" ></textarea>
+          <textarea class="containerInput__box textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" required></textarea>
          <div class="container-imgPreview">
         <img class="container-imgPreview__img" id="imgPreview" >
       </div>
@@ -19284,19 +19298,15 @@ const AddPost = (onNavigate2) => {
   `;
   const $inputFile = $AddPost.querySelector("#fileAddPost");
   const $imgPreview = $AddPost.querySelector("#imgPreview");
-  const $containerImgPreview = $AddPost.querySelector(".container-imgPreview");
   $inputFile.addEventListener("change", () => {
     if (!$inputFile.files || !$inputFile.files.length) {
       $imgPreview.src = "";
       return;
     }
-    $containerImgPreview.insertAdjacentHTML("afterbegin", '<span id="img__previsualizacion__close">X</span>');
     $imgPreview.src = URL.createObjectURL($inputFile.files[0]);
   });
-  $AddPost.querySelector(".container-imgPreview");
   const root2 = document.getElementById("root");
   root2.appendChild($AddPost);
-  $AddPost.style.display = "block";
   const $closeAddPostElement = document.getElementById($idCloseAddPost);
   $closeAddPostElement.addEventListener("click", () => {
     $AddPost.style.display = "none";
@@ -19314,13 +19324,17 @@ const AddPost = (onNavigate2) => {
     console.log($form);
     console.log("textPost en addPost: ", texPost);
     console.log("urlFile en addPost: ", objImg);
-    addPostTasks(texPost, objImg).then((postDoc) => {
+    addPostTasks(texPost, objImg).then(() => {
+      document.getElementById("addPostModal").style.display = "none";
+      $imgPreview.removeAttribute("src");
+      $form.reset();
       Modal("Success:", "Your post was successfully created");
       setTimeout(() => {
         document.getElementById("modal").style.display = "none";
       }, 2e3);
     }).catch((error) => {
       console.log("Error en addPostTasks en addPost", error.code);
+      document.getElementById("addPostModal").style.display = "none";
       Modal("Error:", "Something went wrong");
       setTimeout(() => {
         document.getElementById("modal").style.display = "none";
@@ -19329,7 +19343,7 @@ const AddPost = (onNavigate2) => {
   });
   return $AddPost;
 };
-const Menu = (onNavigate2) => {
+const Menu = () => {
   const $header = document.createElement("header");
   $header.className = "containerHeader";
   $header.innerHTML = `
@@ -19349,17 +19363,16 @@ const deletePost = (idPost) => {
   const collectionName = "posts";
   return deleteItem(idPost, collectionName);
 };
-const Posts = (post, postId) => {
+const Posts = (post, postId, postOwner2) => {
   const $section = document.createElement("div");
   $section.className = "container-Posts__Post";
   $section.id = postId;
-  console.log("soy id de post en posts.js", $section.id);
   $section.innerHTML = `
    
         <div class="container-headerPost">
           <div class="container-user">
-            <img  class='container-user__imgUser'src="${currentUser().photoURL}">
-            <p class='container-user__nameUser'> ${currentUser().displayName} </p>
+            <img  class='container-user__imgUser'src="${postOwner2.imgProfile}">
+            <p class='container-user__nameUser'> ${postOwner2.name} </p>
           </div>
           <button id='${postId}' class="container-headerPost__options">
             <img class='container-headerPost__hamburguerIcon' src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_delete.png">
@@ -19397,7 +19410,8 @@ const Posts = (post, postId) => {
   return $section;
 };
 const showAllPosts = (callback) => readAllCollectionPosts(callback);
-const Wall = (onNavigate2) => {
+const postOwner = (idPostOwner) => readCollectionUserDoc(idPostOwner);
+const Wall = () => {
   const $section = document.createElement("section");
   $section.className = "container container-wall";
   $section.innerHTML = `
@@ -19408,9 +19422,9 @@ const Wall = (onNavigate2) => {
 
     <section class="container-addPost">
         <div class="container-imgProfile">
-            <img class="container-imgProfile__img" src="${currentUser() ? currentUser().photoURL : 0}">
+            <img class="container-imgProfile__img" src='${currentUser() ? currentUser().photoURL : 0}'>
         </div>
-        <div class="container-addPost__text" id="addPost" >What are you thinking, ${currentUser() ? currentUser().displayName : "usuario"}? </div>
+        <div class="container-addPost__text" id="addPostBlock" >What are you thinking, ${currentUser() ? currentUser().displayName : "usuario"}? </div>
    </section>
 
    <section class='container-Posts'>
@@ -19422,15 +19436,25 @@ const Wall = (onNavigate2) => {
   showAllPosts((posts) => {
     $section.querySelector(".container-Posts").innerHTML = "";
     posts.forEach((post) => {
-      $section.querySelector(".container-Posts").insertAdjacentElement("afterbegin", Posts(post.data(), post.id));
+      const idPostOwner = post.data().uid;
+      postOwner(idPostOwner).then((docPostOwner) => {
+        $section.querySelector(".container-Posts").insertAdjacentElement("afterbegin", Posts(post.data(), post.id, docPostOwner.data()));
+        console.log("soy docPostOwner en wall", docPostOwner.data());
+      }).catch((error) => {
+        const errorCode = error.code;
+        console.log("Error en obtener el id del propietario del post", errorCode);
+      });
     });
   });
   const $addPostElement = $section.querySelector(".container-addPost__text");
   $addPostElement.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log("target:", e.target);
-    if (e.target.getAttribute("id") === "addPost") {
+    console.log("escucha para agregar un post:", e.target);
+    if (e.target.getAttribute("id") === "addPostBlock") {
+      console.log("click para agregar un post:", e.target);
       AddPost();
+      const $AddPost = document.getElementById("addPostModal");
+      $AddPost.style.display = "block";
     }
   });
   const root2 = document.getElementById("root");

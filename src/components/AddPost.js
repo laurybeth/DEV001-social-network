@@ -3,21 +3,22 @@ import { Modal } from './Modal.js';
 
 export const AddPost = () => {
   const $AddPost = document.createElement('div');
-  $AddPost.id = 'addPost';
+
   $AddPost.className = 'container-modal';
+  $AddPost.id = 'addPostModal';
   const $idCloseAddPost = 'closeAddPost';
-  const $formID = 'registerForm';
+  const $formID = 'registerFormPost';
 
   $AddPost.innerHTML = `
   <div class="container-modal__content container__addPost">
      
      <div class='container-AddPost__title'>
-      <p> Crear publicación </p>
+      <p class='createPublicationText'> Crear publicación </p>
       <span class="container-modal__close" id="${$idCloseAddPost}">&times;</span>   
      </div>
 
      <form class='container-AddPost__form' id="${$formID}"> 
-          <textarea class="containerInput__box textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" ></textarea>
+          <textarea class="textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" required></textarea>
          <div class="container-imgPreview">
         <img class="container-imgPreview__img" id="imgPreview" >
       </div>
@@ -25,7 +26,7 @@ export const AddPost = () => {
            <img  class="containerInput__uploadFileIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
             " alt="upload file icon"> 
          
-          <input type="file" id="fileAddPost" placeholder="Upload a file" required>
+          <input class="containerInput__uploadFileInput" type="file" id="fileAddPost" required>
         </div> 
         
         <input class="container__button__login AddPost btnsubmit" type="submit" value="Publicar">
@@ -46,11 +47,8 @@ export const AddPost = () => {
 
   /** ***************************************** */
 
-  // console.log(currentUser());
   const root = document.getElementById('root');
   root.appendChild($AddPost);
-
-  $AddPost.style.display = 'block';
   const $closeAddPostElement = document.getElementById($idCloseAddPost);
 
   $closeAddPostElement.addEventListener('click', () => {
@@ -77,13 +75,15 @@ export const AddPost = () => {
 
     addPostTasks(texPost, objImg)
       .then(() => { // then (postDoc)
-        /* document.getElementById('addPost').style.display = 'none'; */
+        document.getElementById('addPostModal').style.display = 'none';
+        $imgPreview.removeAttribute('src');
+        $form.reset();
         Modal('Success:', 'Your post was successfully created');
         setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
       })
       .catch((error) => {
         console.log('Error en addPostTasks en addPost', error.code);
-        /* document.getElementById('addPost').style.display = 'none'; */
+        document.getElementById('addPostModal').style.display = 'none';
         Modal('Error:', 'Something went wrong');
         setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
       });

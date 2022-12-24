@@ -10,7 +10,6 @@ export const uploadImg = (objImg, userId) => {
   const imgRef = ref(storage, (`posts-${userId}/${imgName}`));
   // spaceRef now points to "images/space.jpg"
   // imagesRef still points to "images"
-  console.log('Soy imgRef de storage.js', imgRef);
   return uploadBytes(imgRef, objImg);
 };
 

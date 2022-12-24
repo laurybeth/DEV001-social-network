@@ -19,7 +19,7 @@ export const Posts = (post, postId, postOwner) => {
         </div>
         <div class='container-content'>
               <div  class='container-content__textPost'>
-              <p>${post.text}</p> 
+              <p class='container-AddPost__title_text'>${post.text}</p> 
               </div>
               <div class='container-content__imgPost'>
               <img class='container-content__imgPost-img' src="${post.file}">

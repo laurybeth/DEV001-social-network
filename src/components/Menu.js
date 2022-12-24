@@ -13,6 +13,8 @@ export const Menu = () => {
   $header.querySelector('.containeMenu__addPost-icon').addEventListener('click', (e) => {
     e.preventDefault();
     AddPost();
+    const $AddPost = document.getElementById('addPostModal');
+    $AddPost.style.display = 'block';
   });
   return $header;
 };
