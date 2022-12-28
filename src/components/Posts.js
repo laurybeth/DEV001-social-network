@@ -1,4 +1,3 @@
-import { currentUser } from '../lib_firebase/auth.js';
 import { deletePost } from '../controller/posts_controller';
 
 export const Posts = (post, postId, postOwner) => {
