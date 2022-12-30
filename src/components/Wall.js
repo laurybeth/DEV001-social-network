@@ -2,12 +2,14 @@ import { Menu } from './Menu.js';
 import { AddPost } from './AddPost';
 import { Posts } from './Posts.js';
 import { showAllPosts, postOwner } from '../controller/wall_controller';
+import { currentUser } from '../lib_firebase/auth.js';
 
-export const Wall = (onNavigate, user) => {
+export const Wall = (onNavigate) => {
   const $section = document.createElement('section');
   $section.className = 'container container-wall';
 
-  console.log('userState en wall', user);
+  // console.log('userState en wall', user);
+  console.log('currentUser en wall', currentUser());
 
   $section.innerHTML = `
     <header class="container-header">
@@ -17,9 +19,9 @@ export const Wall = (onNavigate, user) => {
 
     <section class="container-addPost">
         <div class="container-imgProfile">
-            <img class="container-imgProfile__img" src='${user.photoURL}'>
+            <img class="container-imgProfile__img" src='${currentUser().photoURL}'>
         </div>
-        <div class="container-addPost__text" id="addPostBlock" >What are you thinking, ${user.displayName}? </div>
+        <div class="container-addPost__text" id="addPostBlock" >What are you thinking, ${currentUser().displayName}? </div>
    </section>
 
    <section class='container-Posts'>

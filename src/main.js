@@ -28,8 +28,8 @@ window.onpopstate = () => {
   root.append(components(onNavigate));
 };
 
-userState((user) => {
-  root.appendChild(components(onNavigate, user));
+userState(() => {
+  root.appendChild(components(onNavigate));
 });
 
 /* subscribedUser((user) => {
