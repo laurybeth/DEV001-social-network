@@ -1,5 +1,5 @@
-import { currentUser } from '../lib_firebase/auth.js';
 import { deletePost } from '../controller/posts_controller';
+import { Modal } from './Modal.js';
 
 export const Posts = (post, postId, postOwner) => {
   const $section = document.createElement('div');
@@ -55,10 +55,17 @@ export const Posts = (post, postId, postOwner) => {
   $postDelete.addEventListener('click', () => {
     console.log('idPost en posts', postId);
     deletePost(postId).then(() => {
-      alert('your post deleted successfully');
+      Modal('your post deleted successfully ');
+      setTimeout(() => {
+        document.getElementById('modal').style.display = 'none';
+      }, 2000);
     })
       .catch((error) => {
-        alert(' Uh-oh, an error occurred!', error.code);
+        const errorCode = error.code;
+        Modal('Uh-oh, an error occurred! ', errorCode);
+        setTimeout(() => {
+          document.getElementById('modal').style.display = 'none';
+        }, 2000);
       });
   });
 

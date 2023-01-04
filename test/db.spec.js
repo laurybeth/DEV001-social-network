@@ -1,4 +1,4 @@
-import { addDoc } from 'firebase/firestore';
+import { setDoc } from 'firebase/firestore';
 import { saveCollectionUsersDoc, readCollectionUserDoc } from '../src/lib_firebase/db.js';
 
 const user = {
@@ -20,7 +20,7 @@ describe('saveCollectionFunction', () => {
 
   it('Should return an object with the new colletion', () => {
     saveCollectionUsersDoc(user.id, user.name1, user.email, user.birthday, user.imgProfile);
-    expect(addDoc).toHaveBeenCalled();
+    expect(setDoc).toHaveBeenCalled();
   });
 });
 

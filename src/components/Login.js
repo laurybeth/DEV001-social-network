@@ -3,74 +3,50 @@ import { Modal } from './Modal.js';
 
 export const Login = (onNavigate) => {
   const $section = document.createElement('section');
+  const $idLoginForm = 'loginID';
   $section.className = 'container';
+  const $idGoogleSingIn = 'googleLSingInID';
   $section.innerHTML = `
   <img class="container__logo-register"src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png" alt="logo">
- `;
-  const $formR = document.createElement('form');
-  $formR.id = 'registerForm';
-  $formR.className = 'container__form';
-  $formR.innerHTML = `
-    <div class="containerInput">  
-      <input class="containerInput__box" type="email" name="User_email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" title="the format does not match what was requested" required>  
-      <span class=containerInput__line></span>  
-      <label for="email"class="containerInput__label">Email</label>
-    </div>
-      <div class="containerInput">
-      <input class="containerInput__box" type="password" name="User_password" required>
-      <span class=containerInput__line></span>
-      <label for="password" class="containerInput__label">Password</label>
-      <span class=containerInput__line></span>
-    </div>
-    <input class="container__button__login" type="submit" value="Sign In">
-  `;
-
-  const $cGoogle = document.createElement('div');
-  $cGoogle.className = 'containerGoogle';
-  const $imgGoogle = document.createElement('img');
-  $imgGoogle.className = 'containerGoogle__logo';
-  $imgGoogle.src = 'https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/2000px-Google_G_Logo.svg_.png';
-  const $linkGoogle = document.createElement('a');
-  $linkGoogle.href = '#';
-  $linkGoogle.id = 'googleLink';
-  $linkGoogle.className = 'containerGoogle__link';
-  $linkGoogle.textContent = 'SIGN IN WITH GOOGLE';
-
-  $cGoogle.append($imgGoogle, $linkGoogle);
-
-  $section.append($formR, $cGoogle);
-  $section.insertAdjacentHTML('beforeend', `
+  <form class='container__form' id='${$idLoginForm}'>
+  <div class="containerInput">  
+  <input class="containerInput__box" type="email" name="User_email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" title="the format does not match what was requested" required>  
+  <span class=containerInput__line></span>  
+  <label for="email"class="containerInput__label">Email</label>
+</div>
+  <div class="containerInput">
+  <input class="containerInput__box" type="password" name="User_password" required>
+  <span class=containerInput__line></span>
+  <label for="password" class="containerInput__label">Password</label>
+  <span class=containerInput__line></span>
+</div>
+<input class="container__button__login" type="submit" value="Sign In">
+</form>
+<div class='containerGoogle'>
+<img class='containerGoogle__logo' src='https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/2000px-Google_G_Logo.svg_.png'>
+<a class= 'containerGoogle__link' id='${$idGoogleSingIn}' href='#'>SING UP WITH GOOGLE</a>
+  </div>
   <span class="container__alreadyAccount">Don’t have an account? 
   <a href="/register">
   <strong>Sign up here</strong>
   </a>
-  </span>`);
-  /*
-  const $button = document.querySelector('.container__button__signup');
+  </span>
+ `;
 
-  $button.addEventListener('submit', (e) => {
+  const $loginForm = $section.querySelector('#loginID');
+  $loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    onNavigate('/');
-  });
-*/
-
-  $formR.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const userEmail = $formR[0].value;
-    const userPassword = $formR[1].value;
-    console.log(e.target);// pueden correrlo que sale  en esa linea
+    const userEmail = $loginForm[0].value;
+    const userPassword = $loginForm[1].value;
+    console.log(e.target);
 
     login(userEmail, userPassword)
       .then((userCredential) => {
-        const user = userCredential.user;
-
         Modal('Welcome: ', `${userCredential.user.displayName}`);
-        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
+        setTimeout(() => {
+          document.getElementById('modal').style.display = 'none';
+        }, 2000);
         onNavigate('/wall');
-
-        console.log('User: ', user);
-
-        return userCredential.user;
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -80,6 +56,9 @@ export const Login = (onNavigate) => {
       // ..
       });
   });
+
+  const $linkGoogle = $section.querySelector('#googleLSingInID');
+
   $linkGoogle.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -88,14 +67,11 @@ export const Login = (onNavigate) => {
         // alert('Te registraste con google');
 
         Modal('Welcome: ', `${userCredential.user.displayName}`);
-        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
+        setTimeout(() => {
+          document.getElementById('modal').style.display = 'none';
+        }, 2000);
 
-        // Modal('Welcome: ', `${userCredential.user.email}`);
         onNavigate('/wall');
-        const user = userCredential.user;
-        console.log('Soy useG en login: ', user);
-
-        // ...
       })
       .catch((error) => {
         // Handle Errors here.
