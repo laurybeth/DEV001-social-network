@@ -3,7 +3,6 @@ import { Welcome } from './components/Welcome.js';
 import { Login } from './components/Login.js';
 import { Register } from './components/Register.js';
 import { Wall } from './components/Wall.js';
-import { userState } from './lib_firebase/auth';
 // import { subscribedUser } from './controller/wall_controller';
 // import { currentUser, user } from './lib_firebase/auth.js';
 
@@ -28,9 +27,9 @@ window.onpopstate = () => {
   root.append(components(onNavigate));
 };
 
-userState(() => {
+
   root.appendChild(components(onNavigate));
-});
+
 
 /* subscribedUser((user) => {
   if (user) {

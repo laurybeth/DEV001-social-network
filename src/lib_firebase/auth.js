@@ -18,5 +18,6 @@ export const signInGoogle = () => {
 
 export const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
 
-export const currentUser = () => auth.currentUser;
+/* export const currentUser = () => auth.currentUser;
 export const userState = (callback) => auth.onAuthStateChanged(callback);
+ */

@@ -7,13 +7,12 @@ export const registerTasks = (name, email, birthday, password) => register(email
     userCredential.user.displayName = name;
     const imgProfile = 'https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/imgProfileDefault.png';
     userCredential.user.photoURL = imgProfile;
+    localStorage.setItem('uid', uid);
+    localStorage.setItem('uName', name);
+    localStorage.setItem('uImgProfile', imgProfile);
     return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile)
       .then(() => readCollectionUserDoc(uid));
   });
-
-/* readCollectionUserDoc(docRef.id)
-        .then((docSnap) => {
-          console.log(docSnap.data()); */
 
 export const registerGoogleTasks = () => signInGoogle()
   .then((userCredential) => {
@@ -24,6 +23,9 @@ export const registerGoogleTasks = () => signInGoogle()
     const email = userCredential.user.email;
     const birthday = userCredential.user.metadata.creationTime;
     const imgProfile = userCredential.user.photoURL;
+    localStorage.setItem('uid', uid);
+    localStorage.setItem('uName', name);
+    localStorage.setItem('uImgProfile', imgProfile);
 
     return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile)
       .then(() => readCollectionUserDoc(uid));
