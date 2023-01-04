@@ -1,6 +1,5 @@
 import { registerTasks, registerGoogleTasks } from '../controller/register_controller.js';
 import { validateEmail, validateName, validatePassword } from '../helpers';
-import { readCollectionUserDoc } from '../lib_firebase/db';
 import { Modal } from './Modal.js';
 
 export const Register = (onNavigate) => {
@@ -99,19 +98,14 @@ export const Register = (onNavigate) => {
     const userName = $registerForm[1].value;
     const userPassword = $registerForm[2].value;
     const userBirthday = $registerForm[3].value;
-    const imgProfile = 'https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/imgProfileDefault.png';
 
-    registerTasks(userName, userEmail, userBirthday, userPassword, imgProfile)
-      .then((userDoc) => {
-        console.log('register - userDoc.id', userDoc.id);
-        const userDocId = userDoc.id;
-        readCollectionUserDoc(userDocId).then((docSnap) => {
-          console.log('docSnap.data() ', docSnap.data());
+    registerTasks(userName, userEmail, userBirthday, userPassword)
+      .then((docSnap) => {
+        console.log('docSnap.data() ', docSnap.data());
 
-          Modal('Welcome: ', `${docSnap.data().name}`);
-          setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
-          onNavigate('/wall');
-        });
+        Modal('Welcome: ', `${docSnap.data().name}`);
+        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
+        onNavigate('/wall');
       })
       .catch((error) => {
         const errorCode = error.code;

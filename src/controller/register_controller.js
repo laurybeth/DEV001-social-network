@@ -1,13 +1,14 @@
-import { saveCollectionUsersDoc } from '../lib_firebase/db.js';
+import { saveCollectionUsersDoc, readCollectionUserDoc } from '../lib_firebase/db.js';
 import { register, signInGoogle } from '../lib_firebase/auth.js';
 
-export const registerTasks = (name, email, birthday, password, imgProfile) => register(email, password)
+export const registerTasks = (name, email, birthday, password) => register(email, password)
   .then((userCredential) => {
     const uid = userCredential.user.uid;
-
     userCredential.user.displayName = name;
+    const imgProfile = 'https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/imgProfileDefault.png';
     userCredential.user.photoURL = imgProfile;
-    return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile);
+    return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile)
+      .then(() => readCollectionUserDoc(uid));
   });
 
 /* readCollectionUserDoc(docRef.id)
