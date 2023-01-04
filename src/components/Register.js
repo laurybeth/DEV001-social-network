@@ -104,7 +104,9 @@ export const Register = (onNavigate) => {
         console.log('docSnap.data() ', docSnap.data());
 
         Modal('Welcome: ', `${docSnap.data().name}`);
-        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
+        setTimeout(() => {
+          document.getElementById('modal').style.display = 'none';
+        }, 2000);
         onNavigate('/wall');
       })
       .catch((error) => {
@@ -127,8 +129,11 @@ export const Register = (onNavigate) => {
     e.preventDefault();
 
     registerGoogleTasks()
-      .then(() => {
-        console.log('registerGoogleTasks');
+      .then((docSnap) => {
+        Modal('Welcome: ', `${docSnap.data().name}`);
+        setTimeout(() => {
+          document.getElementById('modal').style.display = 'none';
+        }, 2000);
 
         onNavigate('/wall');
       })

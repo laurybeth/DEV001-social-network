@@ -38,12 +38,14 @@ export const Login = (onNavigate) => {
     e.preventDefault();
     const userEmail = $loginForm[0].value;
     const userPassword = $loginForm[1].value;
-    console.log(e.target);// pueden correrlo que sale  en esa linea
+    console.log(e.target);
 
     login(userEmail, userPassword)
       .then((userCredential) => {
         Modal('Welcome: ', `${userCredential.user.displayName}`);
-        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
+        setTimeout(() => {
+          document.getElementById('modal').style.display = 'none';
+        }, 2000);
         onNavigate('/wall');
       })
       .catch((error) => {
@@ -65,14 +67,11 @@ export const Login = (onNavigate) => {
         // alert('Te registraste con google');
 
         Modal('Welcome: ', `${userCredential.user.displayName}`);
-        setTimeout(() => { document.getElementById('modal').style.display = 'none'; }, 2000);
+        setTimeout(() => {
+          document.getElementById('modal').style.display = 'none';
+        }, 2000);
 
-        // Modal('Welcome: ', `${userCredential.user.email}`);
         onNavigate('/wall');
-
-        // console.log('Soy useG en login: ', user);
-
-        // ...
       })
       .catch((error) => {
         // Handle Errors here.

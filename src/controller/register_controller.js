@@ -24,7 +24,7 @@ export const registerGoogleTasks = () => signInGoogle()
     const email = userCredential.user.email;
     const birthday = userCredential.user.metadata.creationTime;
     const imgProfile = userCredential.user.photoURL;
-    console.log(uid, name, email, birthday, imgProfile);
 
-    return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile);
+    return saveCollectionUsersDoc(uid, name, email, birthday, imgProfile)
+      .then(() => readCollectionUserDoc(uid));
   });
