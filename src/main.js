@@ -27,9 +27,7 @@ window.onpopstate = () => {
   root.append(components(onNavigate));
 };
 
-
-  root.appendChild(components(onNavigate));
-
+root.appendChild(components(onNavigate));
 
 /* subscribedUser((user) => {
   if (user) {

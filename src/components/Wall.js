@@ -3,7 +3,7 @@ import { AddPost } from './AddPost';
 import { Posts } from './Posts.js';
 import { showAllPosts, postOwner } from '../controller/wall_controller';
 
-export const Wall = (onNavigate) => {
+export const Wall = () => {
   const $section = document.createElement('section');
   $section.className = 'container container-wall';
 
