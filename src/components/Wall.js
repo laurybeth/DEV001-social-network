@@ -1,7 +1,9 @@
+import { doc, getDoc } from 'firebase/firestore';
 import { Menu } from './Menu.js';
 import { AddPost } from './AddPost';
 import { Posts } from './Posts.js';
-import { showAllPosts, postOwner } from '../controller/wall_controller';
+import { showAllPosts } from '../controller/wall_controller';
+import { db } from '../firebase.js';
 
 export const Wall = () => {
   const $section = document.createElement('section');
@@ -33,17 +35,21 @@ export const Wall = () => {
 
   showAllPosts((posts) => {
     $section.querySelector('.container-Posts').innerHTML = '';
+    const allPosts = [];
+    const promises = [];
+    posts.forEach((post) => allPosts.push(post));
     posts.forEach((post) => {
       const idPostOwner = post.data().uid;
-      postOwner(idPostOwner)
-        .then((docPostOwner) => {
-          $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data(), post.id, docPostOwner.data()));
-          // console.log('soy docPostOwner en wall', docPostOwner.data());
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          console.log('Error en obtener el id del propietario del post', errorCode);
-        });
+      const docRef = doc(db, 'users', idPostOwner);
+      promises.push(getDoc(docRef));
+    });
+    Promise.all(promises).then((values) => {
+      allPosts.forEach((post, i) => {
+        $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data(), post.id, values[i].data()));
+      });
+    }).catch((error) => {
+      const errorCode = error.code;
+      console.log('Error en obtener el id del propietario del post', errorCode);
     });
   });
 
