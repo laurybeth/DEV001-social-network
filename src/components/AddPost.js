@@ -18,14 +18,14 @@ export const AddPost = () => {
      </div>
 
      <form class='container-AddPost__form' id="${$formID}"> 
-          <textarea class="textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" required></textarea>
+          <textarea class="textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" required>
+          </textarea>
          <div class="container-imgPreview">
         <img class="container-imgPreview__img" id="imgPreview" >
       </div>
         <div class=" container-UploadFile"> 
            <img  class="containerInput__uploadFileIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
             " alt="upload file icon"> 
-         
           <input class="containerInput__uploadFileInput" type="file" id="fileAddPost" required>
         </div> 
         

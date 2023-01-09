@@ -2,18 +2,20 @@ import { deletePost } from '../controller/posts_controller';
 import { Modal } from './Modal.js';
 
 export const Posts = (post, postId, postOwner) => {
-  const $section = document.createElement('div');
-  $section.className = 'container-Posts__Post';
-  $section.id = postId;
+  const $div = document.createElement('div');
+  $div.className = 'container-Posts__Post';
+  $div.dataset.post = postId;
+  console.log('atributo data-post: ', $div.dataset.post);
+  // $section.id = postId;
   // console.log('soy id de post en posts.js', $section.id);
-  $section.innerHTML = `
+  $div.innerHTML = `
    
         <div class="container-headerPost">
           <div class="container-user">
             <img  class='container-user__imgUser'src="${postOwner.imgProfile}">
             <p class='container-user__nameUser'> ${postOwner.name} </p>
           </div>
-          <button id='${postId}' class="container-headerPost__options">
+          <button class="container-headerPost__options">
             <img class='container-headerPost__hamburguerIcon' src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_delete.png">
           </button>
         </div>
@@ -51,7 +53,7 @@ export const Posts = (post, postId, postOwner) => {
 
   console.log('post en wall', post);
 
-  const $postDelete = $section.querySelector('.container-headerPost__options');
+  const $postDelete = $div.querySelector('.container-headerPost__options');
   $postDelete.addEventListener('click', () => {
     console.log('idPost en posts', postId);
     deletePost(postId).then(() => {
@@ -69,5 +71,5 @@ export const Posts = (post, postId, postOwner) => {
       });
   });
 
-  return $section;
+  return $div;
 };

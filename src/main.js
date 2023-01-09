@@ -15,11 +15,14 @@ const routes = {
 };
 
 const onNavigate = (pathname) => {
+  // browser session history estado, título y dominio
   window.history.pushState({}, pathname, window.location.origin + pathname);
+  // a string containing the canonical form of the origin of the specific location. (https://....)
   root.removeChild(root.firstChild);
   root.appendChild(routes[pathname](onNavigate));
 };
 
+// A string containing an initial '/' followed by the path of the URL
 const components = routes[window.location.pathname];
 
 window.onpopstate = () => {
@@ -28,17 +31,3 @@ window.onpopstate = () => {
 };
 
 root.appendChild(components(onNavigate));
-
-/* subscribedUser((user) => {
-  if (user) {
-    console.log('suscribedUser en main', user);
-
-    const $imgProfile = document.querySelector('.container-imgProfile');
-    const $containerAddPost = document.querySelector('.container-addPost');
-    console.log('soy en main....',$imgProfile, $containerAddPost);
-
-    $imgProfile.innerHTML = `<img class="container-imgProfile__img" src='${user.photoURL}'>`;
-    $containerAddPost.insertAdjacentHTML('afterend', `<div class="container-addPost__text" id="addPostBlock" >What are you thinking, ${user.displayName}? </div>`);
-  }
-});
- */

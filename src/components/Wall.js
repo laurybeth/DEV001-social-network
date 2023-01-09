@@ -37,7 +37,8 @@ export const Wall = () => {
       const idPostOwner = post.data().uid;
       postOwner(idPostOwner)
         .then((docPostOwner) => {
-          $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data(), post.id, docPostOwner.data()));
+          $section.querySelector('.container-Posts')
+            .insertAdjacentElement('afterbegin', Posts(post.data(), post.id, docPostOwner.data()));
           // console.log('soy docPostOwner en wall', docPostOwner.data());
         })
         .catch((error) => {

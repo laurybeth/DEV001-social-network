@@ -52,7 +52,11 @@ export const Login = (onNavigate) => {
       .catch((error) => {
         const errorCode = error.code;
 
-        if (errorCode === 'auth/wrong-password') { Modal('Error:', 'Wrong-password'); } else { Modal('Error:', 'Something went wrong'); }
+        if (errorCode === 'auth/wrong-password') {
+          Modal('Error:', 'Wrong-password');
+        } else {
+          Modal('Error:', 'Something went wrong');
+        }
 
       // ..
       });
