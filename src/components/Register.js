@@ -100,10 +100,10 @@ export const Register = (onNavigate) => {
     const userBirthday = $registerForm[3].value;
 
     registerTasks(userName, userEmail, userBirthday, userPassword)
-      .then((docSnap) => {
-        console.log('docSnap.data() ', docSnap.data());
+      .then(() => {
+        const uName = localStorage.getItem('uName');
 
-        Modal('Welcome: ', `${docSnap.data().name}`);
+        Modal('Welcome: ', `${uName}`);
         setTimeout(() => {
           document.getElementById('modal').style.display = 'none';
         }, 2000);
@@ -129,8 +129,10 @@ export const Register = (onNavigate) => {
     e.preventDefault();
 
     registerGoogleTasks()
-      .then((docSnap) => {
-        Modal('Welcome: ', `${docSnap.data().name}`);
+      .then(() => {
+        const uName = localStorage.getItem('uName');
+
+        Modal('Welcome: ', `${uName}`);
         setTimeout(() => {
           document.getElementById('modal').style.display = 'none';
         }, 2000);

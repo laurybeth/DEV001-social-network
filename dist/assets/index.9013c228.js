@@ -13682,11 +13682,11 @@ class PersistenceUserManager {
     if (this.persistence === newPersistence) {
       return;
     }
-    const currentUser2 = await this.getCurrentUser();
+    const currentUser = await this.getCurrentUser();
     await this.removeCurrentUser();
     this.persistence = newPersistence;
-    if (currentUser2) {
-      return this.setCurrentUser(currentUser2);
+    if (currentUser) {
+      return this.setCurrentUser(currentUser);
     }
   }
   delete() {
@@ -18930,119 +18930,6 @@ const Welcome = (onNavigate2) => {
   $section.append($divButtons);
   return $section;
 };
-const register = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-const signInGoogle = () => {
-  const provider = new GoogleAuthProvider();
-  return signInWithPopup(auth, provider);
-};
-const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
-const currentUser = () => auth.currentUser;
-const Modal = (title, message = "") => {
-  const $modal = document.createElement("div");
-  $modal.id = "modal";
-  $modal.className = "container-modal";
-  const $closeId = "closeModal";
-  $modal.innerHTML = `
-  <div class="container-modal__content"> 
-  <span class="container-modal__close" id="${$closeId}">&times;</span>
-  <h2>${title}</h2> 
-  <p>${message}</p> </div>`;
-  document.body.appendChild($modal);
-  $modal.style.display = "block";
-  const $closeModalElement = document.getElementById($closeId);
-  $modal.addEventListener("click", () => {
-    $modal.style.display = "none";
-  });
-  $closeModalElement.addEventListener("click", () => {
-    $modal.style.display = "none";
-  });
-  return $modal;
-};
-const Login = (onNavigate2) => {
-  const $section = document.createElement("section");
-  $section.className = "container";
-  $section.innerHTML = `
-  <img class="container__logo-register"src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png" alt="logo">
- `;
-  const $formR = document.createElement("form");
-  $formR.id = "registerForm";
-  $formR.className = "container__form";
-  $formR.innerHTML = `
-    <div class="containerInput">  
-      <input class="containerInput__box" type="email" name="User_email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" title="the format does not match what was requested" required>  
-      <span class=containerInput__line></span>  
-      <label for="email"class="containerInput__label">Email</label>
-    </div>
-      <div class="containerInput">
-      <input class="containerInput__box" type="password" name="User_password" required>
-      <span class=containerInput__line></span>
-      <label for="password" class="containerInput__label">Password</label>
-      <span class=containerInput__line></span>
-    </div>
-    <input class="container__button__login" type="submit" value="Sign In">
-  `;
-  const $cGoogle = document.createElement("div");
-  $cGoogle.className = "containerGoogle";
-  const $imgGoogle = document.createElement("img");
-  $imgGoogle.className = "containerGoogle__logo";
-  $imgGoogle.src = "https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/2000px-Google_G_Logo.svg_.png";
-  const $linkGoogle = document.createElement("a");
-  $linkGoogle.href = "#";
-  $linkGoogle.id = "googleLink";
-  $linkGoogle.className = "containerGoogle__link";
-  $linkGoogle.textContent = "SIGN IN WITH GOOGLE";
-  $cGoogle.append($imgGoogle, $linkGoogle);
-  $section.append($formR, $cGoogle);
-  $section.insertAdjacentHTML("beforeend", `
-  <span class="container__alreadyAccount">Don\u2019t have an account? 
-  <a href="/register">
-  <strong>Sign up here</strong>
-  </a>
-  </span>`);
-  $formR.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const userEmail = $formR[0].value;
-    const userPassword = $formR[1].value;
-    console.log(e.target);
-    login(userEmail, userPassword).then((userCredential) => {
-      const user = userCredential.user;
-      Modal("Welcome: ", `${userCredential.user.displayName}`);
-      setTimeout(() => {
-        document.getElementById("modal").style.display = "none";
-      }, 2e3);
-      onNavigate2("/wall");
-      console.log("User: ", user);
-      return userCredential.user;
-    }).catch((error) => {
-      const errorCode = error.code;
-      if (errorCode === "auth/wrong-password") {
-        Modal("Error:", "Wrong-password");
-      } else {
-        Modal("Error:", "Something went wrong");
-      }
-    });
-  });
-  $linkGoogle.addEventListener("click", (e) => {
-    e.preventDefault();
-    signInGoogle().then((userCredential) => {
-      Modal("Welcome: ", `${userCredential.user.displayName}`);
-      setTimeout(() => {
-        document.getElementById("modal").style.display = "none";
-      }, 2e3);
-      onNavigate2("/wall");
-      const user = userCredential.user;
-      console.log("Soy useG en login: ", user);
-    }).catch((error) => {
-      const errorCode = error.code;
-      if (errorCode === "auth/wrong-password") {
-        Modal("Error:", "Wrong-password");
-      } else {
-        Modal("Error:", "Something went wrong");
-      }
-    });
-  });
-  return $section;
-};
 const saveCollectionUsersDoc = (id2, name2, email, birthday, imgProfile) => {
   const docRef = sa(db, "users", id2);
   return ml(docRef, {
@@ -19073,21 +18960,147 @@ const deleteItem = (idDoc, collectionName) => {
   const colRef = ea(db, collectionName);
   return yl(sa(colRef, idDoc));
 };
-const registerTasks = (name2, email, birthday, password, imgProfile) => register(email, password).then((userCredential) => {
+const register = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+const signInGoogle = () => {
+  const provider = new GoogleAuthProvider();
+  return signInWithPopup(auth, provider);
+};
+const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
+const loginTasks = (userEmail, userPassword) => login(userEmail, userPassword).then((userCredential) => {
+  const uid = userCredential.user.uid;
+  return readCollectionUserDoc(uid).then((docSnap) => {
+    const name2 = docSnap.data().name;
+    const imgProfile = docSnap.data().imgProfile;
+    localStorage.setItem("uName", name2);
+    localStorage.setItem("uImgProfile", imgProfile);
+  });
+});
+const loginGoogleTasks = () => signInGoogle().then((userCredential) => {
+  const uid = userCredential.user.uid;
+  localStorage.setItem("uid", uid);
+  return readCollectionUserDoc(uid).then((docSnap) => {
+    const name2 = docSnap.data().name;
+    const imgProfile = docSnap.data().imgProfile;
+    localStorage.setItem("uName", name2);
+    localStorage.setItem("uImgProfile", imgProfile);
+  });
+});
+const Modal = (title, message = "") => {
+  const $modal = document.createElement("div");
+  $modal.id = "modal";
+  $modal.className = "container-modal";
+  const $closeId = "closeModal";
+  $modal.innerHTML = `
+  <div class="container-modal__content"> 
+  <span class="container-modal__close" id="${$closeId}">&times;</span>
+  <h2>${title}</h2> 
+  <p>${message}</p> </div>`;
+  document.body.appendChild($modal);
+  $modal.style.display = "block";
+  const $closeModalElement = document.getElementById($closeId);
+  $modal.addEventListener("click", () => {
+    $modal.style.display = "none";
+  });
+  $closeModalElement.addEventListener("click", () => {
+    $modal.style.display = "none";
+  });
+  return $modal;
+};
+const Login = (onNavigate2) => {
+  const $section = document.createElement("section");
+  const $idLoginForm = "loginID";
+  $section.className = "container";
+  const $idGoogleSingIn = "googleLSingInID";
+  $section.innerHTML = `
+  <img class="container__logo-register"src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png" alt="logo">
+  <form class='container__form' id='${$idLoginForm}'>
+  <div class="containerInput">  
+  <input class="containerInput__box" type="email" name="User_email" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" title="the format does not match what was requested" required>  
+  <span class=containerInput__line></span>  
+  <label for="email"class="containerInput__label">Email</label>
+</div>
+  <div class="containerInput">
+  <input class="containerInput__box" type="password" name="User_password" required>
+  <span class=containerInput__line></span>
+  <label for="password" class="containerInput__label">Password</label>
+  <span class=containerInput__line></span>
+</div>
+<input class="container__button__login" type="submit" value="Sign In">
+</form>
+<div class='containerGoogle'>
+<img class='containerGoogle__logo' src='https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/2000px-Google_G_Logo.svg_.png'>
+<a class= 'containerGoogle__link' id='${$idGoogleSingIn}' href='#'>SING UP WITH GOOGLE</a>
+  </div>
+  <span class="container__alreadyAccount">Don\u2019t have an account? 
+  <a href="/register">
+  <strong>Sign up here</strong>
+  </a>
+  </span>
+ `;
+  const $loginForm = $section.querySelector("#loginID");
+  $loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const userEmail = $loginForm[0].value;
+    const userPassword = $loginForm[1].value;
+    console.log(e.target);
+    loginTasks(userEmail, userPassword).then(() => {
+      const uName = localStorage.getItem("uName");
+      Modal("Welcome: ", `${uName}`);
+      setTimeout(() => {
+        document.getElementById("modal").style.display = "none";
+      }, 2e3);
+      onNavigate2("/wall");
+    }).catch((error) => {
+      const errorCode = error.code;
+      if (errorCode === "auth/wrong-password") {
+        Modal("Error:", "Wrong-password");
+      } else {
+        Modal("Error:", "Something went wrong");
+      }
+    });
+  });
+  const $linkGoogle = $section.querySelector("#googleLSingInID");
+  $linkGoogle.addEventListener("click", (e) => {
+    e.preventDefault();
+    loginGoogleTasks().then(() => {
+      const uName = localStorage.getItem("uName");
+      Modal("Welcome: ", `${uName}`);
+      setTimeout(() => {
+        document.getElementById("modal").style.display = "none";
+      }, 2e3);
+      onNavigate2("/wall");
+    }).catch((error) => {
+      const errorCode = error.code;
+      if (errorCode === "auth/wrong-password") {
+        Modal("Error:", "Wrong-password");
+      } else {
+        Modal("Error:", "Something went wrong");
+      }
+    });
+  });
+  return $section;
+};
+const registerTasks = (name2, email, birthday, password) => register(email, password).then((userCredential) => {
   const uid = userCredential.user.uid;
   userCredential.user.displayName = name2;
+  const imgProfile = "https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/imgProfileDefault.png";
   userCredential.user.photoURL = imgProfile;
-  return saveCollectionUsersDoc(uid, name2, email, birthday, imgProfile);
+  localStorage.setItem("uid", uid);
+  localStorage.setItem("uName", name2);
+  localStorage.setItem("uImgProfile", imgProfile);
+  return saveCollectionUsersDoc(uid, name2, email, birthday, imgProfile).then(() => readCollectionUserDoc(uid));
 });
-const registerGoopgleTasks = () => signInGoogle().then((userCredential) => {
+const registerGoogleTasks = () => signInGoogle().then((userCredential) => {
   console.log("userCredential.user en registerGoogleTasks:", userCredential.user);
   const uid = userCredential.user.uid;
   const name2 = userCredential.user.displayName;
   const email = userCredential.user.email;
   const birthday = userCredential.user.metadata.creationTime;
   const imgProfile = userCredential.user.photoURL;
-  console.log(uid, name2, email, birthday, imgProfile);
-  return saveCollectionUsersDoc(uid, name2, email, birthday, imgProfile);
+  localStorage.setItem("uid", uid);
+  localStorage.setItem("uName", name2);
+  localStorage.setItem("uImgProfile", imgProfile);
+  return saveCollectionUsersDoc(uid, name2, email, birthday, imgProfile).then(() => readCollectionUserDoc(uid));
 });
 function validateEmail(userEmail) {
   const regexEmail = /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}/;
@@ -19104,62 +19117,53 @@ function validatePassword(userPassword) {
 const Register = (onNavigate2) => {
   const $section = document.createElement("section");
   $section.className = "container";
+  const $idRegisterform = "registerID";
+  const $idGoogleSingIn = "googleRSingInID";
   $section.innerHTML = `
     <img class="container__logo-register"src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png" alt="logo">
-   `;
-  const $formR = document.createElement("form");
-  $formR.id = "registerForm";
-  $formR.className = "container__form";
-  $formR.innerHTML = `
-     <div class="containerInput">  
-      <input type="email" name="user_email" id='userEmail' class="containerInput__box" 
-      pattern='[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}' required>  
-      <span class=containerInput__line></span>  
-      <label for="email"class="containerInput__label">Email</label>
-    </div>
-    <p id='warningsEmail' class='warnings'></p>
-    <div class="containerInput">
-      <input class="containerInput__box" type="text"  name="user_name" id="userName" required >
-      <span class=containerInput__line></span>
-      <label for="userName" class="containerInput__label">Full name</label>
-    </div>
-    <p id='warningsName' class='warnings'></p>
-    <div class="containerInput">
-      <input class="containerInput__box" type="password" name="User_password" id='userPassword' required  >
-      <span class=containerInput__line></span>
-      <label for="userPassword" class="containerInput__label">Password</label>
-    </div>
-    <p id='warningsPassword' class='warnings'></p>
-    <div class="containerInput ">
-    <input  id="userDate" onfocus="(this.type = 'date')" class="containerInput__box" type="text" required  min="1900-01-01" max="2004-12-31"
+    <form id = '${$idRegisterform}' class='container__form'>
+    <div class="containerInput">  
+    <input type="email" name="user_email" id='userEmail' class="containerInput__box" 
+    pattern='[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}' required>  
+    <span class=containerInput__line></span>  
+    <label for="email"class="containerInput__label">Email</label>
+  </div>
+  <p id='warningsEmail' class='warnings'></p>
+  <div class="containerInput">
+    <input class="containerInput__box" type="text"  name="user_name" id="userName" required >
+    <span class=containerInput__line></span>
+    <label for="userName" class="containerInput__label">Full name</label>
+  </div>
+  <p id='warningsName' class='warnings'></p>
+  <div class="containerInput">
+    <input class="containerInput__box" type="password" name="User_password" id='userPassword' required  >
+    <span class=containerInput__line></span>
+    <label for="userPassword" class="containerInput__label">Password</label>
+  </div>
+  <p id='warningsPassword' class='warnings'></p>
+  <div class="containerInput ">
+  <input  id="userDate" onfocus="(this.type = 'date')" class="containerInput__box" type="text" required  min="1900-01-01" max="2004-12-31"
 >
-     <span class=containerInput__line></span>
-    <label for ="userDate" class="containerInput__label">Date of Birth</label>
+   <span class=containerInput__line></span>
+  <label for ="userDate" class="containerInput__label">Date of Birth</label>
+  </div>
+   <p id='warningsDate' class='warnings'></p>
+  <div class="container__terms-conditions">
+      <input class="input__conditions" id="input__conditions" name="User_terms&conditions" type="checkbox" >
+      <label for="input__conditions" class="label__conditions" >I agree with terms and conditions</label>
     </div>
-     <p id='warningsDate' class='warnings'></p>
-    <div class="container__terms-conditions">
-        <input class="input__conditions" id="input__conditions" name="User_terms&conditions" type="checkbox" >
-        <label for="input__conditions" class="label__conditions" >I agree with terms and conditions</label>
-      </div>
-    <input class="container__button__signup btnsubmit" type="submit" value="Sign Up">`;
-  const $cGoogle = document.createElement("div");
-  $cGoogle.className = "containerGoogle";
-  const $imgGoogle = document.createElement("img");
-  $imgGoogle.className = "containerGoogle__logo";
-  $imgGoogle.src = "https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/2000px-Google_G_Logo.svg_.png";
-  const $linkGoogle = document.createElement("a");
-  $linkGoogle.href = "#";
-  $linkGoogle.id = "googleLink";
-  $linkGoogle.className = "containerGoogle__link";
-  $linkGoogle.textContent = "SING UP WITH GOOGLE";
-  $cGoogle.append($imgGoogle, $linkGoogle);
-  $section.append($formR, $cGoogle);
-  $section.insertAdjacentHTML("beforeend", `
+  <input class="container__button__signup btnsubmit" type="submit" value="Sign Up">
+  </form>
+  <div class='containerGoogle'>
+  <img class='containerGoogle__logo' src='https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/2000px-Google_G_Logo.svg_.png'>
+  <a class= 'containerGoogle__link' id='${$idGoogleSingIn}' href='#'>SING UP WITH GOOGLE</a>
+  </div>
   <span class="container__alreadyAccount">Already have an account? 
   <a href="/login">
   <strong>Sign in</strong>
   </a>
-  </span>`);
+  </span>
+   `;
   const $userEmail = $section.querySelector("#userEmail");
   const $warningsEmail = $section.querySelector("#warningsEmail");
   const $userName = $section.querySelector("#userName");
@@ -19190,24 +19194,20 @@ const Register = (onNavigate2) => {
       $warningsPassword.innerHTML = null;
     }
   });
-  $formR.addEventListener("submit", (e) => {
+  const $registerForm = $section.querySelector("#registerID");
+  $registerForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const userEmail = $formR[0].value;
-    const userName = $formR[1].value;
-    const userPassword = $formR[2].value;
-    const userBirthday = $formR[3].value;
-    const imgProfile = "https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/imgProfileDefault.png";
-    registerTasks(userName, userEmail, userBirthday, userPassword, imgProfile).then((userDoc) => {
-      console.log("register - userDoc.id", userDoc.id);
-      const userDocId = userDoc.id;
-      readCollectionUserDoc(userDocId).then((docSnap) => {
-        console.log("docSnap.data() ", docSnap.data());
-        Modal("Welcome: ", `${docSnap.data().name}`);
-        setTimeout(() => {
-          document.getElementById("modal").style.display = "none";
-        }, 2e3);
-        onNavigate2("/wall");
-      });
+    const userEmail = $registerForm[0].value;
+    const userName = $registerForm[1].value;
+    const userPassword = $registerForm[2].value;
+    const userBirthday = $registerForm[3].value;
+    registerTasks(userName, userEmail, userBirthday, userPassword).then(() => {
+      const uName = localStorage.getItem("uName");
+      Modal("Welcome: ", `${uName}`);
+      setTimeout(() => {
+        document.getElementById("modal").style.display = "none";
+      }, 2e3);
+      onNavigate2("/wall");
     }).catch((error) => {
       const errorCode = error.code;
       if (errorCode === "auth/email-already-in-use") {
@@ -19217,12 +19217,17 @@ const Register = (onNavigate2) => {
       }
       console.log("registerTasks-Error en el registro", errorCode);
     });
-    $formR.reset();
+    $registerForm.reset();
   });
+  const $linkGoogle = $section.querySelector("#googleRSingInID");
   $linkGoogle.addEventListener("click", (e) => {
     e.preventDefault();
-    registerGoopgleTasks().then(() => {
-      console.log("registerGoopgleTasks");
+    registerGoogleTasks().then(() => {
+      const uName = localStorage.getItem("uName");
+      Modal("Welcome: ", `${uName}`);
+      setTimeout(() => {
+        document.getElementById("modal").style.display = "none";
+      }, 2e3);
       onNavigate2("/wall");
     }).catch((error) => {
       const errorCode = error.code;
@@ -19247,7 +19252,7 @@ const downloadImg = (urlImg) => {
   return getDownloadURL(imgRef);
 };
 const addPostTasks = (textPost, objImg) => {
-  const newUid = currentUser().uid;
+  const newUid = localStorage.getItem("uid");
   return uploadImg(objImg, newUid).then((snapshot) => {
     const newUrlImg = snapshot.metadata.fullPath;
     console.log("newUrlImg en uploadImg", newUrlImg);
@@ -19276,12 +19281,12 @@ const AddPost = () => {
   <div class="container-modal__content container__addPost">
      
      <div class='container-AddPost__title'>
-      <p> Crear publicaci\xF3n </p>
+      <p class='createPublicationText'> Crear publicaci\xF3n </p>
       <span class="container-modal__close" id="${$idCloseAddPost}">&times;</span>   
      </div>
 
      <form class='container-AddPost__form' id="${$formID}"> 
-          <textarea class="containerInput__box textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" required></textarea>
+          <textarea class="textPost" id="textAddPost" name="user_post" placeholder="What are you thinking?" required></textarea>
          <div class="container-imgPreview">
         <img class="container-imgPreview__img" id="imgPreview" >
       </div>
@@ -19289,7 +19294,7 @@ const AddPost = () => {
            <img  class="containerInput__uploadFileIcon" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/icon_addImage.png
             " alt="upload file icon"> 
          
-          <input type="file" id="fileAddPost" placeholder="Upload a file" required>
+          <input class="containerInput__uploadFileInput" type="file" id="fileAddPost" required>
         </div> 
         
         <input class="container__button__login AddPost btnsubmit" type="submit" value="Publicar">
@@ -19356,6 +19361,8 @@ const Menu = () => {
   $header.querySelector(".containeMenu__addPost-icon").addEventListener("click", (e) => {
     e.preventDefault();
     AddPost();
+    const $AddPost = document.getElementById("addPostModal");
+    $AddPost.style.display = "block";
   });
   return $header;
 };
@@ -19380,7 +19387,7 @@ const Posts = (post, postId, postOwner2) => {
         </div>
         <div class='container-content'>
               <div  class='container-content__textPost'>
-              <p>${post.text}</p> 
+              <p class='container-AddPost__title_text'>${post.text}</p> 
               </div>
               <div class='container-content__imgPost'>
               <img class='container-content__imgPost-img' src="${post.file}">
@@ -19402,9 +19409,16 @@ const Posts = (post, postId, postOwner2) => {
   $postDelete.addEventListener("click", () => {
     console.log("idPost en posts", postId);
     deletePost(postId).then(() => {
-      alert("your post deleted successfully");
+      Modal("your post deleted successfully ");
+      setTimeout(() => {
+        document.getElementById("modal").style.display = "none";
+      }, 2e3);
     }).catch((error) => {
-      alert(" Uh-oh, an error occurred!", error.code);
+      const errorCode = error.code;
+      Modal("Uh-oh, an error occurred! ", errorCode);
+      setTimeout(() => {
+        document.getElementById("modal").style.display = "none";
+      }, 2e3);
     });
   });
   return $section;
@@ -19414,6 +19428,8 @@ const postOwner = (idPostOwner) => readCollectionUserDoc(idPostOwner);
 const Wall = () => {
   const $section = document.createElement("section");
   $section.className = "container container-wall";
+  const uName = localStorage.getItem("uName");
+  const uImgProfile = localStorage.getItem("uImgProfile");
   $section.innerHTML = `
     <header class="container-header">
         <img class="container-header__logo" src="https://raw.githubusercontent.com/JENNYFERGAMBOA/DEV001-social-network/main/src/assets/img/logo_horizontal.png
@@ -19422,9 +19438,9 @@ const Wall = () => {
 
     <section class="container-addPost">
         <div class="container-imgProfile">
-            <img class="container-imgProfile__img" src='${currentUser() ? currentUser().photoURL : 0}'>
+            <img class="container-imgProfile__img" src='${uImgProfile}'>
         </div>
-        <div class="container-addPost__text" id="addPostBlock" >What are you thinking, ${currentUser() ? currentUser().displayName : "usuario"}? </div>
+        <div class="container-addPost__text" id="addPostBlock" >What are you thinking, ${uName}? </div>
    </section>
 
    <section class='container-Posts'>
@@ -19432,14 +19448,12 @@ const Wall = () => {
     </section>
   
    `;
-  console.log("soy currentUser en wall", currentUser());
   showAllPosts((posts) => {
     $section.querySelector(".container-Posts").innerHTML = "";
     posts.forEach((post) => {
       const idPostOwner = post.data().uid;
       postOwner(idPostOwner).then((docPostOwner) => {
         $section.querySelector(".container-Posts").insertAdjacentElement("afterbegin", Posts(post.data(), post.id, docPostOwner.data()));
-        console.log("soy docPostOwner en wall", docPostOwner.data());
       }).catch((error) => {
         const errorCode = error.code;
         console.log("Error en obtener el id del propietario del post", errorCode);

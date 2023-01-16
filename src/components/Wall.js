@@ -1,15 +1,18 @@
+import { doc, getDoc } from 'firebase/firestore';
 import { Menu } from './Menu.js';
 import { AddPost } from './AddPost';
 import { Posts } from './Posts.js';
-import { showAllPosts, postOwner } from '../controller/wall_controller';
-import { currentUser } from '../lib_firebase/auth.js';
+import { showAllPosts } from '../controller/wall_controller';
+import { db } from '../firebase.js';
 
-export const Wall = (onNavigate) => {
+export const Wall = () => {
   const $section = document.createElement('section');
   $section.className = 'container container-wall';
 
   // console.log('userState en wall', user);
-  console.log('currentUser en wall', currentUser());
+  // const uid = localStorage.getItem('uid');
+  const uName = localStorage.getItem('uName');
+  const uImgProfile = localStorage.getItem('uImgProfile');
 
   $section.innerHTML = `
     <header class="container-header">
@@ -19,9 +22,9 @@ export const Wall = (onNavigate) => {
 
     <section class="container-addPost">
         <div class="container-imgProfile">
-            <img class="container-imgProfile__img" src='${currentUser().photoURL}'>
+            <img class="container-imgProfile__img" src='${uImgProfile}'>
         </div>
-        <div class="container-addPost__text" id="addPostBlock" >What are you thinking, ${currentUser().displayName}? </div>
+        <div class="container-addPost__text" id="addPostBlock" >What are you thinking, ${uName}? </div>
    </section>
 
    <section class='container-Posts'>
@@ -32,17 +35,21 @@ export const Wall = (onNavigate) => {
 
   showAllPosts((posts) => {
     $section.querySelector('.container-Posts').innerHTML = '';
+    const allPosts = [];
+    const promises = [];
+    posts.forEach((post) => allPosts.push(post));
     posts.forEach((post) => {
       const idPostOwner = post.data().uid;
-      postOwner(idPostOwner)
-        .then((docPostOwner) => {
-          $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data(), post.id, docPostOwner.data()));
-          //console.log('soy docPostOwner en wall', docPostOwner.data());
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          console.log('Error en obtener el id del propietario del post', errorCode);
-        });
+      const docRef = doc(db, 'users', idPostOwner);
+      promises.push(getDoc(docRef));
+    });
+    Promise.all(promises).then((values) => {
+      allPosts.forEach((post, i) => {
+        $section.querySelector('.container-Posts').insertAdjacentElement('afterbegin', Posts(post.data(), post.id, values[i].data()));
+      });
+    }).catch((error) => {
+      const errorCode = error.code;
+      console.log('Error en obtener el id del propietario del post', errorCode);
     });
   });
 

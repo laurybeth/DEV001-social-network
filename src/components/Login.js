@@ -1,4 +1,4 @@
-import { login, signInGoogle } from '../lib_firebase/auth';
+import { loginTasks, loginGoogleTasks } from '../controller/login_controller.js';
 import { Modal } from './Modal.js';
 
 export const Login = (onNavigate) => {
@@ -40,9 +40,10 @@ export const Login = (onNavigate) => {
     const userPassword = $loginForm[1].value;
     console.log(e.target);
 
-    login(userEmail, userPassword)
-      .then((userCredential) => {
-        Modal('Welcome: ', `${userCredential.user.displayName}`);
+    loginTasks(userEmail, userPassword)
+      .then(() => {
+        const uName = localStorage.getItem('uName');
+        Modal('Welcome: ', `${uName}`);
         setTimeout(() => {
           document.getElementById('modal').style.display = 'none';
         }, 2000);
@@ -62,11 +63,11 @@ export const Login = (onNavigate) => {
   $linkGoogle.addEventListener('click', (e) => {
     e.preventDefault();
 
-    signInGoogle()
-      .then((userCredential) => {
-        // alert('Te registraste con google');
+    loginGoogleTasks()
+      .then(() => {
+        const uName = localStorage.getItem('uName');
 
-        Modal('Welcome: ', `${userCredential.user.displayName}`);
+        Modal('Welcome: ', `${uName}`);
         setTimeout(() => {
           document.getElementById('modal').style.display = 'none';
         }, 2000);
